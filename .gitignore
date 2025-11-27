@@ -1,0 +1,62 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE
+.vscode/
+.idea/
+.claude/
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+
+# Data e Cache
+data/transcriptions/*.txt
+data/playlists/*.json
+data/processed/
+data/progress/*.json
+data/proxies/*.json
+data/DKW/
+data/*.zip
+logs/*.log
+
+# Manter estrutura de diretórios
+!data/transcriptions/.gitkeep
+!data/playlists/.gitkeep
+!data/processed/.gitkeep
+!data/progress/.gitkeep
+!data/proxies/.gitkeep
+!logs/.gitkeep
+
+# Arquivos temporários
+*.tmp
+tmp/
+temp/
+
+# Sistema operacional
+Thumbs.db
+.DS_Store

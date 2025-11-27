@@ -1,0 +1,385 @@
+
+Analise profundamente as transcrições dos videos e extraia um framework COMPLETO de implementação. Você é um estrategista especializado em transformar conhecimento em sistemas de execução imediata, com PhD em Learning Sciences e 20 anos decodificando metodologias complexas.
+
+# **INSTRUÇÕES CRÍTICAS DE PROCESSAMENTO**
+
+Leia as transcrições INTEIRAS primeiro, anotando mentalmente: números específicos, histórias, exemplos, contradições, repetições e ênfases dos autores. Depois execute a extração em 7 dimensões complementares.
+
+# **DIMENSÃO 1: FRAMEWORK COMPLETO DE IMPLEMENTAÇÃO**
+
+### **SUMÁRIO EXECUTIVO TRANSFORMADOR**
+
+Escreva 3 parágrafos densos:
+
+* Parágrafo 1: O problema central que as transcrições resolvem (com dados/estatísticas se mencionados)
+* Parágrafo 2: A solução proposta e por que é única/revolucionária
+* Parágrafo 3: A transformação prometida com exemplos concretos do autor
+
+### **PARTE I: ARQUITETURA CONCEITUAL**
+
+**1.1 Premissa Central**
+
+* A grande sacada em uma frase memorável
+* Por que isso muda tudo no campo
+
+**1.2 Pilares Fundamentais** Identifique 3-7 princípios base que sustentam TODO o sistema:
+
+* Nome do princípio
+* Definição precisa do autor
+* Por que é essencial (não opcional)
+* Consequência de ignorar
+
+**1.3 Modelos Mentais e Frameworks** Extraia TODOS os modelos/equações/matrizes apresentados:
+
+* Nome exato usado pelo autor
+* Visualização (descrição ou ASCII se possível)
+* Como usar na prática
+* Exemplo das transcrições
+
+**1.4 Mudanças de Paradigma** Formato: "Antes achávamos X → Agora sabemos Y" Liste todas as inversões de pensamento propostas
+
+### **PARTE II: SISTEMA DE IMPLEMENTAÇÃO**
+
+**2.1 Pré-Requisitos Absolutos**
+
+* [ ]  Checklist do que DEVE estar pronto antes de começar
+* [ ]  Recursos mínimos necessários
+* [ ]  Mindset/crenças necessárias
+* [ ]  Red flags: sinais de que NÃO está pronto
+
+**2.2 Processo Sequencial Detalhado** PASSO A PASSO numerado e cronológico:
+
+```
+textCopiar código
+FASE 1: [Nome] (Tempo estimado)
+├─ Passo 1.1: [Ação específica]
+│  └─ Como fazer: [Instruções]
+│  └─ Ferramenta: [Se aplicável]
+│  └─ Resultado esperado: [Métrica]
+├─ Passo 1.2: [...]
+└─ Checkpoint: [Como saber se está pronto para Fase 2]
+
+```
+
+**2.3 Árvore de Decisão Completa** Para cada ponto de decisão crítico:
+
+```
+textCopiar código
+Situação: [Contexto]
+├─ SE [condição A] → ENTÃO [ação X]
+│  └─ Razão: [Por que essa é a escolha certa]
+├─ SE [condição B] → ENTÃO [ação Y]
+└─ SE [nenhuma acima] → ENTÃO [ação padrão]
+
+```
+
+**2.4 Métricas e KPIs**
+
+* Indicadores de progresso (leading indicators)
+* Indicadores de resultado (lagging indicators)
+* Benchmarks: ruim/médio/bom/excelente
+* Frequência de medição
+
+### **PARTE III: FERRAMENTAS PRÁTICAS**
+
+**3.1 Templates Prontos** Crie templates preenchíveis baseados nas transcrições:
+
+* Template de [X]: estrutura exata
+* Exemplo preenchido das transcrições
+* Variações para diferentes contextos
+
+**3.2 Checklists Operacionais**
+
+* [ ]  Checklist diário
+* [ ]  Checklist semanal
+* [ ]  Checklist de auditoria mensal
+* [ ]  Checklist de troubleshooting
+
+**3.3 Scripts e Swipe Copy** Extraia frases/scripts exatos mencionados:
+
+* Situação de uso
+* Script palavra por palavra
+* Variações sugeridas
+
+**3.4 Exercícios e Drills** Todos os exercícios práticos com:
+
+* Nome do exercício
+* Objetivo específico
+* Instruções passo a passo
+* Tempo necessário
+* Critério de sucesso
+
+# **DIMENSÃO 2: INSIGHTS REVOLUCIONÁRIOS**
+
+### **OS [5-10] MAIORES INSIGHTS**
+
+Para cada insight principal:
+
+**Insight #1: [Título Impactante]**
+
+* O conceito central em 2-3 frases
+* Por que isso é revolucionário/contra-consenso
+* Exemplo concreto das transcrições (com números se houver)
+* Como isso muda suas ações imediatamente
+* Citação relevante: "[citar]" (página/capítulo)
+
+### **O META-INSIGHT**
+
+O insight que conecta todos os outros - a sacada maior que organiza todo o pensamento do autor.
+
+# **DIMENSÃO 3: ASPECTOS CONTRA-INTUITIVOS**
+
+Liste 10-15 paradoxos ou inversões de lógica:
+
+**#1: "[Título Provocativo]"**
+
+* **Senso comum**: O que 99% acredita/faz
+* **Realidade**: O que o autor prova ser verdade
+* **Evidência**: Dados, caso ou lógica apresentada
+* **Implicação prática**: O que muda na sua ação
+
+# **DIMENSÃO 4: HISTÓRIAS E CASOS TRANSFORMADORES**
+
+### **Casos de Sucesso Detalhados**
+
+Para cada caso principal mencionado:
+
+* **Contexto inicial**: Situação antes
+* **Intervenção específica**: O que foi feito
+* **Resultados**: Números e prazos exatos
+* **Lição chave**: O princípio ilustrado
+
+### **Casos de Fracasso Instrutivos**
+
+* O que deu errado e por quê
+* Princípio violado
+* Como evitar
+
+### **A História Pessoal do Autor**
+
+* Momentos de descoberta/epifania
+* Fracassos que levaram aos insights
+* Transformação pessoal alcançada
+
+# **DIMENSÃO 5: NÚMEROS E FÓRMULAS EXATAS**
+
+### **Métricas Mencionadas**
+
+* Benchmarks específicos citados
+* Proporções e ratios importantes
+* Metas numéricas sugeridas
+* Estatísticas que fundamentam argumentos
+
+### **Fórmulas e Equações**
+
+Se houver, transcreva EXATAMENTE:
+
+* Fórmula matemática/conceitual
+* O que cada variável significa
+* Como calcular na prática
+* Exemplo numérico resolvido
+
+### **Timeframes e Prazos**
+
+* Quanto tempo cada fase deve levar
+* Quando esperar primeiros resultados
+* Marcos temporais críticos
+
+# **DIMENSÃO 6: APLICAÇÕES IMEDIATAS PÓS-LEITURA**
+
+### **Para Implementar em 2 HORAS**
+
+3-5 ações ultra-específicas que geram resultado imediato:
+
+**Ação 1: [Nome do Exercício Rápido]**
+
+* O que fazer exatamente (passo a passo em bullets)
+* Resultado esperado em 2 horas
+* Como isso valida um princípio maior
+
+### **Para Implementar ESTA SEMANA**
+
+5-7 projetos de implementação rápida:
+
+**Projeto 1: [Nome]**
+
+* Segunda: [Ação específica]
+* Terça-Quarta: [Ação específica]
+* Quinta-Sexta: [Ação específica]
+* Resultado mensurável ao final
+
+### **Para Implementar ESTE MÊS**
+
+3-5 mudanças estruturais profundas:
+
+**Mudança Estrutural 1: [Nome]**
+
+* Semana 1: [Preparação]
+* Semana 2: [Implementação]
+* Semana 3: [Otimização]
+* Semana 4: [Consolidação]
+* Métrica de sucesso: [X]
+
+### **HACKS E ATALHOS NINJA**
+
+5-10 "truques" que aceleram resultados:
+
+**Hack #1: [Nome Criativo]**
+
+* O atalho explicado
+* Por que funciona (psicologia/sistema)
+* Quando usar vs quando evitar
+
+# **DIMENSÃO 7: CITAÇÕES ESTRATÉGICAS E MANTRAS**
+
+### **Citações de Transformação**
+
+7-10 citações que capturam a essência:
+
+> "[Citação exata]" (localização)Contexto: Quando foi ditoAplicação: Use quando [situação]
+> 
+
+### **Mantras Operacionais**
+
+Frases curtas para lembrar diariamente:
+
+* "[Mantra 1]" - para [situação]
+* "[Mantra 2]" - para [situação]
+
+### **Perguntas Poderosas**
+
+Perguntas que o autor sugere fazer regularmente:
+
+* [Pergunta] → ilumina [aspecto]
+a
+# **RECURSOS COMPLEMENTARES**
+
+### **Ferramentas Mencionadas**
+
+* Ferramenta: [Nome] - para [uso] - onde conseguir
+
+### **Livros/Referências Citados**
+
+* [Título] de [Autor] - mencionado no contexto de [X]
+
+### **Comunidades/Recursos Online**
+
+* Recursos oficiais do autor
+* Comunidades de praticantes mencionadas
+
+# **GUIA DE INÍCIO IMEDIATO**
+
+**HOJE - Primeiras 3 Ações (30 min cada):**
+
+1. [Ação ultra-específica com resultado visível]
+2. [Ação ultra-específica com resultado visível]
+3. [Ação ultra-específica com resultado visível]
+
+**AMANHÃ - Próximas 3 Ações:** [...]
+
+**EM 48H - Primeiro Milestone:** [O que você terá concluído e como medir]
+
+# **PLANO DE 30-60-90 DIAS**
+
+### **Primeiros 30 Dias: FUNDAÇÃO**
+
+**Semana 1:** [Tema]
+
+* [ ]  Seg-Ter: [Ações específicas]
+* [ ]  Qua-Qui: [Ações específicas]
+* [ ]  Sex-Dom: [Ações específicas] [Continuar para semanas 2-4]
+
+### **30-60 Dias: ACELERAÇÃO**
+
+[Detalhar semana a semana]
+
+### **60-90 Dias: MAESTRIA**
+
+[Detalhar práticas avançadas]
+
+# **PERSONALIZAÇÃO POR CONTEXTO**
+
+### **Por Nível de Experiência**
+
+**Iniciante Total:**
+
+* Comece por: [3 coisas específicas]
+* Ignore por enquanto: [o que é avançado]
+* Foco nos primeiros 30 dias: [objetivo]
+
+**Intermediário:**
+
+* Pule para: [capítulos/seções]
+* Foque em: [aspectos específicos]
+* Meta 30 dias: [objetivo maior]
+
+**Avançado:**
+
+* Implemente direto: [o mais sofisticado]
+* Combine com: [outras metodologias]
+* Use para: [aplicação avançada]
+
+### **Por Recurso Disponível**
+
+**Sem orçamento:** [adaptações] **Orçamento limitado:** [prioridades] **Orçamento livre:** [aceleradores]
+
+### **Por Objetivo Principal**
+
+**Objetivo: Resultado Rápido** [Caminho específico]
+
+**Objetivo: Transformação Profunda** [Caminho específico]
+
+**Objetivo: Escalar/Multiplicar** [Caminho específico]
+
+# **AVISOS E ARMADILHAS**
+
+### **TOP 10 Erros Fatais**
+
+1. **[Nome do Erro]**: Como acontece → Como evitar
+2. [Continuar...]
+
+### **Sinais de Que Está Funcionando**
+
+Primeiras 24h: [sinais] Primeira semana: [sinais] Primeiro mês: [sinais]
+
+### **Sinais de Que Precisa Ajustar**
+
+Red flags: [lista] Troubleshooting: SE [problema] ENTÃO [solução]
+
+# **SÍNTESE FINAL MEMORÁVEL**
+
+**A Grande Sacada em Uma Frase:** [Capture a essência em <20 palavras]
+
+**Se Você Lembrar Apenas 3 Coisas:**
+
+1. [Mais importante]
+2. [Segunda mais importante]
+3. [Terceira mais importante]
+
+**O Desafio do Autor:** [Se o autor propõe um desafio específico]
+
+---
+
+# **INSTRUÇÕES DE FORMATAÇÃO**
+
+* Use **negrito** para termos do autor e ações críticas
+* Use CAPS para ênfases extremas do autor
+* Use "aspas" para termos proprietários/únicos
+* Use [colchetes] para suas inferências/derivações
+* Use (parênteses) para localizações e contexto
+* Mantenha linguagem e termos originais quando únicos
+* Se o autor usa metáforas recorrentes, preserve-as
+
+Processe agora as transcrições anexo com esta profundidade TOTAL.
+
+**Dica Pro de Usuário:**
+
+Após a primeira extração, você pode pedir refinamentos cirúrgicos:
+
+* "Aprofunde apenas a Dimensão 3 (Contra-Intuitivos) com mais exemplos"
+* "Expanda o Plano de 30-60-90 dias com tarefas diárias"
+* "Crie 10 exercícios práticos adicionais baseados nos princípios"
+
+### **Variáveis**
+
+Use chaves duplas no seu texto para criar variáveis, por exemplo, **`{{exemplo de variável}}`**, para preencher posteriormente ao usar o prompt.
