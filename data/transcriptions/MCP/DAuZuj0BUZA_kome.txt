@@ -1,0 +1,853 @@
+LLMs are great, but they have some significant limitations. They can search 
+the web, but they don't have access to realtime data or you can't connect them to your 
+database to make crowd operations and you cannot store data to reuse it 
+across different AI tools. Most LLMs only come with a few built-in tools like 
+official email and calendar connectors. This is exactly why MCP servers are 
+becoming so popular. They let you create your own connectors where you can fetch 
+realtime data, connect to databases, integrate APIs, or even use other AI 
+tools. And you can use your server across any LLM and AI tool that supports 
+MCP. So today you are going to learn everything you need to know about MCP 
+servers. We'll start with the basics and explore how to use tools, resources, and 
+prompts. Then we'll build something real, not just a simple calculator or 
+weather API demo. We'll create a fully functional project planner MCP and we'll 
+deploy it for free. You can use it remotely from everywhere and share it 
+with others without exposing your source code. Here is what we are going to build. Users will be able to login and 
+create projects. For each project, they can add features 
+or to-do tasks with priority and status. All data will be stored in cloud 
+storage. So, even if you close your LLM or switch to another AI tool, your data 
+will always be there waiting for you. You'll be able to create, delete, and 
+update projects and tasks, fetch specific items, and filter tasks 
+by status. And since we'll deploy the server, 
+you'll be able to use your MCP on any device without setting up anything locally. 
+We'll also add authorization so you can control who can access your tools and 
+data. So if you are ready, let's dive in, learn the basics and start building our 
+project. 
+To understand MCP, we first need to understand the problems of AI models. AI 
+models are trained on data up to a certain date. They don't actually know 
+anything beyond what they were trained on. They can't access your database, 
+read your company files or retrieve information from your systems. Everything has to be copy-pasted into 
+the conversation. Of course, there are some built-in tools that you can connect to your email 
+account or note takingaking application or read data from a file, but nothing 
+more. To solve this problem, you can use an automation tool like N8N. You can 
+make an API request, fetch and send data, connect to other services or AI 
+tools. But in those systems, you have to define the flow. AI doesn't decide 
+anything. It just follows your instructions. If conditions change, the 
+flow doesn't adapt. But with an MCP server, instead of you 
+deciding the flow, the AI decides what it needs. You just create tools and 
+leave everything else to AI. Based on the user's prompt, it will figure out 
+what tools need to run. MCP stands for model context protocol. 
+This protocol provides a shared communication standard between AI models and tools. When you use a web browser, 
+it doesn't magically know how to talk to every website. It uses a protocol called 
+HTTP that defines how browsers and servers exchange information. 
+An MCP is just like that. This protocol allows your MCP server to integrate with 
+different AI tools and models. This is why people define MCP as the USBC for 
+AI. MCP provides a universal standard for AI integration. Define your tools 
+and use them everywhere. When you create an MCP server, there are 
+three main components. Resources, tools, and prompts. Resources allow servers to 
+share data like files, database, schemas, or documentation. So when you 
+ask AI for an information, it can bring it using a resource. Tools enable models 
+to interact with external systems such as calling APIs, querying databases, or 
+running functions and prompts allow you to create reusable templates for complex instructions. So 
+instead of typing out the same long prompt every time, you can just call the template. With this information, you are 
+ready to create your first MCP server. We'll start with a simple example to 
+understand how these components work. Then we'll create a real project. 
+Okay, I created a new folder and inside this folder we'll create our MCP server. 
+Let's open the documentation model context protocol.io 
+and on the left menu I'm going to choose build an MCP server. I'm going to scroll 
+down and as you realize we can use different languages but for this tutorial we'll be 
+using NodeJS and one thing you should keep in mind 
+before starting when you create a local MCP server you are actually creating a 
+standard input outputbased server not a regular HTTP-based server that means our 
+server will receive and send messages using standard input output. So if you 
+write a standard output like console log, it's going to intercept the communication and break your server. So 
+if you want to log something, use console.error instead of console lock. 
+And later we'll create an HTTP based server and deploy it to the cloud. Okay, 
+I assume that you already have the Node.js and MPM. If you don't have just download them and here firstly we are 
+going to initialize our application and we are going to need these dependencies. 
+Let's install them. I'll open my console 
+mpm install model context protocol SDK and zot. And for the dev dependency we 
+are going to need the TypeScript. Let's install them quickly. And after inside the source folder, we are going 
+to create a file called index.ts. We are going to write everything inside 
+this file. Okay, there is a warning because we didn't initialize our application. I'll 
+say mpm in it. Okay, our package JSON is here. Right 
+now we can install our dependencies and the dev dependencies. 
+Let's create our index file source folder index.ts. 
+Let me close this terminal. And since we want to use import export, I'm going to 
+open my package JSON. And the type will be module. And inside the scripts, we 
+are going to have the build script. We'll be using TypeScript. So I will say TSC. 
+Basically, it's going to build our TypeScript application inside the build folder. 
+So, we are going to be using the file inside this folder. Of course, to run TypeScript, we'll need 
+the TypeScript configuration. So, I'm going to create TS config 
+and it will be a regular configuration. You can find this in the documentation 
+here. And finally we can create our server. We need to import MCP server and standard 
+IO server transport from MCP SDK. 
+And to validate inputs we are going to be using sot. So let's copy here 
+open our index file and paste. And now we are ready to create our server. I'll 
+say conserver new MCP server 
+and inside we are going to give the name let's say my first MCP 
+we can give any version let's say version one 
+and we are going to add the capabilities 
+remember we have three main primitives for now let's just use tools 
+and after learning learning how to use it. We are going to add the others. 
+So let's create our first tool. I'll create a really basic one that will take 
+two numbers and return the total number. But don't worry, we'll create a real 
+world example. You are just learning how it works. So I will say server tool and 
+inside I'm going to give the name. Let's say add numbers. 
+We can give any description add two numbers 
+and we are going to pass the param schema which is the type of the inputs. 
+You can directly define a type or interface here but we have to validate the inputs. The easiest way to do this 
+is using zot. So let's define the type of the first number. 
+I will say zot is going to be a number and we can give any description. It's 
+going to be the first number. Let's do the same thing for the second 
+one. And now we can create our function. Take the params and return what we want 
+to return. So I will say take the inputs a and b 
+and return content. is going to be an array and the type 
+will be a text and the text we want to return is a + b. 
+Let's actually say total is a + b and that's all. 
+This is why we are using mcp. It has a standard structure and output. So we get 
+the same result no matter which AI tool we use. Now we can connect to our server and run 
+this tool wherever we want. To do that I'm going to create a main function. 
+I'm going to create a transport layer and it will be standard IO server transport 
+that we have imported here. It basically allows our server to 
+communicate with the AI tools. Let's connect to the server using this 
+transport. 
+And if there is an error, we'll log that error. But remember, instead of console 
+log, we need to use console error. 
+And we are going to exit the server. 
+Okay, right now we can test our tool. Let's open our terminal and build our 
+application. I'll say mpm run build. 
+And as you can see, it created this build folder. And inside we have the index.js. 
+But before adding this server to any AI tool, let's test it to check if it works 
+as we expect. So I'm going to open a new terminal and write MPX model context 
+protocol inspector 
+and it's going to open our inspector on this part number. The comment will be note 
+and here is going to be the build folder and the index file. 
+Let's connect And here we can see all our resources, 
+prompts and tools. Let me zoom out a little bit. Okay. And if I list the 
+tools, we can see our first tool here. Here is the description and inputs. If I 
+give any number and run the tool, 
+this is the response that we expected. So right now we can add our MCP server 
+to cursor. For example, I'm going to open the cursor settings tools and MCP 
+and add custom MCP. Inside this object, we can add all our MCP servers. So let's 
+add our server. I'm going to give it a name, my first MCP. 
+And again as we did for the inspector we are going to add the command and arguments. So let's say command 
+it's going to be not arcs and we are going to add the exact path 
+of our index file just like that. I'm going to save and as you can see it's 
+enabled and it includes our tool here. Okay. Right now I'm going to open my 
+chat AI chat and let's write at five and 
+six. And as you can see it runs our function. 
+When you run this tool for the first time it's going to ask your permission and when you allow you are going to see 
+the result. Okay. Awesome. We can also test it on the cloud application. 
+Let's open the settings developer 
+and edit config. When you click here, it will open the folder that includes the 
+cloud desktop config. Let's open this using our code editor. 
+And again, I'm going to add my servers and save. 
+But after adding a new MCP server or adding new tools to your MCP, you should 
+restart your application. So I'm going to restart 
+and let's see right now. 
+Okay, it's running. Let's try. 
+As you can see, I'm using my tool for the first time. So, it's asking my permission. Let's allow. 
+And it returns our response. Using this response, Cloud answers our question. 
+Okay. Right now, let's add something more useful. 
+I'm going to create a new tool and I want to fetch a user's GitHub 
+repositories based on their username. When you ask an LLM to do that without 
+using MCP, it will probably search the web for the GitHub profile and it may 
+not get all the repositories. So what we want instead is to create a tool that 
+will directly make a request to the GitHub API, fetch all the user repositories and return the data in a 
+consistent way. So let's give a name. I'll say get GitHub repos 
+and the description 
+we are going to have a single input and it's going to be a username. 
+It will be a string. Let's say GitHub username. 
+Our input will be username. And using this string we are going to make a fetch request. In this case here 
+is going to be an async function. 
+And let's say cons response await a f request and the endpoint will 
+be api.github.com and the endpoint will be users. We are 
+going to pass here our username and we are going to find all the repositories of this user 
+and to make this request we are going to give a headers 
+user agent and let's say MCP server 
+we are giving this headers because we don't have any API key so GitHub can reject our request to prevent this we 
+are adding this header okay I'll Okay, if the response is not okay, we are 
+going to throw an error let's say GitHub API error. 
+And if everything is okay, we can get the response JSON. 
+And since it's going to include all our repositories, we can create a list 
+get all the repos of course here is going to be semicolon. I'm going to be using map and for each repo inside. 
+Let's also get the index number. I'm going to return index number plus 
+one and repo dot name. Basically for the 
+first repo it's going to be one the repo name to the second repo and the others. 
+And we can join them using a space. I'm doing this because if we don't give 
+any space, it's going to write all the repositories in just one line. And let's 
+change this text. GitHub repositories for the user. Let's 
+say for this username and we are going to pass here the total number of the 
+repos. And again I'm going to give a space 
+here. and my repo list. 
+Let's try. I'm going to build my application again. 
+Our inspector is working. Let's refresh the page and connect 
+and as you can see our tool is here. Let's give a name 
+and run our tool. As you can see, there is an error. This is why we are testing 
+this before using it in AI tools. Let's see. Okay, it should be users. Okay, let's do 
+the same thing again. I'm going to refresh connect list my 
+tools and try again. 
+And as you can see, the response is here. Okay, it works. If you want to, you can 
+test it on cursor. Or if you are using VS code plot, you can add your server 
+there also. Or if you want to, let's test it on cloth again. I'm going to 
+restart and let's ask for the same thing. 
+Let's be kind. I will add please. I'm going to enter. 
+It tries to run our tool. I'm going to allow 
+and they are here. After the response, it add some comments 
+here. And right now, let's close our tools. 
+And let's see how to create an MCP resource. Remember, resources are meant 
+for reading information like files or documentation. At this point you might ask why would I 
+need this if I can just upload my document to the LLM directly and get the information and you are right that works 
+for the static files but if your document changes frequently you have to download and re-upload it every time and 
+the same goes for documentation whenever it's updated you have to repeat the same 
+process for each version but with an MCP resource you can automatically patch or 
+update the documentation on the server. And this way, every time you use your AI 
+tool, it always access to the latest version of the resource. 
+I created a simple doc file. Let me create here a data folder 
+and I'm going to paste my document inside. It includes some apartment 
+rules. Of course, it can be a long PDF or pages of documentation, 
+but let's keep it simple for the test purpose. So, I'm going to create my resource server dot resource. 
+Again, I'm going to give the name. Let's say apartment rules. 
+And as you can see, we should pass here a URI. And let's say rules 
+and all. This URI is basically a unique 
+identifier for this resource. So when your AI assistant wants to access your 
+resource, it requests them using this URI. And after that again we can give a 
+description and also we need to add the type of the 
+file and it's going to be text plane. Basically when you read any document PDF 
+or text file it's going to be text plane. If you are using any JSON file 
+it's going to be application JSON. And finally we can create our function. 
+I will say async we are going to get the URI and return our content. But before we 
+need to read our file so I will say const rules await 
+to read our file we are going to need a library called fs 
+and to find our file we also need path. 
+So I'll say fs dot read file. Let's import them by the way. 
+FS and path 
+and we are going to pass here file location to that I'll say file name 
+file URL to path and pass here import dot meta dot URL. 
+We also need to get the directory name 
+and we are going to be using path and we are going to pass the file name 
+here and inside we'll be using path dotresolve 
+the folder name and the location of our file source data rules dod doc. 
+It can be a little bit complicated but don't worry about here. It doesn't have to be a local file. You can fetch it 
+anywhere else. By the way, its type will be UTF8. 
+And let's return our response. I will say return 
+contents. It's going to be an array. We'll pass this object and it's going to 
+include our URI. But this URI is not a string. 
+Let's transform this first. URI string 
+URI dot to string. Okay, we can use it here. 
+Again, we are going to add the type. And finally, our text and it's going to 
+be rules. I'm going to save and let's test it. I'm 
+going to build. Oops. It's going to be MPM ROM build. I'm going to refresh my 
+inspector connect. And here we have the apartment rules. 
+Okay. Right now we can use it in our LLM. I'm 
+going to restart quickly. And if I click here, you can see our MCP 
+server. And we can choose our resource apartment rules. So if you ask any 
+question, it's going to answer according to our rules. 
+And it's here. And finally, let's see how to use MCP 
+prompts. They are not as commonly used as tools 
+or resources, but they can be really useful when you need to use a long prompt repeatedly in your LLM. Instead 
+of typing out the same detailed instruction each time, you can give that prompt a unique name in the MCP server 
+and whenever you call that name, it will automatically generate the full version. For example, let's say you want your AI 
+tool to explain the given SQL code. If you just write explain this and paste 
+your code, you might get a short response. So each time you have to write 
+something like this, give me a detailed explanation of the following SQL query 
+in plain English. Make it very detailed and specific for a beginner to 
+understand. So instead of writing this long prompt 
+every time, let's make this easier using MCP. So let's create a prompt. 
+I'm going to give a name explains SQL and description. 
+We'll get the SQL code as an input. So it's going to be a string 
+describe the SQL query to explain 
+and I'm going to create my function. We'll get the input 
+and we are going to return messages. It's going to be an array and 
+in our message we should pass here the role. It's going to be a user prompt. 
+And inside the content as we always do, we'll give the type. 
+It's going to be a text and the text will be our prompt. 
+So let's paste our prompt. I will close this menu and let's paste our SQL code 
+somewhere here. 
+Okay. Right now we can build our application. mpm run built. 
+Let's open our cursor settings, disable our MCP server, and enable 
+again. And as you can see, we have the prompt explains SQL. So let's open our LLM chat 
+and I'm going to be using slash and as you can see it shows our readyto use prompt. I'm going to choose it. It asks 
+our input which is the ask code. I'm going to paste my code and enter. Let's 
+send our message 
+and the answer is here. Okay. 
+So this is how you can use prompts. If you have a long detailed prompt, you 
+can define it inside a short prompt name and call it whenever you want. It can be 
+really useful especially if you are creating an image. Okay, 
+so we finished our basic project. You know how to create an MCP server, how to 
+create a tool resource and prompt. So now we can create something bigger, a 
+project planner MCP. But for this project we'll use a remote MCP instead 
+of using a local one. That means we can deploy our server online, get the MCP 
+server URL and use it anywhere we want because when you create a local server 
+only you can use it. The only way to share it with other people is to create 
+a GitHub repository or create an MPM package. So users can go to your 
+repository, download the code and run it on their machines. But it's not ideal 
+because every time you make a change, they would have to download and run it again. Also, if you want to use it on 
+another device, you would have to repeat the same process, download the code and run a new local server. Another downside 
+is that a local server only works while it's running. That means you need to keep it running or keep serving the 
+output file. But with a remote server, you can basically add the URL for each 
+AI tool and whenever you update your server, it will keep using the latest tools and resources and it can be used 
+by other people and multiple devices. The easiest way to do this is using 
+Cloudflare. It's one of the first platforms that lets you create and deploy MCP servers without any 
+configuration. It even includes built-in authentication, so you can easily share 
+your MCP server with other people. The model context protocol uses standardized 
+authorization flows to connect clients and servers. Normally, this requires 
+complex configuration, managing credentials, tokens, and authentication logic. But with Cloudflare MCP, 
+everything is built in. You just create your provider's client ID and secret 
+key, and Cloudflare handles the rest. When you create a remote MCP server, 
+there are two transport options, SSE and HTTP. SSE uses two endpoints, one for 
+requests, one for responses. Most MCP clients currently use this method. 
+Streamable HTTP is simpler using just one endpoint for two-way communication. 
+SSE will soon be deprecated and streamable HTTP will become the standard 
+transport. And the Cloudflare agents SDK supports both. So you can start with SSE 
+today and switch to streamable HTTP later without changing any configuration. 
+You can create stateless MCP servers using MCP Typescript SDK, but this 
+agents SDK allows your MCP server to remember previous tool calls and cache 
+API responses. It also includes websocket hibernation, which means your 
+agents only consume compute resources when actively processing requests and it 
+dramatically reduces your cost. Basically, Cloudflare is currently the 
+best option for building remote MCP servers. And the best part is creating 
+and deploying your servers is completely free. If you want to use other platform 
+services like database, memory storage or file storage, Cloudflare offers a 
+very generous free tier, so you won't have to pay anything to get your project started. 
+Let's go ahead and create a real MCP project. So I will show you how easy it 
+is to build and deploy MCP servers with Cloudflare. So I'm going to create a new 
+project and let's open the documentation. This is a great documentation. You can use 
+this page, but they also prepared a great page where you can learn MCP step 
+by step. So let's get started. We already know 
+the basics. I'm going to skip here. So, we'll create a new Cloudflare 
+project using its MCP template. It doesn't have the authentication, but 
+don't worry. After learning the basics, we are going to add it. Okay. Before running this code, let's also open our 
+dashboard. Since we want to deploy our application, 
+we need to visit the workers page. I'm going to zoom in by the way. And when 
+you visit this page, it's going to automatically create your workers environment. 
+Okay. So, I can close here, copy my code, and let's turn back to our 
+editor. I'm going to open my terminal, paste my code, and it's going to install 
+everything inside this folder. But we don't need to do that. 
+I want to install everything inside my root folder. So I'm going to add here dot and enter. 
+We don't need to use git. And as you can see, you can directly deploy your application. If I choose yes, it's going 
+to log to my account. If you didn't login before, it's going to open the browser and you can login. And after 
+that, it's going to deploy your application. And this is going to be the URL we are going to be using to reach 
+our MCP server. If you are deploying your application for the first time, it's going to take a while because it's 
+also creating a domain and waiting for the DNS changes 
+and it's ready. So we can reach our server using this 
+address. But before let's see what's inside our index file. I'm going to 
+close this terminal. And as you can see, it uses classes. But don't worry, we won't be creating any 
+classes or anything like that. The only difference is instead of writing server 
+tool, we just add here this this server. And the others are the same, the name, 
+inputs, and the function. So I'm going to close this menu and 
+let's get rid of these tools. There are some simple examples like add tool and 
+calculate tool but we don't need them. I'm just going to remove and change the 
+name of my MCP server. I'll say project planner. 
+Right now we can write our first tool. But before let's define our types in our 
+server. We'll be able to add projects and to-do lists. So at the very beginning 
+I'm going to create an interface and I will say project. 
+Each project will include an ID. It's going to be a string. We'll give a 
+project name project description 
+and we'll have the created at and updated at times. 
+Let's create one more and it's going to be todo. 
+Again, we'll have the ID and each to-do will belong to a project. So, I'm going 
+to add here project ID. Let's say title, description, created 
+and updated at dates. But also, I'm going to add here a status. And we'll 
+have three options. It can be pending or in progress 
+or completed. We'll also have the priority 
+and it can be low, medium or high. So 
+right now we can write our first tool inside the init function. I'll say this 
+server and tool. And as we always do, we are going to give a name. I'll say 
+create project. We can give a description. 
+I'll define my inputs. We'll give a name. And we are going to validate our input. Remember, it's going to be a 
+string. And we can give any description. It's going to be the project name. And 
+one more. We can also give a description, but it will be optional. 
+So we can create a project with only a name. Let's change here. 
+And now I will write my function. It's going to be an async function. We'll get 
+the inputs name and description. For each project, we need to have an ID. 
+So let's create a random ID. We are going to be using crypto and random UYU 
+ID. So let's create our project. Its type will be project type. 
+We are going to pass here our project ID. We'll give the name and the description. 
+But remember it's optional. So I will say description, but if it doesn't exist, leave it empty. 
+And the created at time will be new date. But we should transform this JavaScript date into a string. 
+And I will do the same thing for the updated at time. Okay. So right now we can return our 
+response. I'll say return content. Remember it's an array and it 
+includes our type. Response type is going to be a text 
+and the text will be our project but it's an object which should return a 
+text. So I'm going to be using stringifi and pass my project here. But since it's 
+a string, it's going to write everything in just one line. To prevent this, I'll 
+also give here a space parameter. Let's say two. Basically, for each line, it's 
+going to give a space. Okay, right now our first tool is ready. 
+But we should actually store this project somewhere. So when the user closes the AI tool, everything will be 
+still available the next time. And we'll also be able to fetch the same data 
+across different AI tools. To do that, we can use a database. Let's actually 
+open the previous page again, 
+storage and databases. And as you can see, we can use an SQL database, but for 
+this project, I prefer using its key value storage. because it's much much faster when it 
+comes to reading data. It's almost instant. And Cloudflare's free tier 
+gives a 100,000 read operations and thousand writing operations daily for 
+free. This is incredible. The free tier actually gives you almost everything 
+like database usage, file storage, and even some AI tools. 
+But also, I want to let you know that if you are a student, you can go far beyond the regular limits for one year. You'll 
+get everything in the free tier, plus millions of requests and logs, more CPU 
+and build time, and increased KV storage. It's an amazing opportunity for 
+students. If you are interested, I will leave the link in the description so you can click and get more information. 
+Okay. In our server, we'll basically store our projects like project and the 
+project ID and the value will be all these information here. It's going to be 
+an object and it will include all the fields here. And when we create other 
+project, it will be project and some other ID and the value will be whatever 
+inside that project. So when we search for any project, we'll be using these 
+ids. Okay, so let's create our KV storage. To 
+do that, we'll be using Wrangler, which is Cloudflare's command line tool. 
+So I will say MPX Wrangler or if you install Wrangler globally. 
+You don't have to use MPX. You can directly say Wrangler. If you want to use it like that, just open a new 
+terminal and install it globally. But I already have 
+I'll say KV namespace create and you can give any name you 
+want. Let's say project planner store. I'm going to enter. 
+I'll say yes. So it's going to write the configuration in the ranker JSON. This 
+is going to be the name. So I'm going to enter. If you want to you can directly use your cloud resource. So let's say 
+yes. Let's open our menu. And if you check the Wrangler JSON, 
+you can see your KV name space. It's here. And whenever you make a change in 
+this file, I recommend you run Wrangler types. So it's going to add the new binding 
+types automatically. It's here. Okay. So let's close this menu and 
+console and let's add our project into our store. So I will say await emv dot 
+project planner store. Let's give our type here 
+as emv. And as you can see we can get list and 
+delete items but we are going to choose put because we are creating a new item. 
+And inside we are going to add our key and its value. Remember our key will be 
+project and the project id and the value will be this project 
+object but we can store only strings. So let's use JSON stringify and pass here 
+our project. Right now we saved our project and sent 
+the response. But I also want to store a list of all my projects because later 
+when we also add the to-do items inside the storage, it will be hard to get all 
+the projects or all the to-dos. So let's say con project list. Actually 
+we can define it here before the init function because we'll be using it again and again for the other tools. So let's 
+create a function async function get project list. 
+It will be a promise and we'll pass here a string array. 
+So I'll say const this data await and again we'll be using our 
+storage 
+and I will say get and we are going to get all the project list 
+and we are going to return our list. I'll say return if list data exists, transform that into 
+an object and return. If it doesn't exist, return an empty array. 
+And I can do the same thing for the to-do list. Get to-do list. 
+And we will fetch all the to-do items that belong a project. we can get a 
+project ID here which is a string and using this ID we can fetch all our 
+to-dos. So let's see project the project ID and to-dos 
+and also maybe instead of writing this long string again and again let's make 
+it simpler we are just going to call it as KV it 
+type will be KV namespace and I'm going to return this long string 
+So we can directly use here this KV. 
+Okay, it's much cleaner. Let's do the same thing here 
+and here. So right now after adding the project, 
+we can add this project into our project list. Let's get the previous ones. 
+Project list. Wait, we are going to call our get 
+project list function. And inside this array, we are going to 
+add one more item. Project list.push. And we are going to add our first 
+project. Remember inside this list, we are just storing our project ids. And 
+I'm going to save this list. So I will say await kv.put 
+project list and pass here the new list. 
+So here we created a new project and here we updated our list. So this was 
+our first tool. Let's create another one. 
+server. And this time we are going to create a 
+new to-do. I'll give the description 
+and inputs. Let's remember our types. We have the project ID, title, 
+description, status, priority, and the dates. 
+So we can get the project ID. It's going to be a string. 
+Let's say project ID. Let's create more. 
+Here is going to be the title. Here is going to be the description 
+and priority. By the way, 
+this is the init function. Our tool should be inside this function. 
+Just like that. Of course, description can be optional 
+and the priority, but remember we have only three options. 
+So, let's transform this into an enom. And it's going to be low, medium, 
+or high. Of course, inside an array. 
+Let's change the descriptions quickly. 
+So I can create my function right now. I'll say async. I'll get the inputs 
+and let's create our to-do. But before using this project ID, we should check 
+if the project exists or not project data 
+await KV.get get and we are going to pass here 
+project and project id 
+and I'll say if it doesn't exist 
+throw a new error and let's say project not found. 
+Okay, right now we can create our to-do. Firstly, let's create an ID. 
+To-do ID. Remember how we are doing this? Crypto dot random ID. 
+And let's create a to-do object that includes an ID which we created. 
+The project ID will be actually let's write here our type. 
+So we can use the auto completion project ID is going to be the ID that 
+comes from the client title description but remember it's optional so I'll say 
+description if it doesn't exist empty string status will be pending because when we 
+create a new to-do by default it's going to be pending I'll say priority 
+and if it doesn't exist is going to be medium. 
+And let's create our dates. New dates and it's going to be a string. 
+Okay. Right now we can save it. So I'm going to be using 
+KV.put. And let's pass here to-do. And again I'm 
+going to add the to-do ID and its value will be this to-do object. 
+And as always it should be a string. 
+And now we can update our to-do list. Remember 
+our function is here. We can get the previous to-do list and we can update. 
+So let's say con to-do list 
+our function and we'll pass here our project ID. 
+After getting our list, we can push our new item 
+which is going to be its ID. And finally we can update our list 
+project and project id and it's to list and we are going to 
+pass here our new list 
+just like that. And finally we can send our response. Remember 
+we are sending a content and inside this array we have the type 
+and we have the text and I'm going to pass my to-do and again 
+I'm going to give a space and let's see if we have any error or 
+not. Okay. 
+So right now we can create a project and inside this project we can create a 
+new to-do. So let's create a tool that we can list our projects. 
+Actually let's do this before this create to-do because it's related to project. 
+So let's say server dot tool give the name and description quickly. 
+We'll not need any input. So I'm going to leave it empty 
+because we are going to fetch all the items. I'm going to create my function. And 
+let's get the project list await and our get project list function. 
+And remember it includes all our project ids. So using those ids we can fetch all 
+the projects. So I'm going to create here an empty array 
+projects its type will be project array and it's 
+going to be an empty array and for each ID inside this project list 
+we are going to fetch the data. So let's say for project id of project list. 
+So for each item we are going to get the data let's say project data 
+await kv.get and we are going to pass here project 
+and every single project ID and if it exists we are going to push 
+this data inside this array 
+projects dotpush and pass our data. But remember it 
+should be an object just like that. And finally 
+we can return our response content array 
+and that includes our type and the text will be JSON stringify 
+and our project list. And as we always do, we are going to give space between each line. 
+And that's all. Right now we can get a single project. Let's actually copy here 
+and paste. It's going to be get project. 
+The description will be get a specific project by ID. 
+We'll get the project ID as an input. is going to be a string 
+and let's write a description project ID. Let's get our input here. 
+Let's get rid of them. And right now using this ID we can fetch 
+our project. So I will say project data 
+await. We are going to be using our store and get function. And remember we 
+are storing them just like that project and the project ID 
+and if it doesn't exist we can throw an error 
+throw new error and let's say project not found. 
+Remember when we fetch from our store it returns a string. So let's transform 
+this into an object con project. Its type will be project and I'm going 
+to pass my string just like that. If you want to you can 
+fetch all the to-dos of this project. Let's do that. 
+Actually for this we can create a new function here because later we are going 
+to need it in other tools. So let's say private async function get todos by 
+project. We are going to pass the project ID which is going to be a string 
+and it's going to return a promise which includes our to-do list. 
+Remember we have here the to-do list function and this list includes the to-do ids. So using each ID, we can 
+fetch the actual to-do. Firstly, let's get our list. 
+I'm going to call my function and pass here the project ID. And I'm going to 
+create an empty array for the to-dos. 
+And for each ID, let's fetch the to-do data. So again I'm going to be using for 
+con to-do id of to-do list 
+and using the ID we'll get the data 
+kv.get todo and the todo id. 
+can push it into our list. T-dos array dot push JSON parse 
+and to-do data. And finally we can return our to-do list. 
+Just like that. Right now we can use this function here. 
+Get a single project. And we are going to pass here our 
+project ID. And right now we can send our project single project and all of 
+its produce. Okay. Right now we can create a project. We can get the project 
+list and a single project. And right now we can delete our project. I'm going to 
+copy here. Create a new tool. And let's say delete project. 
+And be careful when we delete a project, we should also delete all its to-dos. 
+Okay, again we will get the project ID. We'll search for this project. If it 
+doesn't exist, we'll throw this error. And here we can delete all of its 
+to-dos. We already fetched here our to-dos. Let's get rid of here. 
+After finding todos, we are going to delete every single item. So let's say for count todo or todos 
+await this do kv and delete and the key will be todo and its ID. 
+Let's say delete all todos. 
+After deleting to-dos, we can finally delete our project. So again, 
+KV delete, but this time here is going to be project and the project ID. 
+And also we can delete all the to-do list of this project. Project project ID 
+and to-dos. So let's write here a command. delete 
+project to-do list and here is going to be 
+delete project and what else we also have the project 
+list remember if we delete a project we should also delete it from the list 
+let's say remove project from the project list 
+so I will get my project list and filter that list. We are going to remove this 
+project and we are going to update our list. So let's say project list. 
+We are going to call our get project list function. It's going to return all the ids and we are going to filter our 
+list. Let's say updated list project list dot filter. 
+We are going to search for ID and that ID shouldn't be equal to our project ID. 
+Basically, it's going to remove this project ID and leave the others. And 
+finally, we can update our list. 
+I'll say put project list 
+and we are going to pass our updated list. 
+Okay, let's write here a text. 
+We are just going to return a text project and all its to-dos have been 
+deleted. 
+Okay, what about our to-do? We can also update our to-do. 
+So, I'm going to duplicate here and its name will be update to-do. Let's 
+change the description. 
+We'll get the to-do ID to update. 
+We can pass title, description, priority and also the status. 
+Remember it can be pending, in progress or completed. 
+But since we are updating our to-do, they all are going to be optional because we might just want to update the 
+status or just the title. So let's add here optional. 
+I'll copy this and add for the others. Oh, actually we already have let's say 
+new to-do title, new to-do description and the others. 
+So here is going to be to-do ID, title, description, 
+status, and priority. And let's get rid of here. 
+Firstly, we are going to get our to-do data. If it doesn't exist, we are going 
+to return an error. If it exists, we are going to update its fields. 
+So let's say to-do data 
+our store get function and pass here to-do and its id 
+if it doesn't exist throw an error 
+to do with ID not found 
+and after that Remember this is a string. Let's transform this. I'll say 
+con to I'm going to write its type and JSON parse. 
+And finally we can update the fields. But remember they all are optional. So 
+we have to write our conditions. I'll say if title doesn't equal 
+undefined to-do.itle will be the new title. 
+I'll do the same thing for the others 
+description status 
+and priority. And finally, I'm going to update its updated at time to do updated at time. 
+And it's going to be a new date. 
+Okay, right now we can update our to-do using our storage. 
+Let's do this quickly. Put to-do and the to-do ID 
+and pass here our new data. Just like that. And we can pass it here. 
+Okay, it's already here. So finally we can delete our to-do. Let's copy here. 
+Create a new tool. It's going to be delete to-do. Delete to-do from a project. 
+We are just going to need the to-do ID. Let's delete the others. 
+And here. So again we are going to get our data if it doesn't exist we are going to return 
+this error and finally we are going to remove our to-do but remember we also 
+have the to-do list we should update that so let's say remove from projects 
+to-do list let's get the list first 
+wait I'm going to call my function get to-do list and pass here to-do 
+project id. Let's create a new one 
+updated list. And again I'm going to filter my list 
+to-do list dot filter. We are going to check every single ID. And this ID 
+shouldn't be the ID that we get from input. 
+And let's update it. 
+Remember our to-do list is inside project and the project ID to-do. 
+project ID and its to-dos. And we are going to pass here the 
+updated version. Just like that. And finally we can 
+delete our to-do the delete method and pass here our key 
+which is todo and its ID. 
+Let's say remove to-do. Okay, let's get rid of here and let's 
+change our text. Todo has been deleted. 
+What else we can do? I'm going to create another tool 
+and we'll be able to fetch a single to-do. 
+So, let's say get to-do and get a specific to-do by ID. 
+Again, we'll get the to-do ID. We are going to check if it exists or not. 
+If it is, we are going to get our to-do and return it as a response. So, I'm 
+going to get rid of them. We'll directly pass our to-do here 
+just like that. And finally, 
+we can get all the to-dos of a project. 
+So let's say list todos list all todos in a project. 
+So we'll get the project ID. 
+But I want to add here one more item and it's going to be status because we can 
+ask fetch all the to-dos of this project. But we can also ask get all 
+pending to-dos of this project or get all in progress to-dos of this project. 
+So let's say status I'll say enum I'm going to write my 
+options here pending in progress 
+and completed. We can also get all status. Let's make 
+this an array by the way. And I will say it's going to be 
+optional. We can just pass the project ID and I will say describe filter by 
+status. Let's get our inputs here. 
+Project ID and the status. Firstly, we are going to check if this project 
+exists or not. So I will say project data and here is going to be project and 
+project ID if it doesn't exist 
+project with this ID not found and after that using this 
+function get todos by project we can fetch all 
+to-dos that belong to this project ID. 
+So I'll say todos await. I'm going to call my function and pass 
+here my project ID. And remember we can filter our to-dos by 
+status. So I will say if status exists and it's not all 
+we are going to filter our to-do list. Let's make this let so we can modify 
+todos will be todos dot filter. We'll get all the todos and we are going 
+to check its status. to-do status should be the status that comes from the 
+client. And finally, we can return our to-do 
+list. And that's all I think. Let me zoom out for now to check if everything is all 
+right. We can create a new project. 
+We can list our projects. We can get a single project 
+and delete that project. We can create a to-do. 
+We can update. We can delete 
+get a single to-do and get all the to-dos of a project. I think that's all. 
+So, I can zoom in and open my terminal. And let's deploy 
+our application. It's really easy. Wrangler and deploy. That's all. 
+Okay, our project is ready. Let's copy this URL 
+and open our cursor MCP settings. I'm going to choose tools. 
+This was our first MCP. I'm going to add a new one. 
+Let's create a new one. But this time we are going to make some changes here. 
+Firstly, let's change the name project planner MCP. 
+I'm just going to pass here my link and the endpoint will be SSE. In the updated 
+version here can be MCP but for now we are going to be using S SE. 
+But for the command we are not going to be using note. Instead we'll be using MCP remote. 
+To run this you should install this library. So I'm going to open a new terminal mpm install global and mcp 
+remote. I'm going to enter. And now I'm going to say my file 
+and let's see. And as you can see it's running. Let me close this terminal. 
+And all our tools are here. Let's try. I'm going to close here. 
+Open my chat. And let's test it. Create a project. And 
+I will say e-commerce app. And we can give some description here. 
+That will be a project that uses React with a Hono API. I'm going to enter. 
+And as you can see, it tries to run our create project tool. Let's allow. 
+And it's here. Project ID, name, description, and the created at time. 
+Let's try to add a to-do. Add a to-do to my e-commerce project. 
+Authentication will be implemented with JWT. 
+I'm going to enter. And now it runs create to-do function. 
+And our to-do is here. And let's add one more to-do in my 
+e-commerce app. I plan to add an Outlas purchase. 
+Add it to the list. Let's try. 
+And it's here. As you realize, by default, it gives some description. 
+So, you don't have to give every single detail. Just write your idea and it's 
+going to generate all the fields for you. And let's try to add a to-do, but 
+priority will be higher. I should implement rate limiting to my 
+e-commerce project as soon as possible. Again, 
+it runs create to-do. And as you can see, it added here high 
+priority and it also added a description. And as you realize, we 
+don't even have to pass here the project ID or we don't even write the correct 
+project name. I just had ecom and it understood that it's the e-commerce 
+application project and created a new to-do. Let's add one more project. I 
+want to create a blog application. 
+Let's add a to-do and after we are going to test it in the cloud application. 
+I'll implement commands functionality to my blog project 
+but it's not that important 
+and right now the priority is low. Let's say show me my projects. 
+It's going to run list projects. I'm going to allow. 
+This is our first project and this is the second one. And it also returns all 
+the to-dos. Okay, it works. Let's do the same thing for the cloud 
+application. I'm going to come here settings 
+and developer settings and I'm going to edit the configuration 
+and it's going to open our cloud folder. Let's update this config JSON 
+and I will do the same thing here. Let's open our MCP JSON from cursor. 
+I'm going to copy here and paste. 
+I'm going to save and let's restart our application. 
+Okay, let's see. 
+Okay, it's running. Let's create a new chat and I will say what are my 
+projects. It's going to run our MCP. I'm going to 
+allow. And since we store all our projects 
+inside Cloudflare, we can use different AI tools simultaneously. If I have an 
+idea, I can write it here and later when I cut I can check my ideas, features, 
+to-do lists and I can update here. This is why we are using a remote MCP server. 
+Let's ask something more. 
+I'm going to allow. When you are calling tools for the first time, you should allow them. And after you don't have to 
+do anything and as you can see all our to-dos are 
+here. It also writes the priorities and status. 
+Let's update this. For example, I completed adding authentication. 
+As you realize, I'm not writing update or something, but it understands that it 
+has to run the update function, update tool, and update the status just like 
+here. I'm going to allow and it's going to update my to-do. 
+As you can see, we have two more pending to-dos. Okay, awesome. 
+So, this is how you can easily create and deploy your MCP servers. 
+Okay, we completed our project, but you might want to keep your server private 
+so only you can use it. Or maybe you want to share it with other people. But 
+make sure that they are authenticated and each project is stored and fetched 
+for the correct user. You can even give usage limit for the users. To handle 
+this, we need to implement authorization. That means before using the MCP server, everyone must login and 
+have the correct permissions. If you are using Cloudflare, it's really simple 
+because it comes with built-in authentication. So, I created a new project and let's 
+see the documentation. Just open the authentication section. And here again, 
+we'll create a Cloudflare application, but this time we'll use a different template. Let's copy here, 
+open our terminal, and paste our code. Again, I want to install everything in 
+this folder. So, I'm going to remove this name. 
+At the end, I'm going to add dot and enter. 
+I'm going to deploy my application. And during this process, let's see our 
+index file. And as you realize we have here 
+additional props like login, email, username and access token. And we are 
+going to get all this information from the GitHub handler. Basically when a user installs our MCP server first they 
+need to make a request to this endpoint and it's going to handle all the authentication process and verify the 
+user. And also we have here a username list. Basically, you can add here the 
+allowed usernames. So, even if the user is authenticated, if their username is 
+not here, they won't be able to use our tools. For this tool, there is no 
+condition. Every logged in user can use it or this one. But as you can see, there's 
+a condition here to use this generate image tool. The username should be 
+inside allowed names list. So this is how you can create private and public 
+tools. All our tools will be private. So I'm going to get rid of them. 
+Let's change the name. 
+I'm going to leave here empty for now. After we are going to add our username 
+and let's get rid of these and add here all our previous tools. So 
+I'm going to delete this one. And as you can see the authentication 
+provider is here. We are using GitHub for the provider. Of course you can use 
+different providers like Google or whatever you want. But let's keep using 
+GitHub because most of the MCP users are developers. Okay, let's come back. 
+Scroll down and right now we need to create a new Oath app using GitHub. Let's click here. 
+I'm going to create a new app. Let's give a name. 
+The homepage will be our application URL. Let's open our terminal. Okay, it 
+didn't deploy our application because there's a name space in the wrangler 
+JSON and it's empty. 
+Let's get rid of this. Later we are going to add our storage. But for now, 
+let's deploy our application. I'll say wrangler deploy. 
+And let's see our URL. Okay, it's here. I'm going to copy here 
+and paste for the homepage. And in the call back input, 
+we are going to pass here call back. Okay, 
+let's create this is our client ID and we are going 
+to create a client secret and it's here. If you open your 
+application, you'll see that there are some development variable examples here 
+and inside we need to pass the client ID. Let's copy this 
+and the client secret. 
+And our application is going to store the user token. To do that, we need to give here an encryption secret key. You 
+can generate a random text. But for the test purpose, I will just say secret 
+key. I'm going to save. And right now instead of example we can directly use 
+our variables. But remember this is for the development mode. If you open the 
+documentation as you can see this example runs the server locally and it 
+uses this file. But since we are deploying our application we need to set the secret keys in the cloud. Let me 
+scroll down. For the production, we need to set our 
+secret keys using Grangler. So, let's do this for all our keys. 
+I'm going to paste my code. I'm going to enter. And here we need to add our 
+value. I'm going to enter and do the same thing 
+for the others. client secret 
+and the encryption key 
+and it's going to be secret key. I'm going to enter and now we can create a 
+KV storage for the authentication. Remember how we are doing this? 
+Basically, it's going to store the user information here. Let's copy this 
+and create. I'm going to say yes. 
+And I'm going to be using the remote resource. And remember, we also need the 
+project planner store. Let's remember our previous application 
+we created. Project planner store. Let's do the same thing. 
+I'm going to change the name. Let's say with off. I'm going to enter. 
+And now we'll use this store for the user information. And we'll use this store 
+for the project and to-do information. Okay. 
+And remember whenever you change your Wrangler JSON create the EMV types using 
+Wrangler types. So it's going to update the types here. 
+Just like that. And let's start adding our tools. I'm going to close this 
+terminal and this sidebar. And now I'm going to come here. 
+First I'm going to paste my types. 
+Let's paste them here. 
+We have some functions here. Let's copy them before the init function. 
+I'm going to paste. 
+Let's change this name. But now every project and to-do item 
+should be specific to user. So we are not going to store our projects like project and project ID. Instead we are 
+going to also give here the username. Remember we are storing our username here inside the props. We have the login 
+field and it includes our username. So let's copy here 
+and I'm going to change the name. It's going to be project user and the 
+username. So let's copy here and do the same thing 
+for the others. Username and todos 
+todo to-do ID user and username. And let's add our tools. 
+I'm going to come here, grab all my tools. 
+paste here. And I'm going to change my key names 
+again. I'm going to copy here and I'm going to change them quickly. 
+And that's all. I think you can add this username anywhere you want. But make 
+sure that you are consistent. If you add it here for the other tools, you should 
+also add it here. If you add at the end, you should add at the end for the others. Okay. 
+I hope everything is all right. I'm not going to add my username for now. I'm going to save and let's deploy our 
+application. 
+Okay, let's copy the link and add it to your AI tool. I'm going to open my 
+MCPJSON. You can find it in the cursor settings. And let's add one more. 
+Give here a comma. change the project name and change the application URL. 
+I'm going to paste and save. And as soon as I do that, it's going to open this 
+authentication page. I'm going to approve and login with my GitHub account. It's going to read our user 
+information and send it to our server. And as you can see, even if we are 
+logged in, it returns an error because we are not authorized. Our username is 
+not here. So this is how you can protect your servers. So if I add here my 
+username and deploy my application again 
+and let's enable our server again. I'm going to disable and enable again 
+and it's going to open the authentication page and since we are already logged in it's going to send 
+this successful message we can close the window 
+and as you can see all these tools are here. 
+If you add here any public tool before this condition, the 
+authentication still will be successful, but the user will be able to see only one tool here, the only public tool. 
+Okay, awesome. Right now, you can delete the previous MCP because they have 
+exactly the same tools. To prevent any conflict, just leave this latest one. 
+And if you open your chat and ask for your projects or to-do lists, it's going 
+to send an empty array. Right now, each project is specific for a user. 
+As you can see, we don't have any project. Create a new project. 
+And it works as we expected. It suggests some to-do items. Let's add this one. 
+And it's going to automatically create our to-do item. 
+Okay. Awesome. You can also test it on your cloud application. And that's all. 
+It's that easy to create MCP servers using Cloudflare. If you want to, you 
+can create different functionality that will automatically add the user items here or you can store them inside a 
+database or Cloudflare KB storage. You can add different tools, resources, 
+prompts or whatever you want. Now you are ready to create your own project. 
+Okay, that's all for today. I hope you liked it. If you learned something new today, please like the video. You can 
+support the channel by using the link in the description or by joining the channel. Don't forget to follow Lamadev 
+social media accounts. I hope I'll see you in the next tutorial. Goodbye.

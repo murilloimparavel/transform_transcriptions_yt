@@ -1,0 +1,500 @@
+Cursor, the leading AI code editor, just 
+announced their biggest release ever, 
+Cursor 2.0. Now, with this release comes 
+a whole new AI coding model that the 
+Cursor team put together themselves, as 
+well as a whole new interface for 
+interacting with the AI agents that are 
+modifying your code. So, today we're 
+going to take a look at all of that and 
+build an application from start to 
+finish. And I'll show you exactly how to 
+use all of these new tools. I want to 
+thank the Cursor team for giving me 
+early access to play around with Cursor 
+2.0. And I've been very impressed with 
+the product so far. First off, Cursor is 
+a desktop application, so you're going 
+to want to download it. And to do that, 
+you'll just go to cursor.com, hit the 
+download button, and then install it. On 
+the pricing front, it is a paid product, 
+but there is a oneweek free trial. So, I 
+suggest you start with that, and then 
+upgrade to a pro plan if you think it's 
+worth your time. Keep in mind it can get 
+pretty expensive. So for me personally 
+as a professional developer, I fall into 
+the ultra tier and sometimes use their 
+usagebased pricing which is described in 
+their documentation. Okay. Now once 
+you've downloaded Cursor and installed 
+it, you're going to open it up. It's 
+going to look something like this. 
+Cursor works with files on your 
+computer. So your options are to either 
+open a project, which is just a folder 
+on your computer, or to clone a git repo 
+into a folder. So, I'm going to open up 
+this folder here, which is really just 
+an empty project. I haven't done 
+anything in here just yet. And right 
+now, we're looking at the agent view, 
+which is the new thing in cursor 2.0. 
+They're moving towards a more agentic 
+AIcentric approach, as opposed to the 
+editor view, which is going to show you 
+all of the files and the file contents. 
+So, let's stay in this new agent view 
+for now, and we'll see how far we can 
+get. To get the project started quickly 
+and have a nice baseline to work with, 
+I'm going to use create Vololo app, 
+which is my free and open-source starter 
+kit. You can check it out on GitHub in 
+the description, or you can just ask 
+cursor to use it. So, I'm going to say, 
+please use create Vololo app to start 
+the project. And right here we're going 
+to use the agent mode which is going to 
+allow cursor to actually run commands 
+and modify files. And we're going to use 
+the composer one model. This is the new 
+AI model that the cursor team has 
+actually created. But you can always 
+switch to other leading industry models 
+in the dropdown. I usually use sonnet 
+45, but I'm looking forward to trying 
+out composer 1 because it is very fast. 
+So, I'll go ahead and submit that 
+request and I'm going to run this 
+command. What this is going to do is 
+just set up a basic front end, backend, 
+and local database that I can work with. 
+So, I can just define specific features 
+for my app instead of trying to set up 
+all of this stuff from scratch. Okay, 
+looks like the project was set up. Now, 
+we can go ahead and start the server. 
+It's going to run pnpm rundev. And I'm 
+actually going to click this to see 
+where the app is running. 
+Looks like it's over here on port 5501. 
+Okay, there we go. This is the basis of 
+our app. Now, I'm going to open a new 
+agent, which is going to allow me to 
+give cursor a fresh context. That way, 
+it's not bogged down in the details of 
+setting up the project, and instead, I'm 
+just going to have it focused on the 
+specific features that I describe. And 
+to start, I'm going to want to customize 
+my project. I want to build a habit 
+tracking app where you can plant your 
+habits and then see them grow over time. 
+So, I'll describe all of that. And I'm 
+going to switch this agent to use the 
+plan mode so that before it actually 
+builds anything, it's going to create a 
+detailed plan that it will follow and 
+take things step by step. This planning 
+and then building approach is really 
+effective because it allows you to 
+correct the AI before it goes down and 
+makes a bunch of changes that you didn't 
+necessarily want. So, I'm going to use 
+this new voice input method and describe 
+my app. We are building a habit tracking 
+app that allows users to plant habits 
+and see them grow over time as they 
+follow those habits day after day. I've 
+described my app and I'll submit the 
+request. 
+It looks like cursor was able to quickly 
+explore the codebase and understand what 
+we're working with. And now it's asking 
+me for some of the details to clarify 
+what I want to build. I've clarified my 
+plan for cursor. And now it's going to 
+start actually writing this plan. And we 
+can see that this composer one model is 
+very fast. Now, generally speaking, 
+you'll want to spend a good amount of 
+time reviewing these plans because once 
+the AI implements it, it's harder to fix 
+it than to just implement it the right 
+way the first time. So, I would review 
+this and then when you feel comfortable 
+with it, you can go ahead and ask Cursor 
+to build it. So, that's exactly what 
+we're going to do now. And it's going to 
+start working through this to-do list 
+that it's put together for itself. 
+Cursor is asking me to run a couple of 
+commands here. And this is the beautiful 
+thing with cursor agents is that they 
+can just run commands. They can modify 
+files. They can read files and search 
+for data. They can look things up 
+online. Okay, cursor has finished 
+working and it has written 12 different 
+files for us. We can see over a thousand 
+lines of code. Now we can review these 
+changes. And this is another part of 
+cursor 2.0 and this whole new view is 
+that we can see all of these changes 
+file by file. and it makes it a lot more 
+convenient to review all in one place 
+instead of having to flip around 
+different files. So here I can see that 
+it's, you know, removed some lines, it's 
+added some lines, and quickly navigate 
+through all of the changes that it's 
+made. Now, in addition to reviewing it 
+yourself, you can actually click this 
+find issues button and then cursor is 
+going to go through on its own and 
+review the code looking for any 
+potential problems that the 
+implementation agent may have caused. 
+And looks like this time around the 
+agent found no issues. But I love to see 
+this direction that cursor is taking of 
+having the planning and the review be a 
+core part of this implementation flow. 
+Prior to cursor 2.0, 0. I've been using 
+my own planning and review prompts. You 
+can find them on my GitHub, but it's 
+great to see them actually incorporating 
+this into the core workflow of cursor 
+itself. Let's flip over and see what 
+this looks like right now. Okay, so we 
+got a habits page. Let's create a habit. 
+This looks good. Let's say drinking 
+water. 
+And we want it to be daily. Okay, it 
+looks like there's an issue with the 
+font color there, but we have some 
+plants. Let's plant this flower. I'll 
+create it. Okay, so that's not working. 
+I can open the dev tools and see that 
+there are some issues here. Now, usually 
+I would actually go and copy paste these 
+into cursor, but I'm going to show you 
+another cursor 2.0 feature, which is the 
+fact that they've added the browser into 
+cursor. So here I'll click connect to 
+browser and I'll click Google Chrome. 
+And here I'll say, "Please check the 
+errors in the browser console log." 
+Okay, here it looks like it's going to 
+the wrong place. I'm actually going to 
+stop it because whatever changes it's 
+making, it's making on some poor 
+assumptions because when it opened it, 
+it wasn't actually looking at the app. 
+So, I'm going to go back and I'm 
+actually going to click this button 
+right here, which will revert the 
+changes that it made since this message. 
+That way, I can always go back. And this 
+is something I love about cursor. It 
+doesn't come natively in a lot of other 
+AI coding apps. Um, I really like the 
+ability to just go back to a previous 
+checkpoint. Let me try something a 
+little different here. I'm going to say 
+browser tab. That way we can see it 
+right in here. And I'll say please check 
+the error logs. And then I'll give it 
+the actual URL so that it goes to the 
+right place. 
+Check it out. It's actually autonomously 
+driving this browser. So, it actually 
+went to this page, checked the logs, and 
+then seeing that there's an error. Now, 
+it's updating the API. It's really 
+impressive to see this level of 
+interaction directly in the code editor. 
+So, now let's go ahead and try to create 
+a habit. Create. Okay, so this button is 
+still not working. And I wonder if it is 
+able to capture the logs from me trying 
+to create it. Actually, you know what? I 
+just read the message and I think it was 
+because the pnpm db push didn't work 
+originally. So, I'm gonna go ahead and 
+open a new terminal and I'll run that 
+directly. Okay, let's try this again. 
+Create. Boom. There we go. Great. So, we 
+were able to add this habit. Now, let's 
+check out the garden. Okay, doesn't 
+quite load. Looks like we have 
+dev tools right here that we can take a 
+look at the logs. 
+Again, I don't even have to leave cursor 
+anymore to see this stuff, right? I can 
+just see what is going on right here. 
+And I'll just describe it to cursor. 
+I'll just say I see these logs in the 
+browser. When I go to the garden page, 
+can you take a look? Okay, looks like 
+cursor was able to fix the issue. And we 
+have our first little habit that gets 
+planted. Now, what I'm going to do is 
+actually open a new agent and start 
+iterating on this. And I'm going to 
+actually run two agents in parallel 
+because first of all, I want to improve 
+the experience on this page and also do 
+some cleanup to remove some of the other 
+unnecessary pages. So, I'll open up a 
+new agent and I'll say, "Please make the 
+garden the default page where we land at 
+when we go to the app and remove the 
+other unnecessary pages other than the 
+habits page. So, we'll start that. Then, 
+I'm going to start another agent in 
+parallel. And I'll say 
+we just built a basic habit tracking 
+app. And we have the garden page, which 
+is supposed to allow us to plant our 
+habits. But right now, it seems to just 
+automatically plant them for us. And it 
+just has a really bland background. So, 
+let's plan a much more interesting and 
+engaging way to interact with the app. 
+And then I'm going to switch it to plan 
+mode so that we can have a concrete idea 
+of how this will actually work. 
+Looks like the other agent has finished. 
+I'll take a look. And looks like it's 
+modified things in app tsx and the app 
+sidebar. That's great. So now when I go 
+to the app, I see the garden and I see 
+the habits. So this all looks good. I'm 
+going to go ahead and click keep all. 
+You don't really have to. cursor does 
+make changes to the files as it goes. So 
+to undo the changes, you have to reject 
+them. But keeping them just basically 
+makes it easier for you to see further 
+changes that are made, but it's not 
+strictly necessary to keep accepting 
+them all of the time. The other agent 
+has created a plan, so I'm going to go 
+ahead and review that. And the proposed 
+changes sound great to me, so I'm going 
+to go ahead and click build. The thing I 
+really like about this cursor 2.0 0 
+workflow is that it finally moves you 
+beyond the individual files and helps 
+you focus on specific features that 
+you're building out while still giving 
+you access to those files and seeing the 
+changes just in a much more consolidated 
+and streamlined way. Cursor has finished 
+this other feature. So I can review 
+that. I can take a look at the 
+individual files. But let's see what it 
+looks like in the browser. Let me create 
+a habit again. 
+Seems like it's having issues with the 
+API again. So, I'm going to ask it to 
+fix that. It looks like it correctly 
+identified that we needed to add a 
+couple of fields to the database and 
+it's created a new migration file here. 
+And when you're working on a real 
+application, you're always going to end 
+up in the weeds on stuff like this where 
+you're getting errors and you have to 
+deal with the database. And if you don't 
+understand software basics or how to use 
+these tools, it can be hard to make 
+progress. So, if you want to learn how 
+to use these tools and how to build a 
+real product, check out my AI coding for 
+entrepreneurs course. It's on Skillap 
+AI. There's a free trial and we go all 
+the way from starting in Chad GPT with 
+basic scripts, moving into lovable and 
+building a landing page, and finally 
+using cursor to build a full stack 
+application. I think it's a great 
+resource and a great way to get started 
+on your AI coding journey. Now, to fix 
+this issue, I'm going to run pnpm db 
+push again. so that our database is 
+updated and now we can see the habit 
+here because our database is working 
+properly. Now I'll go to the garden and 
+we can actually select this and place it 
+on the canvas. But I don't like how 
+squished this looks. So what I'm going 
+to do is actually use this new select 
+element option and I'm going to select 
+all of this and it's going to add it as 
+context for cursor. That way I can 
+describe the changes that I need 
+specific to these UI elements. And I'll 
+say let's keep the habit seeds at the 
+top so that we can see the garden in 
+full width at all times. Okay, there we 
+go. That's looking pretty good. Let me 
+go ahead and drag this. Doesn't look 
+like it can drag. So, I'll add that as a 
+to-do. But for now, I can click it and 
+place it. I'll put it right there. 
+Great. 
+Now I see as I'm scrolling around it 
+kind of zooms in and scrolls at the same 
+time. So that's an issue I want to fix. 
+And I'm just going to come up with these 
+little edits and provide a list to 
+cursor and it'll just work through all 
+of them. I'll ask it to fix those couple 
+of issues. And then I'm actually going 
+to open a separate agent so that we can 
+add the page to actually track these 
+habits. I've described my feature and 
+now I'm going to show you one other 
+really powerful thing about cursor 2.0 
+know, and that's the ability to run 
+several agents in parallel. So, I'm 
+going to go ahead and let's just start 
+with two. We're going to have cursor 
+implement this feature twice, and we'll 
+be able to compare the different 
+versions of it. So, we can choose which 
+one to go with. This can greatly 
+accelerate development, especially when 
+you're doing something kind of creative 
+and you want to see some different 
+ideas. You can also choose different 
+models to run in parallel. So let's say 
+we want to run one with composer 1 and 
+another one with sonnet 45. So we'll 
+actually have three of them running. And 
+let's go ahead and send it off. We can 
+see that they're running in parallel. 
+And when they need me to do something, 
+there's a little icon there that will 
+prompt me. Looks like the two composers 
+are done and sonnet 45 is finishing up. 
+Now, in terms of reviewing the results 
+of these different agents, you can see 
+all of the files that they've changed 
+here and review them on the right. But 
+seeing it update in the UI is a little 
+bit more tricky. So, what you have to do 
+is actually click this apply all button 
+and that will apply the changes of this 
+particular agent to your main branch. 
+So, you can see it in your UI and your 
+actually functioning software. So now 
+I'm going to flip back over here and we 
+see now that there's a whole calendar 
+view. Now if I want to go check out the 
+other branch, I'm going to undo apply 
+and I'm going to go over there to the 
+other one and click apply on that one. 
+Now if I flip over, looks like this 
+particular agent failed to import a 
+particular item in here. So I can just 
+abandon this branch and just go with the 
+one that works. Just reviewing it again 
+in the cursor browser and I'm pretty 
+happy with how it looks. So I can check 
+it is complete and we see it reflected 
+in the calendar. I can drag and drop and 
+that's a feature we added in the other 
+agent that was running in parallel. So 
+you can start to see how this is really 
+becoming a full application. Now, if I 
+come back to this later and I don't know 
+what's going on, I can simply open up a 
+new agent and just ask about how this 
+works. So, here for example, I'll ask it 
+how we track the habit streak and cursor 
+is going to go read through all the 
+files, come up with an answer. This is 
+something I actually did recently in 
+create volo app when I came back to the 
+project 3 months after working on it and 
+I wasn't sure how to deploy the new 
+version of it. So I just asked cursor. 
+It read through all my files and 
+reminded me of the proper way to publish 
+a new version of create volo app. I 
+noticed that on this page it was saying 
+zero days even though in the calendar it 
+had an actual streak. So I asked it why 
+that might be happening and cursor went 
+through again a bunch of different files 
+to figure out what was causing that 
+problem. So you can see that it actually 
+works in a real codebase. it can find 
+the relevant files and get to the root 
+cause of whatever issue you might have. 
+It even proposed a solution for me. So, 
+I'm going to switch this to agent mode 
+and say, "Please implement this in my 
+code." Now, when I refresh it, we see 
+that it has an actual streak going. So, 
+it's looking pretty good. So, everything 
+we've looked at here is pretty much 
+brand new cursor 2.0. You can always go 
+back to the editor and see all of your 
+files side by side. You can still use 
+the new cursor browser inside here, 
+which can be a really powerful way to 
+also interact with the cursor agent. 
+This is the more traditional view right 
+in the editor. We see all of our files 
+on the side here. Here we have the 
+contents. We can see now the browser. We 
+can see these plan files. And of course, 
+we always have our chat on the right. 
+So, you still have access to all of 
+those original features, but it seems to 
+me that the cursor 2.0 agent view is a 
+really effective way to build software 
+now that we're thinking about it more at 
+the feature level instead of the 
+individual file or individual function 
+level. If you want to learn more about 
+those traditional cursor features, make 
+sure to check out this other related 
+video which is going to go more into 
+depth on that. Now, I also want to share 
+a channel update, which is that I'm 
+going to be shifting the format around a 
+little bit. I realized that my videos 
+are kind of scattered. There's 
+tutorials, model reviews, multi-hour 
+builds, stuff for beginners and experts, 
+and I wanted to come up with a format 
+that was going to take the best aspects 
+of all those different types of videos 
+and make something that would be more 
+consistent, valuable, and teach you AI 
+coding in the context of building real 
+projects. So, moving forward, the 
+channel is going to change around a 
+little bit. Instead of having these sort 
+of tool driven tutorials, I'm going to 
+be building cool stuff, and that aligns 
+more with what I want to be doing. 
+Anyway, and in the process, I'll be 
+showing you all the different AI tools I 
+use, how I work through various 
+problems, and you'll get to see me build 
+something cool. I'm planning to kick 
+this off with three videos released at 
+the same time in the next few weeks, and 
+that will be the beginning of a new 
+chapter for the channel. So, I hope you 
+enjoy the new videos, and thank you for 
+your support. As always, thanks for 
+watching. Take care.

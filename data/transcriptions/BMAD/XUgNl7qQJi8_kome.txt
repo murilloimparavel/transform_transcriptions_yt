@@ -1,0 +1,205 @@
+This is probably about the worst place 
+to be recording right now without a 
+microphone because it is super windy and 
+I also got these wind chimes behind me. 
+But with the power of AI and Da Vinci 
+Resolve can basically flip a switch. 
+It's like magic. So, let's check it out. 
+And just like that, 
+now how do I sound? Can you tell a big 
+difference? I bet you can. But anyways, 
+that's not what I'm here to talk about 
+and that's not what this channel is 
+about. 
+I want to talk about why I made the BMAD 
+method. 
+And I guess I really should talk. Why am 
+I doing this in the middle of a 95 
+degree heatwave, very windy day? Well, I 
+just want to get outside and there's a 
+little bit of shade and I have been, it 
+seems, just locked 
+in front of my computer for weeks 
+working on the V4 upgrade. 
+getting it pretty solid and ready for 
+you guys to use it. So, it's easy to use 
+and easy to install. There's now a 
+built-in installer. You can watch this 
+video. I showed how to use it with 
+almost every IDE. Works great with cloud 
+code, cursor, rue, and more idees with 
+rule settings are coming real soon. But 
+I want to talk about what the BMAD 
+method really is because I think if you 
+understand this, it will be much more 
+powerful for you, but also it's going to 
+help you make it your own. And ever 
+since I started V1 of this back a few 
+months ago, 
+the idea was not necessarily at first to 
+have people pull it off the shelf as is 
+and use it. I was trying to share an 
+idea and the idea was how powerful is a 
+platform for a programming language 
+where the language is English. So I had 
+this idea a couple months ago 
+and shortly after that I think about the 
+time version two was out and I was 
+working on V3. 
+I think it was Sam Alman that said, "Old 
+people, I guess like myself, think of 
+the LLMs as like an advanced Google, but 
+the youth think of it and treat it like 
+a programming language." 
+And I realized that is what the BMAD 
+method already was, right? by taking 
+these different personas and putting 
+workflows into them and tasks and 
+templates and conditions. If this, do 
+that, if that, do this. 
+It really sparked in me before I even 
+heard that that this really is in and of 
+itself not just a tool but a platform. 
+Since then, what's becoming really 
+popular is agents. And what are agents? 
+Agents are nothing but natural language 
+instructions running on a platform that 
+can execute them with an LLM. The 
+future, my friends, is in natural 
+language coding. And I truly believe it. 
+That's why in V3, it hit me that this 1 
+million context window and the 
+optimization that is going on in Gemini 
+2.5 Pro is so powerful that we didn't 
+have to have all of these agents be 
+separate. We could actually put all of 
+the agents together in one massive file 
+and build the BMAD orchestrator or the 
+BMAD agent as it was called in V3. And 
+it's actually able to 
+transform into all of these other 
+personas 
+and know based on which persona it is 
+which tasks it can run, what parameters 
+to run the task with, what to use for 
+inputs, when to complain if it doesn't 
+have the right input. What are we 
+talking about at the end of the day? We 
+are talking about nothing but another 
+programming language. Maybe it's built a 
+little bit inefficiently because it's 
+natural language and there's a lot of 
+processing power that goes into 
+processing these things, but we're 
+building up logical sets of prompts and 
+rules to control a machine. At the end 
+of the day, natural language in English 
+is the programming language. 
+Around the same time, a friend told me 
+that he believes the future is nothing 
+but agents 
+and data. Now, think about that. What 
+does that mean? Agents and data. That 
+means natural language instructions 
+running on a machine 
+and the data. Data is not going away. 
+You control the data, you control the 
+money. But everybody's going to be 
+building agents. 
+I think that's a lot closer than we even 
+imagined. And just a few days ago, 
+Andrew Carpathy, the guy who you may 
+know is the tweeter of the Vibe Code, 
+but his foundational video just 
+explaining how LLM worked when she had 
+GPT came out a few years ago, was 
+actually really groundbreaking. And I 
+think his explanations of LLM was much 
+better than his vibe coding tweet. But I 
+think that's what he'll be remembered 
+for. As I was working on V4 though, his 
+video came out a few days ago. I'll 
+share this link in the description 
+because it's a good watch. 
+Pretty much all code from the 1960s 
+up until the early 2010s was source code 
+as you know it, right? It was Forran, 
+Cobalt, C++, Java, C, Python.net, 
+Node, right? But it's all just software. 
+But then of neural networks came out and 
+this pi which was all the software 
+started to get eaten into and slowly 
+these neural networks are doing a lot of 
+processing what you might know as like 
+ML or AI before the LLMs started doing a 
+lot that we never imagined and that 
+started taking away a little bit of I 
+guess I'll call it market share from the 
+overall pie of all source code. 
+So imagine that from 1960ish, 
+maybe even earlier, all the way until 
+about 2014, that's really all there was. 
+And then like that it shifted and this 
+other thing started to emerge until 
+about 
+2018 
+2020 
+and then all of a sudden there's this 
+new thing on the scene now which we know 
+is the LMS in natural language 
+processing or basically English. This is 
+the third wave of software. Natural 
+language English or whatever language 
+you speak prompting natural language to 
+the LLMs is now coding starting now and 
+into the future. So on here when you're 
+using the BMAD method, you know, you're 
+using it in cursor or whatever your IDE 
+is to produce source code, classical 
+source code that has not changed since 
+the 1960s. 
+But look at the BMAD method itself. 
+really dig into there. Read the 
+architecture file in the docs and look 
+at what gets installed in thisbead- 
+method folder in your project when 
+you're using this. What do you see in 
+there? You can understand this code 
+because it is the code that you have 
+been speaking all of your life. It's 
+English. It is programming and 
+instructions, all the natural language 
+to build up an Asian framework that you 
+can use dayto-day to help you What does 
+that tell you though? Well, what that 
+tells me is this is a new wave of 
+language that is going to eat the rest 
+of the software world and the future is 
+literally going to be agents or natural 
+language LLM instructions 
+and data. 
+This is the future, my friends. It's a 
+great time to learn software engineering 
+principles and practices and it is still 
+a good time to learn actual coding 
+languages like Python or JavaScript or 
+any language you want to work on. It's 
+not going away. Those skills translate. 
+People that have this experience and are 
+good at this. They can master vibe 
+coding, but they can master 
+understanding what is going on when 
+they're vibe coding and they are going 
+to be able to be the true masters of 
+this third wave of coding that's coming. 
+So, this is a little bit of a different 
+video this time. So, if you've watched 
+it this far, thanks for watching. My 
+name is Brian. Really do enjoy this 
+community. So, continue to check out V4 
+of the BMAD method. And we'll see you 
+soon back behind the desk with a more 
+normal video where I'll be talking about 
+some of the other new key features of 
+the V4 method and also doing a full app 
+build. So, thank you everybody.

@@ -1,0 +1,1101 @@
+Hey everybody, Brian here
+and welcome to BMad Code. What an amazing week
+this has been in tech 
+and there has been amazing
+releases from Google, Anthropic, OpenAI, Sonnet 4
+came out. But there's 
+one other game changer that
+came out earlier this week that probably flew
+under everybody's radar and that is the BMad Agent
+is live and ready 
+for action. So I'm going to
+be sharing with you all the amazing updates in
+the BMad method, V3, 
+and how you can put it into
+practice right now. It's simplified and it is
+super powerful. This 
+is a revolutionary update.
+It is a mind-blowing experience. Perfect time
+to start using the BMad method. The BMad method
+has gone through 
+some drastic changes, but first
+let's talk about why does vibe coding fail. First
+of all, you just 
+get the agent where you build
+your project halfway through, you get to a certain
+point and it's just 
+going to start going off
+the rails and doing dumb things. And even with the
+better coding agents, the more complex your project
+gets, the harder 
+it's going to be for the agent
+to stay on the rails. Resources get wasted. If
+you do not optimize 
+and plan ahead, you're going
+to be burning credits and burning monies. If we don't
+give the agents 
+the right information, they're
+not going to know what to do. You're going to
+see agents putting files in random places you don't
+expect and they're 
+not going to remember where
+they did it, maybe just steps before. What do
+you do when you're halfway through a project,
+you're working on 
+your MVP, maybe you finished
+almost all of your epics and then you forgot a
+major feature or you 
+realize you need to do a big
+change. Well, in the past, that has been a real
+pain to recover from, but now the BMad method
+will actually support 
+change recovery. And then
+finally, failing to plan. If you fail to plan, you
+are planning to fail 
+and that is what the BMad
+method is about. It is going to help you brainstorm
+your idea, 
+plan it and put it into motion so the developer agents can work from
+beginning to end. Why has the BMad method
+evolved? I started 
+with vibe coding, but you
+get so far and we just talked about all of the
+problems that you run into. So from vibe coding,
+I started using a lot 
+of cursor rules and I started
+to learn that you can create documents that help
+keep your agents 
+on the rail and it was still
+fragile and it was unoptimized. So I came up with
+the idea of creating 
+agile personas that work as
+custom modes. There was issues with the V1 method,
+one of them being 
+each agent was hard coded
+to the task at hand and it was very hard to optimize
+them and customize 
+them as people would like to
+do. So V2 was really about four main things. Optimizing
+and utilizing 
+the web, taking a lot of the
+work of building this planning out of the IDE,
+saving so much time, 
+effort and money, taking
+the power of deep research from the web to
+really investigate 
+better ways of doing things. But the two key innovations in V2, I think
+were checklists 
+and templates. By having templates,
+we can now define exactly what our PRD
+would look like in define exactly what our PRD
+or Architecture would 
+look like in a separate file.
+We were not having to modify the agent because
+we had a separate template file and also the
+agents were trained 
+to work section by section.
+So the agents work with us, explaining to us, working
+back and forth 
+with us to produce really
+clear documents. But still, V2 was complex in that
+it was difficult 
+to set up all of these agents
+and there was challenges with each different
+IDE and web 
+platform. If you wanted to use some of my larger agents that worked really
+well in Gemini Gems, 
+it might not work in the
+custom GPT without drastically reducing the
+file. So that's why 
+we led to version three.
+Version three fully 
+optimized this so you would
+not have to have these bloated files that you
+would upload and 
+create. Instead, the agent
+files themselves and the agent definitions got
+smaller and they got 
+optimized by uploading separate
+files to augment them. And now they work perfectly
+with Gemini 
+Gems and chat GPT. But the
+other big innovation of V3 is full customization
+and a new Uber 
+AI orchestration agent I call
+the BMad Agent, which is really the most
+exciting thing that 
+I have seen in a long time. piece of V3. The BMad Agent
+really is your ultimate AI orchestration
+partner. This BMad 
+Agent coordinates as your
+method coach and it organizes your whole entire
+AI Agile team, 
+dynamically adapting to become
+the one Agile agent that you need right now.
+Product manager, 
+Scrum Master, Product Owner (PO). And you can also define
+those agents now in V3 to have the exact tasks that you want them to
+have. But how do we 
+really get from idea to implementation
+with the full agent flow in the BMad
+method? If you have 
+a seed of an idea, maybe you
+want to get something out in the market, you're
+not exactly sure what it is, you're going to first
+talk to the BMad 
+Agent. And the BMad Agent is going to suggest that you do brainstorming
+with the business analyst coach. It is going
+to help you form it 
+into a conceptual product
+brief. But it's also going to help you do deep research if you 
+want. It is going to help you
+look for competition, see what they're doing,
+look for competing 
+products or just similar products
+to maybe help you figure out what is unique
+about your idea so 
+you can get something out in
+the market that is truly interesting. And then
+hand that off to the product manager. Now if you're
+using the power of 
+Gemini 2.5 in the web, which
+I highly recommend, you can run most of these agents
+now all in the 
+same chat thread. You no longer
+have to export a document, re-import it into
+a new chat. So your 
+agents are going to be able
+to virtually pass around your brainstorming,
+your PRD brief that 
+we just talked about, over to the product manager who's going to help you
+elicit and define a 
+beautiful product requirements
+document that is going to have all of your
+high level epics and 
+stories worked through in an
+order that makes the most sense for the developer
+agents to build your 
+project on the rails perfectly
+in the right execution order. That is going
+to be virtually 
+handed off if you have a front end to the UI-UX design architect. This
+is a specialized agent 
+that does three different
+things. It can help you create a prompt for V0
+or Lovable that is 
+going to build a UI basically
+in a one shot for your whole front end application
+with all of the 
+knowledge of the full PRD, MVP, and the architecture. The design architect
+also will help you just 
+figure out what the UX and
+UI spec is. It's going to ask you questions.
+It's going to have you 
+detail what types of themes
+and colors you want or you can upload images, but
+it is going to help 
+distill that down to a very
+clear document that the build will be able to follow
+later on to build 
+the UI of your dream, but
+not just a generic looking admin UI, but really
+a UI that encapsulates 
+exactly what you're trying to
+imagine in your head and get actually on the screen.
+So it doesn't look 
+like just some generic vibe
+coded crap that everybody else is putting
+out there. This will help you create your unique
+artistic visual 
+vision. The application architect
+is really going to look at all of the MVP requirements
+of the PRD. 
+It's been passed virtually in
+memory. It is going to look at all of that and
+then it is going to 
+look at all of those epics
+and stories and it is going to make sure that it
+creates the source tree and the architecture decisions
+that will make 
+sense to fully build out the
+PRD. If you are an expert and already know what
+design and architecture 
+you want to do and what technology
+choices you want, you can actually also
+feed in a document 
+that has your preferences for coding standards, design patterns, or
+technology choices. The 
+architecture will take all
+of that into account, see what fits, and it is trained
+to either accept 
+those, talk to you about them, or offer alternatives. But you might not know
+those things. You might be 
+a beginner. You might not even
+know what language you want to use. In this architecture
+engine and even going back to the previous
+agents, they're 
+going to work with you, understand
+the level and where you're coming from, and
+help you learn and 
+understand and choose the right
+technology choices. It's going to show you trade-offs.
+It's going to explain to you why it shows
+one thing over another 
+thing. It's going to help
+you also make sure that the agent is really thinking
+through things and 
+giving you the best possible
+options. It's then going to pass this off to the
+product owner, just like we had before, but this
+is not combined 
+with the Scrum Master anymore.
+The product owner has one job when we're in the
+web flow, and it's 
+one of the most important jobs.
+It is going to look at the architecture, the
+PRD, and the output 
+from the design analyst or
+the design architect, and it is going to run through
+a masterful 
+checklist that really makes
+sure that everything works together and everything is updated.
+Once we're done with the product owner, 
+that's where we probably have all of our artifacts and we're ready to
+put it into the IDE. 
+The Scrum Master or the product
+owner in the IDE will run a document sharding
+task. This will give 
+the agents the intelligence
+to produce the high level detailed lower level stories
+with tasks and 
+subtasks, and the artifacts
+that the developer needs to implement your stories
+perfectly. Then, 
+of course, we have our developer
+agents. These are the workhorses that are
+going to be taking our granular, very detailed
+user stories. I'm 
+going to show you an example
+of some of the user stories, just how detailed they are, that are guaranteed to keep your
+agents on the rail, 
+putting things in the right place, following the right protocols,
+and more importantly, 
+not requiring the creation
+of tons of rules to keep it on the rails. It's going
+to basically know 
+everything it needs just from
+the user story and the details that the Scrum Master
+puts in it from 
+all of the sharded artifacts.
+As I mentioned, there is now a task and an
+agent that can help 
+you with course correction.
+So if you're halfway through your MVP and you realize
+there's something you want to add in, or you want to change 
+course, or maybe you want to throw
+out one database for another database, it's a huge change, the course correction agent is going
+to work with you, 
+figure out what the best approach
+is. Do you have to go back to the beginning?
+Do you have to throw away a few stories? Is there
+a way to pivot in 
+the sand and move forward?
+It will also help you update all of the artifacts
+you need to, all of 
+the future remaining stories,
+add new stories that you need, so you can get back
+on track quickly. 
+It will help you do that. It's
+amazing. This is a brand new feature of the V3
+BMad method. In V2, I 
+mentioned that we had templates.
+In V2, we had a checklist. The PM, the architect,
+the design 
+architect, the PO, and the
+Scrum Master. After they do anything, they will
+run these detailed 
+checklists. It forces the LLMs
+to further deeper think about what they've
+done and reassess 
+everything. But what is the
+change for V3 that really gives us the ultimate
+customization? Well, furthermore, instead of
+just having the roles 
+tied to what actions they
+can do, we've now split out the personas so you
+can make them creative, 
+you can customize them how you want. Additionally, we've split out tasks.
+If you wanted to do the 
+course correction task, you
+could do that just by pulling in the task. But
+by having all these 
+pieces, we can also now fully
+customize the BMad agent to be able to have whatever
+agents, tasks, 
+checklists, and personas that we want. We can
+also now customize multiple developer 
+agents that are specialized
+to the front end or the back end that have their
+own specialties and can help you master
+certain languages, 
+certain frameworks, or be an expert
+in front end or back end and really focused on
+that specialty. And 
+it does make a big difference
+when you do that. This new feature in V3 is advanced reflective elicitation and brainstorming
+actions. 
+What that really means is
+when you go through critical pieces of your document,
+whether you're working through the PRD or
+the architecture, as 
+you're reviewing each section,
+it's then going to give you eight options.
+And the first seven options are basically going
+to allow you to tell 
+the agent to do different things,
+to self-reflect on itself or improve things. Critical
+self-reflection, 
+user goal alignment. This is
+going to force the agent to really reflect, is
+it meeting the goals 
+of the overall project?
+Could it have done something differently? Generate
+and evaluate alternative design solutions.
+So what this is 
+going to do is this is going
+to force the agent to look at what it told you
+and present two or 
+three possible alternatives.
+And then it's going to have to either defend what
+it chose and tell you why it chose it or potentially
+choose one of 
+these other ones and also give
+you some options to help you really understand
+its thought process, but also forcing the agent
+to further think 
+about how it got to where it
+did. Also, there's user journey and integration or
+interaction stress 
+testing. And then finally,
+we have the deep dive into design assumptions. We
+really challenge the 
+agent to think about hidden
+constraints that could impact the development success.
+I'm going to show you how easy it is to set this
+up and install it 
+now. It is so easy compared
+to the way it used to be. And you can start experiencing
+the magic with 
+the BMad agent today. So
+all you got to do is clone and install. This is going
+to work in Cursor, 
+Windsurf, Roo, Cline, Copilot. But more importantly, this works great with
+Gemini Gems and Chat GPT's 
+custom GPTs. I highly recommend
+the Gemini Gems. And start with the default.
+I already have a 
+build done in the repo, so
+you can just take all the files, even if you don't
+want to build it yourself, put it in the web
+and start playing 
+with these agents today. And
+then finally, we have a great community on the GitHub
+repo for the BMad 
+method. So you can share your
+suggestions. This whole thing is meant to be
+customizable and work 
+for the way you want to work.
+So you can customize this and share your suggestions
+in the forum. A 
+lot of people are doing amazing
+things with the BMad agent and the BMad method.
+And so there's a lot of people just willing
+to help you out. And 
+we're all making this better
+together. This is an amazing system. This works
+in Greenfield. This 
+works in Brownfield. And this
+works everywhere in between. All right, so let's
+now check out the BMad method. Again, there's
+a very active 
+community here. Come in and
+check it out. See how other people are using it.
+You can also suggest 
+issues or changes. Poll requests
+love feedback from the community because
+a lot of the ideas 
+in V3 came from people suggesting
+some of these amazing changes. Getting started
+is now easier 
+than ever. Anybody can do this.
+And I want you to just try this for yourself.
+All you have to do, 
+come to the web build sample.
+And there's these one, two, three, four, five,
+six, seven files 
+here. All you need to do is
+first of all, I would clone the repo. It's much easier
+to work with. So 
+if you clone the repo locally,
+you'll have the BMad method just like here. This
+is the same GitHub 
+that we were just looking at.
+And you can go to the web build sample. And first
+of all, this is 
+the agent prompt. Now look
+at this agent prompt. You'll see that this is slightly
+less than 8,000 
+characters. So this will work
+with custom GPTs. And this will also work with
+Gemini gems. This is 
+the only file that you need
+to copy and paste the text. So I'm going to copy
+all of this, go into Gemini. Models are always advancing.
+You can play 
+with the different models,
+but the 2.5 Pro is going to give you the huge context
+window that is just amazing. And then what we are
+going to do, so we 
+are going to say new gem and
+we're just going to paste all of that information
+right in here in the 
+instructions. You need to give
+it a name. I would call it BMad. So we'll just
+go to upload files. 
+We're going to select every
+file except for the agent prompt. The prompt again is the 
+instructions. Very similar in custom
+GPT. All of these other files we want to attach as
+knowledge for the 
+agent. This is going to give it
+all of the intelligence and all of the personas.
+And now we can save 
+here. We can start chat with
+it. And now this is to B-MAD. We can say slash
+help if we don't know 
+what to do, or we can just
+start talking to the B-MAD agent. The B-MAD agent
+has a knowledge base and it is knowledgeable
+about all of the agents 
+and all of the different workflows.
+But it also has these amazing help commands
+that you can use. 
+So the BMad agent tells
+you that you can go to YOLO mode and just plow
+through all of your documents. I don't recommend
+it, but if you want 
+to work really fast or maybe
+just work through a demo of the whole process,
+you can put it on YOLO mode. You can get a list
+of all the available 
+agents and what they're able
+to do. So let's do that right now. Let's see what
+we have available to us and what they're capable
+of. And so you 
+can see this tells us all of
+our different agents. We've given names to them. Some
+of them also have custom personalities. And we
+can see what type of 
+tasks they can do. And as I
+said, the BMad method is very customizable. So people
+have told me in the 
+past, their version of Agile
+is different than my version of Agile. And to
+be honest with you, 
+across all of the industry,
+there is no one way of doing Agile and different
+roles do different things. So if you feel the product
+owner should be 
+the one creating the product
+requirements document, you can customize it and have
+that set up. If you 
+don't think there's no room
+for a product manager and instead you want to have
+only a Product Owner (PO), you can 
+do that. You can change out
+the analyst. You can have the architect and the
+design architect be the same person. You can do
+so much configuration. 
+It's wonderful. If I want to
+work on brainstorming, I can just talk to the analyst
+and say that I want 
+to brainstorm on an idea. I
+don't even know what I want to build yet. Or when
+I'm ready to make my product brief, again, I can
+create the project 
+brief with the analyst. And
+then when I'm done and the project brief is
+done, we've worked through all the sections from
+the template that 
+she's going to work with
+us on. We tell her, let's hand it off to the product
+manager and BMad will 
+orchestrate that and in memory
+it will hand it off. We can still keep copying
+all these artifacts out so we have them, but they're
+all being passed 
+around in the context. And
+I've been able to go through a whole workflow of
+a brief, a large PRD, 
+a large architecture, plus design,
+plus all of the checklists without having it
+start hallucinating 
+or going off the rails. And
+you'll know if you run out of the context window,
+but you can have very long chats with this and actually
+do so much before 
+you ever have to start a
+new chat. So once your artifacts are done, you
+can actually start developing. So when you come
+into here, again, 
+this is the Bmed method. What
+you'll want to do is if you have your project,
+whether you're starting a new project or you've
+already started a project 
+and you want to start using
+this method, all you have to do is copy over the
+BMad agent into your 
+project. I can show you a
+project I have here and you can see I've been working
+on this a little 
+bit. I've already completed
+one epic with cloud 4. It's going so smooth and
+you can see all I've 
+done is I've put the BMad
+agent here. The BMad agent is made up of multiple
+files and folders. 
+There's a checklist, a data,
+a personas, a tasks, and a templates folder. And
+if you'll notice from 
+our web build sample, what
+do we have here? We have checklists, data, personas,
+tasks, and templates. 
+Whatever folders are in the
+BMad agent, it is going to create a compiled
+folder or a compiled 
+file of all the content in
+that folder. So all of my personas, let's look at
+the PM, is a persona 
+that is really tuned to being
+a very good product manager. So what are the principles
+of a product 
+manager that are already active,
+always active? Well, they're right here. And
+you can see this is 
+a person or a persona that is going to champion you and champion the
+end user and really work 
+closely with you understanding
+what we're trying to build and why we're trying
+to build it. These 
+are ingrained into the core
+principles of this persona. Unlike the previous
+methods, you will 
+not see anything in here
+about the PM being able to create a PRD or do any
+other tasks. That is 
+because that is not all fully
+customizable. These are just the personas. So the
+analyst you'll see 
+is curiosity driven because this is a brainstorming expert and has very
+different personas, very 
+action oriented, loves to
+be strategic and do market research. The architect
+is very analytical. 
+This is not getting into the
+what they can do. The tasks are all the things
+that we define in the 
+Bmed method that the agent can
+do for us. So what are some of those things? The
+agent can create a 
+library for us and index our
+index folder to make sure it is a good resource for
+finding all of the 
+information in our docs folder.
+It can create a UI you expect. It can create
+the PRD, the front end 
+architecture. It can help
+us create masterful prompts to feed into the deep
+research because 
+the prompt that you put into
+deep research also affects the quality that you
+get out of running deep research when you're
+doing it in the web. 
+It can help us generate prompts
+for lovable or V0 or replit to create these amazing
+prompts that we 
+can one-shot our UI. It can
+help us course correct like I mentioned before. And
+also there's a task 
+here to run checklists. So we
+might want to define all sorts of checklists in the future. By 
+just having a generic task
+called run checklist, we can now allow any agent
+to be able to run 
+any checklist that we defined.
+Now right here, we have story definition of
+done checklist to 
+really make sure that the developer
+did everything it should. Did it test? Did
+it clean up the story? Did it check everything
+is complete? 
+Did it run integration tests?
+Whatever we want to put in our DOD could be
+in this checklist. 
+We have the Product Owner's Master
+Checklist that I described before, which is really making
+sure that every is cohesive and anything that
+was updated in one 
+document is reflected in all
+the other documents and that there's no gaps in logic that
+our developer agents will later face. 
+We have changed checklists. The architecture
+checklist is what it uses to make sure that the architecture that
+was produced from 
+the template is spot on and
+matched closely to our PRD. So you can look at these checklists. 
+They're all part of the format.
+This is a mistake here. There should be a markdown
+file, but text files work also. So we have our checklists.
+We have our 
+tasks. We have our personas.
+And as I mentioned, we have our templates, right?
+So you can define 
+what sections you want in your
+PRD. If you want your PRD laid out like I do,
+then this is the way 
+to do it. If you want to
+have your stories following the same way I have my stories, this is the way to do it. By the way, the 
+Scrum Master is going to put
+a lot more information than you see right here. So
+the developer agent is really going to stay on
+the rails and be able 
+to get stuff done. In the
+web, we have this configuration file. And
+this file, when we 
+compile our web build, becomes
+agent config. Now in here, we've said what agents
+we want. So maybe 
+in our version of the BMad
+Method or for our web agent, we only want to have
+three agents, or maybe 
+we only want to have four agents.
+Maybe we want to have an analyst, and then
+we want to have a 
+technical product owner that can do PRD, architecture, and the front end,
+right? Like we can make any 
+expert we want because we can
+define what tasks they're capable of doing, what
+templates they have 
+access to, and what checklists
+they're allowed to run beyond what the tasks
+give them. So we can 
+create an Uber agent if we
+want to beyond the BMad agent that can do anything.
+But I really 
+recommend kind of keeping
+the personas tied to what they're doing because
+again, the persona 
+really makes the architect
+a keen expert at producing your architecture.
+So matching the 
+personas does make sense,
+but again, this is all customizable. And speaking
+of customization, 
+one of the best things here
+is you can further customize by putting in a prompt
+right here. So 
+this is a customization where
+it's just giving them a different type of personality
+just to test 
+it out, but you can do so
+much more with these customizations. For example,
+if you're going to 
+customize your dev agent, and
+by the way, there's also an IDE orchestrator to
+do all this, and it's a very similar setup here,
+but this is where you 
+can create your full stack
+dev or your front end dev. So what is the difference?
+Well, I've told 
+it to specialize in Next.js,
+React, TypeScript, HTML, and Tailwind. So now
+this is really going 
+to take on the persona of a
+master front end web application developer, whereas
+this is more of a 
+master generalist. If I knew
+I was doing TypeScript, you know, I could tell it
+to be a TypeScript expert or, you know, Go or C#
+or whatever it is, 
+you can actually make multiple
+developers in here. You can give them different
+names. You don't have to name it dev or dev Front End or
+whatever names you 
+want to use. If you have names
+that you can easily remember instead of wanting
+to remember their roles, it's really fun to
+give them names and 
+personalities and work with
+that. But with the web orchestrator, agent config,
+or the other one, 
+you can look at the examples. It's pretty easy. It'll help you set it up
+and create the exact personas that you want. So whatever
+you define in 
+this file, they are now all
+going to be available to you through the BMad agent.
+He will allow you 
+to talk to and transform to any
+one of these agents. So once you've created your PRD, your 
+architecture and all of that, right,
+you're going to want to jump into the actual web
+here or excuse me, 
+you're going to want to want to
+jump into the IDE and actually start developing
+to this project that 
+I've started here already.
+So this is where I'm building a project. This is
+a daily digest. What this is going to do is this
+is going to download 
+stories from Hacker News
+and create a daily podcast, a daily two person
+podcast, much like 
+what I can do manually in
+notebook LM, except this is going to send me the
+daily podcast by email. 
+What we have here, this is
+the backend service. And the first thing I do before
+I even started 
+this project, I did start with
+a starter template. I always recommend starting with
+a starter template if you already have one. And
+when you talk to 
+the agent, you tell it you have
+a starter template, you show it the structure and
+it's going to make sure that the documents it
+create will actually 
+follow your starter template.
+But in the docs, you're not going to have all
+of these initially, 
+what you're going to copy
+out of the web, out of the web, or if you're using
+the agents in here to produce these documents,
+you're going to have a 
+PRD, you're going to have an
+architecture, that's it. And then you're going
+to run that sharding task. And the sharding task is
+going to take your PRD 
+and it's going to pull out
+these separate Epic files. And the Epics are what
+describes the overall 
+large pieces of functionality. And it's already broken it down into these
+high level stories. 
+When we run the sharding task
+on the architecture, it's going to create our API
+reference that gives us all the details of all
+the APIs we're going 
+to be interacting with. It's
+going to give us the component view to really look
+at which components we're going to be creating.
+It's going to give us 
+our data models. These are
+the files that are going to keep the agents on the
+rail. This probably is one of the two most important
+documents. And 
+this is our project structure.
+Now, this is the backend and this is the frontend. So it's 
+already laid out here and it's
+going to give all of the details of where files need to go. So it 
+knows exactly where to put things
+and it has some descriptions here. Now the tech stack is very important. And one of
+the big key changes 
+in V3, and actually in V2,
+we also had this, is we trained the agents to
+be very specific on 
+versions. Here, we're saying
+use Axios. In past versions, it might say things
+like use Axios or 
+Fetch. And that is very detrimental
+if you don't tie it down to one version,
+because then what your 
+agents will do is they might
+start using Axios and then they'll have a unit
+test that fails. And 
+then if you're not paying attention
+what the agent will do, and trust me, I've seen
+it do this before, is it'll say, "Oh, I'll use
+Fetch because it 
+wasn't very specific." And
+so then you'll have two different HTTP libraries
+in your project, 
+not even realizing it, because
+it made some dumb mistake and instead of fixing
+the unit test, it just decided to install like
+a whole new version 
+or a whole new library. So
+the key thing with the architecture is the architecture
+knows that 
+everything needs to be as
+explicit and defined in here as possible. So you
+should not see any 
+multiple choice, maybe use
+this, maybe use that. So you can see here, when I
+worked with the design 
+agent, we worked on this UX
+UI spec first, and I described the look and feel
+that I wanted of this. 
+So the application is simple.
+There's a list page and there's a details page.
+On the list page, we're going to look at every
+day's Hacker News 
+digest that I created. You
+can click on it and you can go to a detail page.
+There's going to be a player. You can see stats
+and you can go to 
+different links on Hacker
+News to actually see the comments, or you can just
+listen to the website. 
+And also there's going to be like ways to subscribe to get the podcast
+in your email and later post MVP versions.
+But I wanted to do 
+something different and not
+just have it look like boring stock tailwind. So I
+told it I wanted an 80s retro CRT terminal look,
+green glowing text 
+font to really give it that
+80s terminal feel. The prompt, the V0 prompt, I
+had to generate that 
+after we already went through
+the full PRD in both architectures and the UX
+UI spec, obviously, 
+so it really understood
+every page that we need for the MVP. So you can
+see it's a three page 
+responsive web app. It knows
+the name of the app, what technologies we're using,
+all of the constraints, 
+all of the design. This is exactly what I envisioned. This is a one
+shot. Again, I would 
+have never been able to just
+like type all this and get this perfectly. When
+I say this was a one shot, this was an amazing one
+shot. Look at all 
+of this that it did. It even
+knew the layout of the files from the architecture
+that I wanted for 
+the front end architecture,
+how I wanted the organization of the application
+from the design architect. And it gave me an
+app. And when I say 
+a full working app, I mean, this is not calling back in data, obviously,
+but it's ready for 
+everything else. So as you
+can see, once I had this all working here and
+I saw that this all work, I was just blown away.
+I was then able 
+to click this download button
+way over here. And then I was able to just
+jump into a new project. I dumped everything
+that I downloaded. 
+The only thing I added here
+was a docs file with the front end architecture,
+which I have not sharded yet here. I will. So it also has 
+everything, but it's already laid
+out exactly like the design architect even envisioned it,
+which is great. I 
+ran NPM install. So it installed
+the node modules and it set up next and everything
+that I needed. 
+And now I can do NPM run dev
+and boom. Like this is literally all I did beyond
+NPM install. And 
+now you can see the application
+is actually running here on our local host. I'll
+go to this here. 
+We'll load it. And this is now
+running from my local machine, ready to be developed,
+carved up to hit 
+the regular APIs once they're
+deployed. And just like we saw on the web, this
+is all interactive, but this is now running from
+the local machine, 
+full functioning running web app built to spec and built to the needs
+of our app, actual 
+application. So it's already
+set up to call and understand the API routes that
+we're going to be 
+building on the backend. So
+this is not just a scaffolded UI that has no
+concept of how it's 
+actually going to work. This
+is really set up to carve up and implement the
+UI will be done in no 
+time. Hey, if you're still
+here and enjoying this video, please click like
+and subscribe to the channel. So much more content
+is coming real 
+soon. What I want to show
+you right now is how to start coding in the backend.
+The key to 
+getting this going is whatever
+ID you're in, go to the GitHub repo. And I
+have instructions for 
+every IDE of how to set up your
+custom IDE agents. I'm not a big fan of rules.
+I'm in cursor right 
+now. You will see, I have some
+cursor rules here, but I'll show you why I have
+those. But generally I start with no rules because
+everything is going 
+to be in the user stories. What
+you'll want to do is you'll want to install the
+BMad agent because this is your agent that can
+become any of the 
+other agents if you need them.
+So to set up the BMad agent, just come over
+here to the IDE BMad orchestrator markdown file,
+copy all of this 
+content. And just like we
+do with our other custom agent modes, we're going
+to copy this into a new 
+BMad agent, go to advanced
+options of hearing cursor, paste all of those
+instructions there, 
+and it will now use the config
+and all of the folders, just like our web agent
+did to become any agent. 
+In the Personas folder, there are two agents that specifically have
+the .ide extension. 
+So these are very specifically set up
+to work with the bmed method. 
+They're tuned to look for
+a docs folder with these files and they know
+the file names that 
+they need to be able to look for to
+produce the right artifacts. What you'll want to do is you'll want to install
+the sm.ide version and the dev.ide 
+agent. The scrum master, the purpose
+of the scrum master as always is to produce
+the next story. 
+So I'm going to show you how that works. We've already implemented Epic 1. But you can see here, I have the scrum
+master draft story 1.1. 
+I always start a new context window
+after each action. The scrum master creates a story. 
+Start a new window for the dev agent. Once that's done, new window for the scrum
+master, then to the dev agent. 
+So you can see I just go through this. Create the story, implement the story, create
+the story, implement the story. 
+I could choose to draft all of my stories at once, but there's a real
+benefit to doing 
+it this way. And that is because as the
+dev agent works on the story, it is going to populate the 
+story with a lot of notes. And it's also going to leave
+notes for the scrum master about anything it might need 
+to know that might have deviated
+or something weird that it just needs to
+know for the next story. 
+And the scrum master will use that when
+it's crafting the next story. So maybe it learned from a past mistake,
+it won't do it again. 
+Let's have our agent get started
+on the new story. So always starting a new
+chat window, making sure I choose the scrum master
+because this 
+is the one that is tuned. And I'm going to remove everything from context and just to show you
+that it doesn't rely 
+on anything being open. I'm going to close everything. So I am going to tell the scrum master
+to draft the next story. 
+And if you like using super whisper or anything else, you can also
+just of course talk to it. 
+So let's draft the next story. Basically what this is going
+to be doing is it searches the docs folder,
+it's going to find what the last story
+that was done was, 
+it's going to look at the
+epics, figure out what the next one is. It's going to read all of our various architectures, all the sharded
+documents, and figure out 
+all of the information that the developer needs
+so it doesn't have to search all of those files itself. 
+And it's going to create a very detailed task
+and sub-task story for the developer 
+agent. This is good. This is actually a protection here. So it is telling me that 1.6 was
+not actually marked done. 
+So I forgot to mark 1.6 as done. And that's true. 
+It's in review. So we can just mark this
+as done, save it. I'm going to tell it number three here. Go ahead. 
+So that's a safety precaution
+to make sure that it's not creating or
+starting to work on a new story when another story
+was not completed. 
+What I want to show you
+in here is that in these stories, aside from
+the checklist, they will also leave issues that it ran into. 
+So I'm trying to find an example of that. Now here's an interesting one. So here's some issues that were encountered
+when it was trying to set up CDK. 
+It was making some mistakes. So as I said, I don't use cursor
+rules from the beginning. 
+But when I see things like
+this and I want it to learn from it and remember
+it, I will copy this, paste it into an agent window, 
+and tell Cursor to generate
+custom rules so these things don't happen again. So that's why I have these rules
+up here right now. 
+But that's a good quick way
+to just not have it repeat these stupid things
+over and over again. 
+This is now drafting our story. And it's actually a little bit slow. And the reason it's slow is
+because it's doing 
+this massive analysis of all
+of these documents and sections that it read
+to really figure 
+out what it needs to put
+into the stories. But you can see it found the
+right story to make. 
+It's going to implement it. And then once it's done, we switch
+to our dev agent. The agent, the Scrum Master, also runs a 
+story checklist to really make
+sure that the draft is comprehensive and that it
+didn't forget anything. 
+It's saying yes, everything is good,
+and it's considered everything. So now we can look at our
+draft story 2.1. 
+I'm just going to accept it. I'm going to mark it as in progress just so I can show you the developer
+agent going. 
+It took just this fragment
+that it needs so the agent knows where to
+put the code that 
+it's going to work on it. It's pulling what data models
+it needs to know. We're going to be setting up
+some step functions. 
+This is actually going to get into some pretty complicated stuff in
+this 2.1 story because we're setting up a lot of our custom infrastructure
+and async orchestration. 
+So it's going to be really interesting to see how well the dev agent
+does with this. And you can see at the end, there's all 
+these placeholders where the
+dev agent will put notes. So it's going to put its story
+note progress. It's going to put completion notes
+for the next Scrum Master. 
+That's what I was talking about. It's going to leave a change log. It's also going to annotate
+which agent was used. 
+So that creates an interesting history if you want to go back and see
+which agents you used for which stories. But I'm going to make sure I select
+my developer agent. 
+And the developer has rules to know to look for the in progress story
+or the one that 
+I tell it and start developing it. So I'm just going to say it. Let's implement the story. Claude 4 Sonnet seems to
+be miles ahead of 
+where we were before as far as being able to fix linting issues, test issues. 
+This just seems miles ahead of 3.7. So I've just been loving
+the experience so far of developing with this
+new Claude 4 Sonnet. 
+And the power of the BMad
+Method V3 just makes it all come together better
+because the Scrum Master in the IDE and the
+dev agent in the 
+IDE have also just been
+fine tuned to also work much better than they did in V2. 
+So many improvements. Can't even go into all of it. Thumbs up. Subscribe. Join the community. 
+Let me know how this is working for you. No matter your experience level, I know the BMad agent is going to
+be amazing for you 
+and help you out. So we'll see you next time
+here on BMad Code. Thank you everybody.

@@ -1,0 +1,139 @@
+Okay then gang, in this lesson we're 
+going to talk about the tools available 
+to Claude code out of the box and also 
+how we can give project Y permissions to 
+Claude to use certain tools. So whenever 
+we ask Claude code to do something, it 
+generally uses some kind of built-in 
+tool to perform an action. For example, 
+to read a file, it would use a read 
+tool. To edit a single file, it uses the 
+edit tool. To run a bash command, it 
+uses the bash tool. And we don't need to 
+reference these tools when we send our 
+prompts or messages. Claude Code knows 
+when it needs to use certain tools based 
+on your instructions. Now, you might 
+have noticed that when I've asked Claude 
+to do some of these things in past 
+lessons, like edit a file, it asks me 
+for permission to do that thing before 
+it actually does it. And we can either 
+say yes or no, depending on whether we 
+want to grant that permission or not. On 
+the anthropic docs, it lists all of 
+these built-in tools available to Claude 
+Code, and it outlines what each one 
+does. It also shows you whether each of 
+these tools requires permission before 
+it gets used. For example, the bash and 
+the edit tools, they do require 
+permission, but read doesn't. So, if I 
+ask Claude Code to look at a file, it's 
+not going to prompt me to give it 
+access, but if I ask it to change a 
+file, then it will do. There's a tool 
+down here, by the way, called to-do, 
+right? and it uses that tool to make 
+these little checklists of things it 
+needs to do when you give it a task to 
+kind of keep itself on track. It's 
+pretty nice and you're going to see them 
+quite often as you're working with 
+Claude Code. Now, again, you don't need 
+to remember the names of all of these 
+tools and what they do because Claude 
+Code is designed so it knows what tool 
+to use and when automatically, but it is 
+good to know the kinds of things that 
+you can do out of the box. So, I will 
+leave this link down below the video. 
+All right, then. So, let's try doing 
+something that requires permission, like 
+editing a file. I'm going to ask Claude 
+code to add another theme variable to 
+the CSS file called highlight, which 
+needs to be a pastel yellow color. I've 
+also referenced the global CSS file 
+right here as well for context. And when 
+we send this off, as soon as Claude Code 
+figures out that it needs to edit a 
+file, it's going to ask our permission 
+to do it. Okay, so now it's edited the 
+file, or rather it wants to edit the 
+file, it's asking us right here, do you 
+want to make this edit to global.css? 
+So, we have three options. We can select 
+yes at the top, no at the bottom, and 
+you can give further instruction if you 
+want to, or this middle option, yes, and 
+don't ask me again this session. So, 
+we'll go through that in a second, but 
+for now, I'm just going to select yes to 
+give it permission to make this edit. 
+And because it's making multiple edits 
+to the file, it's asking me to make 
+further changes. So, it changed one 
+line, then it's going to somewhere else 
+in the file, and it's making another 
+edit. So, again, I'm going to press yes. 
+And it looks like it wants to update a 
+third time. So again, we're going to uh 
+press yes. And now it's all done. So for 
+a simple set of edits there to just a 
+single file, we had to grant permission 
+three times. Right now, let's try doing 
+a commit using the bash tool. So I'm 
+going to ask clause code this time. Can 
+you make a commit? Like so. And this is 
+going to do a few things. It's going to 
+add the files to the staging area, then 
+make the commit with a commit message. 
+So you can see right here it wants to 
+use bash. It's looking for any changes 
+and then eventually it wants to use this 
+command get add. Now this time when 
+claude code asks for permission I'm 
+going to choose this second option which 
+is yes and don't ask me again for git 
+add commands. Now if I choose this 
+option then it's going to carry on and 
+do this git command and it's also going 
+to create a new file called 
+settings.local.json 
+inside a do.claude claude folder in the 
+project. And inside that file, there's 
+going to be a permissions object with a 
+property inside it called allow. And 
+that allow property should be an array 
+of allowed commands for the project. 
+Meaning, if Claude Code tried to run 
+this bash command again in the project, 
+it wouldn't need to ask for permission 
+because we've allowed it here. So, as 
+Claude Code asks you for permission to 
+do different things, you can select that 
+second option to add the command to the 
+allowed list inside the settings file. 
+You can also manually add commands in 
+there yourself as well. And this would 
+just be for your workflow, by the way. 
+You wouldn't commit this file and push 
+it up. Something else you can do is 
+press Alt and M on Windows. It might be 
+control and M on a Mac. And that's going 
+to turn on this accept edits feature. 
+And now when you ask Claude Code to make 
+changes, it's not going to ask for 
+permission to do that, to edit your 
+files for this chat session. If you 
+start a new session, it will ask you 
+again until you turn this feature on. 
+You can turn it off again by hitting Alt 
++ M twice. So then that's a quick 
+breakdown of tools, permissions for 
+those tools, and how we can edit those 
+permissions for the project inside the 
+settings file. Next up, we're going to 
+look at how Claude Code can plan and 
+think for more complex tasks.

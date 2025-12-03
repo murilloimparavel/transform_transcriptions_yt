@@ -1,0 +1,363 @@
+All right. So, in the last lesson, we 
+talked about the claude ND files, 
+otherwise known as memory, which Claude 
+code uses when you're asking it to do 
+something. Now, it's able to do this 
+because the claw.md file, gets added 
+automatically as context to any claw 
+code session like this one we've got 
+going on now. But what do we mean when 
+we say context? Well, just like in 
+conversations with real people, 
+responses are more accurate and 
+appropriate from AI models when you 
+provide additional relevant information 
+or context to your prompts. Imagine I 
+just said the word banana to you in a 
+conversation without any additional 
+context. You probably wouldn't know how 
+to react and you would most likely think 
+I'm quite strange. But if I said to you, 
+first of all, my favorite fruit is a 
+banana, then I've added context to that 
+word, and you might still think I'm 
+strange, but at least you know why I'm 
+saying the word banana, and you could 
+even respond with your own favorite 
+fruit. The same is true when you're 
+having a conversation with Claude Code 
+or any other AI powered chat. If I just 
+told Claude Code to fix the link, it 
+probably won't know where to start or 
+what link I'm referring to or even 
+what's wrong with the link. But if I 
+referenced a specific file or component 
+where that broken link is as context to 
+the prompt, then Claude's got a much 
+better chance of knowing what I'm going 
+on about. And the results are going to 
+be much better because now instead of 
+having to scan the entire codebase for 
+some kind of broken link that it doesn't 
+know about, it's going to find it right 
+away in the file we added as context. So 
+we can manually add files as context to 
+Claude code by using the at symbol 
+followed by a path to the file. For 
+example, I could say at source and then 
+back slashcomponents 
+and then also back slash UI. And as I'm 
+writing this, notice that we get some 
+file options that appear down here, 
+which I can just cycle through using my 
+arrow keys to select a file. So I'm 
+going to select this button component 
+file and I'm going to shift on it so 
+that it gets added to my chat right 
+here. So now inside that button 
+component, we have different variants, 
+right? like primary, success, warning, 
+etc. I'm going to add two more, which is 
+just black and white variants for high 
+contrast. So, I'm going to say add a 
+black variant with white text and a 
+white variant with black text. And then 
+uh with black text rather, sorry. And 
+then I'm going to hit enter. And because 
+we provided the file as context, it's 
+going to know to look at the variants in 
+that file and add them in. If we didn't 
+add the context, then it wouldn't know 
+maybe which file or components to add 
+the variants to. And now you can see 
+it's asking us to make changes, which 
+I'm going to accept. And then if I open 
+up the file in a moment when it's 
+completed this, we should hopefully see 
+the black and white variance. So, let me 
+cross this off. Oh, it's asking to make 
+another change. So, let me press yes to 
+do that. 
+And now, if we open this file, we should 
+be able to see those two new variants. 
+Another way to give Claude code context 
+of the file that you want to work on is 
+by opening the file itself and just 
+putting your cursor somewhere inside it. 
+And when we do that, you can see the 
+file name underneath the chat window 
+over here, which tells us it's been 
+added to the context. Now, if you close 
+that file, well, it's still there. But 
+that's because the cursor is still kind 
+of active inside that file. But if you 
+open a new file, just put your cursor 
+inside that one instead, then it's going 
+to update over here as well. Now, you 
+can only add one file to the context 
+this way, but you can add multiple files 
+by using the at symbol several times in 
+the prompt itself. Also, you can select 
+a portion of code inside a file, and 
+it's going to hone in and use that 
+little section you've highlighted as 
+context. And you can see that down here 
+in the chat as well, that this amount of 
+lines is selected. 
+So, you can also add references using 
+this at sign to claw. ND files. So if I 
+wanted to reference a schema file for 
+example for whenever Claude works with 
+data modules, I could do and it would 
+load that file up into the context then 
+or I could reference a testing config 
+file in here or anything else I think 
+Claude Code should know when making 
+edits to certain parts of the code. So 
+that's how we add files as context using 
+the at sign or opening the file 
+manually. But we can also add images as 
+context too. So, I've got a picture of a 
+button over here with a 3D effect, and I 
+want Claude Code to apply that kind of 
+3D effect to our buttons. So, what I'm 
+going to do is drag and drop the button 
+file into the chat session over here. 
+And now, it's added as context. Then, 
+what I'm going to do is paste in a 
+prompt, and it says, can you update the 
+button design? Let's just make this more 
+specific. We'll say button design in the 
+button 
+component 
+to look more like the button on this 
+image with a 3D effect keeping all of 
+the color variants. I'm also going to 
+reference the file in context as well by 
+saying at source and then we want to go 
+into components and let's do backslash 
+components to do that. And then we want 
+the button file down here. So, I'm going 
+to tap on that to add it to the context 
+as well. Then press enter. All right. 
+So, I'm going to allow it to make these 
+edits. 
+And again, it wants to make some more 
+edits. I'm going to press yes to allow 
+it to do this. All right. And now it's 
+changed it. Okay. And now in a browser, 
+we can see those buttons look a lot more 
+3D. It's added that 3D effect. It's also 
+added, I think, a subtle gradient going 
+from top to bottom. So, yeah, it's done 
+a really good job there. So, we've seen 
+now how to add context to prompts, which 
+essentially gives Claude code more 
+information about any given task. So, 
+adding context when it's needed is 
+really important. However, adding too 
+much unnecessary context can lead to 
+less accurate results. Now, on a prompt 
+byprompt basis, you're probably not 
+going to intentionally do that. If 
+you're working on the button component, 
+you most likely won't add 50 other 
+unrelated files as context. However, it 
+can happen unintentionally. So let me 
+explain how first of all and then we'll 
+look at some ways to combat that. So 
+imagine we're working on a feature like 
+a shopping basket and we provide clawed 
+code with a bunch of different prompts 
+and files as context over several 
+different messages inside the session. 
+Well, all of those files and messages 
+including the AI model responses. 
+They're all stored in context in the 
+current chat session. And that means 
+whenever you're sending new prompts, 
+Claude codes got the entire chat history 
+plus any additional context you manually 
+added like files as context for the 
+session. Now, that's okay while we're 
+working on this feature because it is 
+probably useful for Claude to know about 
+that history and the changes that it's 
+been making. But imagine we then get 
+sidetracked because the button doesn't 
+quite look right inside the shopping 
+basket and we start asking Claude code 
+to make UI changes to the button 
+component which is I suppose a 
+completely separate thing to the 
+shopping basket. Yes, we might use the 
+button on that section but largely the 
+basket page is unrelated to the button 
+component. So, if we started working on 
+the button component in this chat, 
+Claude code's going to still have all of 
+that previous chat and file context 
+about the basket page, which in respect 
+to working on the button is pretty 
+useless. And we're essentially giving 
+Claude a bunch of useless context to 
+read while it's working on the button. 
+And that could confuse him. It might 
+even start making inline edits to the 
+button itself on the basket page, which 
+isn't what we wanted. So, when we're 
+working on a feature with claude code, 
+it's always best to keep the context 
+clean and focused on whatever we're 
+working on and not let it get bloated 
+with information that it doesn't need. 
+So, how do we combat this? Well, there's 
+a few ways. First of all, you could just 
+exit the chat using the forward/exit 
+command and then start a new one in the 
+terminal by typing claude again and 
+hitting enter. And then from inside any 
+session, you can resume all the previous 
+sessions by using the forward slashres 
+command, which I'm going to show you 
+later. But if you don't want to do that 
+and you want to stay inside the same 
+session, you've got essentially three 
+options. You can use the clear command 
+and that's going to clear the entire 
+session history and context back to its 
+original state. It will keep the claw MD 
+files as context, but anything else that 
+you manually added in the chat and any 
+conversation history that all gets 
+cleared. So, it's like deleting the chat 
+and starting a fresh one, which might be 
+useful if you fully completed a task and 
+you want to move on to the next one. The 
+other option or one other option should 
+I say is to use a command called forward 
+slashcompact. And this tells claw to 
+look through the entire session history 
+and context and compact it into a small 
+summary and then just delete the rest. 
+So that small summary of the session 
+history will remain in the session 
+context, but the rest gets deleted. So 
+it reduces all of the context a lot. It 
+squashes it right down. Now, I find this 
+useful if I'm working on a single 
+feature, but the session starts to get 
+really long and the context bloated. And 
+then I can just carry on with the same 
+feature in the same session using that 
+compact summary, and it's still going to 
+be there as context. The third option is 
+to tap escape twice in the chat window. 
+And this lets you essentially rewind to 
+a previous point in the session and 
+remove all later chats and files from 
+the context. So, this could be useful if 
+you were working on a feature, maybe you 
+got sidetracked by a bug or something 
+else and you wanted to trim all of that 
+last bit from the history in the 
+context. So, you could do that. So, 
+that's three approaches to keeping the 
+context clean and focused. Now, let me 
+show you them in action. All right. So, 
+first of all, let's try double escape. 
+So, press it twice like so. And you can 
+see I can go back in the chat. Now, I 
+cleared it earlier on. So that's why you 
+see this clear and that's the beginning. 
+But you could go back to an earlier 
+point in the chat by just pressing enter 
+on any one of these. Now I'm going to 
+escape to get out of this because I 
+don't want to do that just yet. Uh the 
+next one I'm going to try is compact. So 
+I'm going to use that compact command. 
+And you can see also you can give this 
+an additional argument right here or 
+instructions as to how you would like 
+this compacted. I'm not going to do 
+that. I'm just going to press enter. 
+And then you can see it's created a 
+summary right here. And we can now have 
+that in our context. But if we now press 
+double escape, you can see this is the 
+only thing left. So we have this which 
+is the original one and then the compact 
+command. So all the history has actually 
+been cleared except for this bit of 
+context that remains in the session. All 
+right. So let me escape out of this. And 
+then finally I'm going to use the clear 
+command like so. And you can see here it 
+says clear conversation history and free 
+up context. I'm going to press enter and 
+that's going to get rid of everything. 
+So now if I press double escape, you can 
+see there's no history in the chat. 
+Awesome. I also mentioned that one 
+option would be to exit out of the 
+current chat using for/exit and then 
+just pressing enter. So that's going to 
+stop the session and dump you back in 
+the regular terminal interface again. 
+And if you start Claude up again by 
+typing Claude and then hitting enter, 
+it's going to start on a brand new chat 
+session with zero context added to it 
+except for that claw md file. So you can 
+start working on your new feature 
+straight away. And then if you wanted to 
+resume a previous chat session, you can 
+use the forward slashres command and 
+then press enter. And that's going to 
+show you all of the current chat 
+sessions you have going on with Claude 
+Code for this project, including when 
+you last used that session, how many 
+messages are in it, uh the branch it's 
+working on, and a summary. So, I could 
+select one of these, and then I get put 
+back into that chat session with all of 
+its previous context intact. Now, there 
+is one more small thing I want to 
+quickly mention when it comes to 
+context, and that is something called 
+the context window. And the context 
+window represents how much context an AI 
+model or tool can handle at once. It's 
+measured in tokens where one token is I 
+think about three or four characters in 
+a word. Now the context window is 
+generally different depending on which 
+tools or models that you're using in 
+Claude code. The context window is 
+200,000 tokens at this point in time 
+which is a fair amount. But if your 
+sessions last a long time, have a lot of 
+manually added context and back and 
+forths, then that context window is 
+eventually going to fill up. Claude Code 
+actually tells you when you're 
+approaching this limit as well by giving 
+you a little message. And when that 
+happens, I found the results to drop off 
+a little bit. So if your session context 
+is ever getting a bit bloated, remember 
+those three things that we can do to 
+reduce it. We can double escape to trim 
+out any recent history and go back to a 
+previous part of the chat session. We 
+can use the forward slashcompact command 
+to summarize the context and 
+significantly reduce it. Or we can use 
+the forward slashclear command to 
+completely clear the entire context and 
+start a fresh. So then I think that's 
+enough about context for now and in the 
+next lesson we're going to talk about 
+tools and permissions.

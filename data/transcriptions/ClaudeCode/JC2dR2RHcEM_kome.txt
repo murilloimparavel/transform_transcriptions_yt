@@ -1,0 +1,652 @@
+Claude Code 2.0 is smarter,
+faster, and more agentic than ever. 
+But here's the problem. 
+It's so packed full of features
+that most people are gonna miss 
+the stuff that actually matters. 
+The good news is that I've spent
+weeks testing out all the new updates 
+in Claude Code 2.0 and seeing how
+they fit in to real world projects. 
+And in this video I'm gonna save you hours
+and hours by showing you the essential 
+features of Claude Code 2.0 that you need
+to apply to your coding workflows today. 
+We are gonna cover the 11 essential
+upgrades that every Claude 
+code user, new or old , needs
+to know about Claude code 2.0. 
+And it's gonna be organized
+into three clear sections. 
+Section one is about must know features. 
+We'll explore smarter and faster models. 
+The Explore sub-agent for
+code-based search and the checkpoint 
+system to easily undo changes. 
+Section two is about level up features. 
+These features boost productivity
+when you're using Claude 
+code for real world projects. 
+We'll cover things like advanced
+context management and the interactive 
+question tool, as well as using
+Claude code outside the terminal 
+with the new VS Code extension and
+Claude code on the web and mobile app. 
+Section three is about
+power user features. 
+These features give you advanced
+customizations and let you push 
+Claude code to its agent limits. 
+We'll cover things like discovering
+Claude code best practices with plugins, 
+teaching Claude specialized knowledge
+with skills and building custom 
+agents with the new Claude agents SDK. 
+So whether you're a Claude code
+beginner or power user, I guarantee 
+that you can learn something from
+this video that's gonna help you 
+level up with Claude code 2.0. 
+But before we dive in, I'm Avthar and
+I teach people about the best AI coding 
+tools and how to get the most out of them,
+no matter your skill or experience level. 
+so if you're trying to level up with AI
+coding, please subscribe to the channel 
+and turn on notifications for new videos. 
+And one more thing. 
+If you're new to Claude Code or want a
+refresher on the basics, I actually have 
+another video that covers six months
+of Claude Code lessons in 27 minutes. 
+Many viewers have called it
+the most useful video on Claude 
+code that they've ever watched. 
+So check it out before or
+after you watch this video. 
+It's linked in the video description. 
+With that out the way, let's dive
+into section one, which is a must 
+know features of Claude code 2.0. 
+Essential number one is probably the
+biggest upgrade in Claude code 2.0. 
+And that's new models. 
+Claude Code now has three models that you
+can choose from for your coding tasks. 
+First, there's sonnet 4.5, which is
+the new default model in Claude Code. 
+Anthropic claims that sonnet. 
+4.5 is the best coding model in the world. 
+And the benchmarks back this up. 
+Sonnet 4.5 beat out Opus 4.1, GPT-5
+Codex from OpenAI, and Gemini 2.5 Pro 
+from Google on the SWE bench software
+engineering benchmark, which measures real 
+world software engineering capabilities. 
+Sonet 4.5 can now also handle longer,
+more complex tasks than before with 
+Anthropic claiming it can focus for more
+than 30 hours on complex multi-step tasks. 
+I've been using sonnet 4.5 as my default
+for both planning and execution in Claude 
+code, and honestly, it's the real deal. 
+It's definitely replaced Opus 4.1 for
+me as a model that I use the most. 
+Second, we have Haiku 4.5, which is
+the second new model, and it's also the 
+fastest and cheapest model in Claude. 
+Haiku 4.5. 
+Best compares to Sonet four. 
+It's twice as fast and operates
+at one third of the cost while 
+maintaining similar coding performance. 
+And my own experience
+with Haiku confirms this. 
+It's blazing fast and really useful
+for straightforward coding tasks. 
+One of the coolest things about Haiku
+4.5 is that when you're in plan mode, 
+Claude code automatically uses sonet 4.5
+for planning and haiku for execution. 
+This is nicknamed Sonet Plan. 
+Now, if you remember the old Opus
+Plan mode, this is similar to that. 
+I think this might be the new sweet
+spot for people because it gives you the 
+power of sonnet 4.5 To plan and reason. 
+While using the faster, cheaper
+model, haiku 4.5 for implementation. 
+The third model in Claude code 2.0
+is Opus 4.1, which is a premium model 
+for your most demanding coding tasks. 
+Opus 4.1 also came out on top in
+open AI's, GDP-val, which is a newly 
+published evaluation framework that
+measures AI performance on real world 
+economically valuable work tasks. 
+Opus 4.1 came out on beating out
+the likes of GPT-5, Gemini and Grok 
+as a best performing model on real
+world tasks from fields like finance, 
+healthcare, and customer support. 
+Finally, be aware that the models you can
+access now depend on your Claude plan. 
+Pro users on the $20 a month
+plan will have access to 
+sonnet and haiku, but no opus. 
+While Max users will have access to
+all models on the $200 a month plan. 
+The second must know feature in Claude
+Code 2.0 is the explore subagent. 
+This is a specialized agent
+designed to rapidly gather 
+context from your code base. 
+Exploring a code base is one of those
+tasks that's both common and important. 
+Whether you're planning to implement
+a feature, writing documentation, or 
+just getting up to speed on a project. 
+The explore subagent is powered
+by the new model Haiku 4.5, which 
+means it's fast and efficient at
+searching through your code base. 
+A cool thing about the explore
+subagent is that Claude will 
+actually use it automatically. 
+You don't need to do anything
+differently in order to benefit from it. 
+Claude will automatically use the
+explore subagent when it detects 
+that the task that you're asking
+for matches its capabilities. 
+But you can also explicitly invoke the
+explore subagent by prompting Claude 
+using phrases like "Explore the code
+base" or "use the explore subagent". 
+You can even specify how thorough
+you want the search to be. 
+Use the keyword "quick"
+for a basic search. 
+"Medium" for moderate exploration,
+or "very thorough" for comprehensive 
+analysis across multiple locations. 
+For example, you could say, "use
+the explore subagent with medium 
+thoroughness to find all analytics
+tracking events in the app." 
+The third must know feature in
+Claude code 2.0 is one of the most 
+requested from the community, and
+that's checkpoints and rewind. 
+With checkpoints Claude code now
+automatically saves the state of 
+your code and the AI conversation
+before each Claude initiated change. 
+One checkpoint is created for
+every prompt that you give. 
+The best part is that you don't need
+to do anything to enable checkpoints. 
+It just happens automatically. 
+If the AI starts going down the
+wrong path, you can instantly 
+rewind to a previous checkpoint
+with the rewind command. 
+Just type slash rewind to view
+all the checkpoints and select 
+which one you wanna go back to. 
+You've got three options
+when it comes to rewinding. 
+You can rewind the code,
+the context, or both. 
+And it's this ability to revert back both
+code and potentially poisoned conversation 
+context that makes a checkpoint feature
+such a game changer in Claude code 
+2.0 because it allows you to explore
+new directions with confidence without 
+fear of messing up  because reverting
+is as easy as the rewind command. 
+Finally, two pro tips or checkpoints. 
+First. 
+Once you rewind to a checkpoint, you
+can only go backwards from there. 
+You can't jump back and forth. 
+Second checkpoints isn't
+a replacement for Git. 
+It's a compliment. 
+It's designed for quick session level
+recovery and doesn't cover changes 
+made by Bash or direct file edits. 
+So you still wanna use git for overall
+version control for your projects. 
+Essential number four. 
+And the final feature in this
+must know section is something 
+that you'll notice immediately. 
+Claude code 2.0 has a completely refreshed
+terminal interface and it's really clean. 
+The enhanced terminal UI is
+smoother, snappier, and way 
+more informative than before. 
+The change that I personally like the most
+is a new crab mascot called Claude that 
+shows up whenever you start Claude Code. 
+It's a nice touch. 
+There's also a new animation for thinking
+keywords like Think and Ultra think 
+with the thinking mode now automatically
+turning on when you type these keywords. 
+Then there's a status bar which is
+much more customizable now, giving 
+you better context of your project at
+a glance with information like which 
+folder and which Git branch you're on. 
+To configure the status bar, use
+the slash status line command. 
+I keep my status line showing the
+current folder and current git 
+branch because I work on multiple
+projects at the same time with Claude 
+and it helps me not get confused. 
+And that wraps up Section one, the
+must know features of Claude code. 
+Let's move on to section two, where
+we're gonna learn about the level 
+Up features that are gonna help
+you take your productivity with 
+Claude code to the next level. 
+Alright, this is section two where
+we're gonna cover the new features of 
+Claude code that are gonna help you
+level up from just using Claude code 
+to being truly productive with it. 
+We'll cover things like the new VS code
+extension, the new interactive question 
+tool, and using Claude code outside the
+terminal on the web and mobile apps. 
+if you're used to working in IDEs
+like VS Code or cursor or windsurf, 
+the new VS Code extension for
+Claude code is something that 
+you should a hundred percent use. 
+It's got a completely redesigned
+interface that lives in its own tab. 
+Previously you had to use a built
+in terminal, but now you get a 
+much more cohesive experience. 
+My favorite thing about the Claude
+code vs code extension is that 
+you can view and edit files while
+prompting Claude all in one place. 
+This really speeds up workflows like
+reviewing PRDs or product requirements 
+docs reviewing engineering plans or
+inputting API keys in environment variable 
+files for Claude to take action on. 
+With the VS code extension, you
+also get real time inline diffs and 
+drag and drop support for adding
+files and folders Right into chat. 
+The Claude code extension is available on
+the VS code marketplace, which means you 
+can use it in VS code, but also in cursor,
+windsurf and other VS Code base IDEs. 
+To install it, just search for
+Claude code in the VS Code app 
+store and then once installed, you
+can open it from the settings menu. 
+Or you can just use the slash IDE
+command to switch back and forth. 
+Personally, I'm a fan
+of the new ID extension. 
+I found myself switching back and
+forth between the terminal and using 
+Claude code in cursor, and so I
+highly recommend giving this a try. 
+This next level up feature
+completely changes how and 
+where you can use Claude code. 
+You can now run coding tasks
+in sandboxes directly from the 
+Claude mobile app or web app. 
+This is huge for developing on the go. 
+Let's zoom in on sandboxes. 
+When you kick off a coding task
+from web or mobile app, it runs 
+on anthropic managed sandboxes. 
+Each session runs in its own
+isolated environment with 
+real time progress tracking. 
+And you can be as hands-on
+or as hands-off as you like. 
+You can let Claude run wild or
+actively steer Claude and adjust 
+course as it's working through tasks. 
+You can also run multiple tasks in
+parallel across different GitHub repos. 
+So you could have Claude working on a
+bug fix in one repo while simultaneously 
+updating documentation in another repo. 
+All from your phone or browser. 
+But my favorite feature in the web and
+mobile app experience is teleporting. 
+Teleporting allows you to
+easily switch your web session 
+to your local dev environment. 
+It moves all the context, all
+the messages, and all the edits 
+to your local environment so
+that you can stay in the flow. 
+This makes it super easy to
+switch back and forth between 
+local and remote execution. 
+To get started, just connect
+your GitHub to Claude. 
+Select your permission
+level and you're good to go. 
+Quick note. 
+Accessing Claude in the web and
+mobile app is currently a beta 
+feature in research preview. 
+So if you don't see it yet, hopefully
+you'll be able to access it very soon. 
+The next level up feature is a new
+set of context management tools. 
+And if you've ever hit limits
+unexpectedly, then these features 
+are gonna be super helpful to you. 
+First, you've got two new commands to
+help you understand your usage Better. 
+The slash context command
+lets you visualize the context 
+of your current session. 
+And the slash usage command shows
+your usage and tells you if you're 
+close to hitting any limits in your
+current session or this week or month. 
+These are great for staying aware
+of where you stand so that you 
+never run into rate limits mid task. 
+Next up. 
+Longtime Claude code users can attest
+that performance on a task is much worse 
+after an auto compact happens mid-task. 
+So a pro tip for using Claude code is
+that you can actively clear the context 
+window versus letting it auto compact. 
+And there are actually
+three ways to do this now. 
+There's the slash clear command
+which resets everything to zero. 
+It's a complete fresh start. 
+I recommend using this when you're
+switching to develop a totally new 
+feature or investigating a totally
+new problem and you don't need any 
+other context that you built up. 
+Then there's a slash compact command,
+which clears conversation history, 
+but keeps a summary in context, which
+is what happens during auto compact 
+when your context window gets full. 
+The compact command is useful after you've
+finished a smaller part of a bigger plan. 
+So you can carry some knowledge of what's
+happened before into future subtasks. 
+And then there's a new feature
+called micro compact which is 
+a smarter version of compact. 
+But this isn't a command that you can run. 
+It's actually an automatic command
+that Claude calls to clear all the tool 
+call results when context gets large. 
+This helps extend your session length
+without manual intervention and 
+it's brand new in Claude Code 2.0. 
+The final feature in the Level
+Up section is all about helping 
+you prompt Claude better. 
+The big feature here is the
+interactive question tool. 
+Claude can ask you questions
+when it needs more input. 
+This makes the experience of using
+Claude code much more conversational, 
+especially if you're in plan mode, where
+Claude will ask clarifying questions 
+before diving into an implementation. 
+This helps you get better results
+from Claude because it'll ask for 
+clarification before implementing versus
+you giving it feedback after it's done. 
+This pattern reminds me of ChatGPT,
+and in particular, the deep 
+research feature where it asks you
+clarifying questions before it goes 
+off and compiles research reports. 
+It always forced me to think, what am
+I actually trying to do here, which 
+is just helpful for better thinking,
+but also helps me get better results. 
+So I'm really happy to see this
+kind of pattern being adopted more 
+widely in tools like Claude Code. 
+This brings us to the end of section
+two, and I'm sure you're excited to 
+use some of these features to level
+up your productivity with Claude Code. 
+But hold up because we've got more
+to learn in the final section of 
+this Claude code 2.0 essentials video
+and that's the power user features. 
+Alright. 
+Section three is for the
+Claude code power users. 
+In this section we'll look at advanced
+features that let you customize 
+Claude code to your specific needs
+and let you get even more done. 
+We'll cover how to teach Claude
+specialized tasks with skills. 
+How to discover and share best practices
+with plugins and building your own agent. 
+With a Claude agent. 
+SDK. 
+First up is one of the most powerful
+and most talked about features in 
+Claude Code 2.0 that helps Claude
+level up with specialized knowledge 
+and that feature is skills. 
+Skills are packaged instructions to
+teach Claude your way of working. 
+You can think of skills as
+a way to load specialized 
+knowledge into Claude on demand. 
+Instead of building custom agents
+for everything, you package knowledge 
+into reusable capabilities that
+Claude loads when it needs them. 
+At its core a skill is
+actually quite simple. 
+It's just a folder with a skill. 
+Dot. 
+Md file. 
+The file starts with a name, a
+description, and then contains 
+instructions, code, and resources, as well
+as pointers to other files in the folder. 
+And what's cool is that once you create
+a skill, you can use it everywhere. 
+In Claude Code, in the Claude
+app and the Claude API. 
+Skills use progressive disclosure where
+Claude will only initially see the skill 
+names and descriptions, and then load full
+skills only when relevant to the task. 
+This helps keep your context window
+free from bloat, which is really 
+helpful for managing token usage limits. 
+Anthropic launched a number of pre-built
+skills for Claude code, including skills 
+for working with common file formats
+like PDF Word, PowerPoint, and Excel. 
+and an example skill repo, which contains
+things like a web app testing skill for 
+testing local web apps using playwright. 
+An MCP server guide for creating
+MCP servers and even a skill 
+creator skill, which you can
+use to build your own skills. 
+And the community is already building
+amazing third party skills from test 
+driven development frameworks to eub book
+analyzers and meeting insights tools. 
+You install skills using plugins,
+which we're gonna cover next. 
+Skills is one feature that I plan
+to experiment with a whole lot more. 
+So let me know in the comments if
+you've tried skills and what your 
+experience with it has been so far. 
+The next power user feature is plugins. 
+Plugins are a way to discover
+and share best practices and 
+customizations for using Claude code. 
+Plugins are a big deal because it
+means you can now easily use the 
+best customizations from other
+Claude core users without having to 
+replicate or set them up yourself. 
+A plugin can contain custom commands,
+subagents, MCP servers, hooks, and skills. 
+To get started with plugins,
+use the slash plugin command to 
+browse and install new plugins. 
+A key concept for plugins is marketplaces. 
+You can think of a marketplace as a
+collection of plugins that's made by a 
+certain developer or a certain company. 
+To add a new marketplace, you
+also use the slash plugin command. 
+Companies and individual Claude Code
+users like you and me, can create 
+these marketplaces, and they usually
+take the form of a GitHub repo. 
+Since launch, there are now hundreds
+of plugins out there, but let me show 
+you three of my favorites that I found
+useful so that you can get started with 
+plugins if you're curious about them. 
+First up is the Claude code marketplace
+from Anthropic itself, which has things 
+like the multi-agent, feature development
+workflows, and Git commit plugins. 
+Second is the every plugin
+for compound engineering. 
+This is a set of customizations
+to help Claude code self-improve. 
+And make the next feature you
+make always easier than the last. 
+And third is the agents repo
+by Seth Hobson, which contains 
+over 60 plugins for intelligent
+automation in software development. 
+For more plugins, there's many
+community aggregators out there like 
+claude marketplaces.com where you
+can find more plugins to try out. 
+Just be careful to verify it's
+not shady before you use them. 
+And a final pro tip to with plugins is
+that they can sometimes take up a lot 
+of context so you can enable or disable
+them on demand to avoid context overhead. 
+The final power user feature
+is a Claude Agent SDK. 
+This is previously known
+as a Claude Code SDK. 
+The Claude agent SDK is
+the perfect foundation for 
+creating your own AI agents. 
+It's based on the idea that Claude Code
+and its agent harness of tools and a file 
+system is actually the perfect foundation
+for creating custom agents in general. 
+The Claude Agent SDK gives you
+and your team access to the same 
+core tools that power Claude Code. 
+Including its tool, execution
+system, context management, 
+and permission framework. 
+For example, I use the Claude agent,
+SDK to create a personal travel agent 
+for my wife and I to plan our upcoming
+travel according to our preferences. 
+And of course, I use Claude
+Code to do the implementation. 
+Anthropic also built their
+GitHub actions with this SDK. 
+The SDK supports creating custom
+subagent and defining hook 
+behaviors programmatically. 
+If you'd like a full deep dive on
+the Claude Agents SDK, let me know 
+in the comments and if there's enough
+demand, I'll be sure to make one. 
+So that brings us to the end of section
+three, which is a power user features 
+but before we end off, there's one more
+essential piece that I want to cover. 
+And for some people it might be
+the most essential piece of all. 
+And that's cost. 
+First up. 
+Claude code is still only
+available on the paid plans. 
+There's no free version yet. 
+And the two paid plans that you can choose
+from are the Pro Plan and the Max Plan. 
+For the Pro Plan, it's $20 a month. 
+This is the cheapest plan for
+Claude Code and it gives you 
+access to Haiku 4.5 and Sonnet 4.5. 
+The pro plan is what I recommend you
+start with if you're new to clock 
+code or just use it occasionally. 
+For the max plan, you've
+actually got two options. 
+Max five x is a hundred dollars a
+month and max 20 x is $200 a month. 
+The five x plan gives you
+five x higher rate limits. 
+And the 20 x plan gives you
+20 x higher rate limits. 
+Both the MAX plans give you access
+to all models, meaning that you get 
+access to Haiku, sonnet, and Opus. 
+I recommend the Max plan if
+you're serious about using Claude 
+code for real world projects. 
+It's a plan that I personally
+use and it's definitely worth it 
+if you've got the budget for it. 
+Thirdly, you can also use the
+API for billing, but I'd only 
+recommend this if your company
+is paying for Claude API access. 
+Otherwise, I've just found
+it way too expensive. 
+So if you're paying for Claude yourself,
+I'd recommend getting a Pro or a max plan. 
+Well, that's it for this video. 
+Claude Code 2.0 is a massive
+upgrade, and I'm super excited 
+to see what you'll build with it. 
+If you learn something from this video,
+please subscribe to the channel and 
+share it with your friends and coworkers. 
+And if there's anything you wanna learn
+more about, let me know in the comments. 
+I read every single one of them. 
+Catch you in the next one.

@@ -223,6 +223,474 @@ def show_stats(stats):
     cprint("="*60 + "\n", "cyan")
 
 
+def process_multiple_videos(video_urls, preferred_languages=None, prompt_type="copywriting", output_language="pt"):
+    """
+    Processa múltiplos vídeos sequencialmente.
+
+    Args:
+        video_urls: Lista de URLs dos vídeos do YouTube
+        preferred_languages: Lista de idiomas preferidos para legendas
+        prompt_type: 'faq', 'copywriting' ou 'framework'
+        output_language: Idioma do output ('pt' ou 'en')
+    """
+    total_videos = len(video_urls)
+    cprint("\n" + "="*60, "cyan")
+    cprint(f"🎬 PROCESSAMENTO DE {total_videos} VÍDEOS", "cyan", attrs=["bold"])
+    cprint("="*60, "cyan")
+    
+    # Estatísticas
+    stats = {
+        "total": total_videos,
+        "success": 0,
+        "failed": 0,
+        "skipped": 0,
+        "failed_videos": []
+    }
+    
+    # Aviso especial para framework com múltiplos vídeos
+    if prompt_type == "framework":
+        estimated_time = total_videos * 7  # ~7 minutos por vídeo
+        cprint("\n⚠️  MODO FRAMEWORK ATIVADO", "yellow", attrs=["bold"])
+        cprint(f"Este modo processa cada transcrição em 7 dimensões + síntese", "yellow")
+        cprint(f"Tempo estimado: ~{estimated_time} minutos para {total_videos} vídeo(s)", "yellow")
+        confirm = input(colored(f"\nDeseja processar {total_videos} vídeo(s) no modo Framework? (s/n): ", "magenta", attrs=["bold"])).strip().lower()
+        if confirm != 's':
+            cprint("Processamento cancelado.", "red")
+            return
+    
+    # Processa cada vídeo
+    for idx, video_url in enumerate(video_urls, 1):
+        cprint(f"\n{'='*60}", "cyan")
+        cprint(f"[{idx}/{total_videos}] Processando vídeo {idx}", "cyan", attrs=["bold"])
+        cprint(f"{'='*60}", "cyan")
+        
+        try:
+            success = process_single_video(
+                video_url, 
+                preferred_languages, 
+                prompt_type, 
+                output_language,
+                show_header=False,  # Não mostra header para cada vídeo
+                video_number=f"{idx}/{total_videos}"  # Passa número do vídeo
+            )
+            
+            if success:
+                stats["success"] += 1
+            else:
+                stats["failed"] += 1
+                stats["failed_videos"].append({
+                    "url": video_url,
+                    "index": idx
+                })
+                
+        except KeyboardInterrupt:
+            cprint("\n\n⚠️  Processamento interrompido pelo usuário!", "yellow", attrs=["bold"])
+            cprint(f"Processados {idx-1}/{total_videos} vídeos antes da interrupção.", "cyan")
+            break
+        except Exception as e:
+            cprint(f"\n❌ Erro ao processar vídeo {idx}: {e}", "red", attrs=["bold"])
+            stats["failed"] += 1
+            stats["failed_videos"].append({
+                "url": video_url,
+                "index": idx,
+                "error": str(e)
+            })
+        
+        # Pausa entre vídeos (exceto no último)
+        if idx < total_videos:
+            cprint(f"\n⏳ Aguardando 3 segundos antes do próximo vídeo...", "blue")
+            time.sleep(3)
+    
+    # Mostra estatísticas finais
+    cprint("\n" + "="*60, "cyan")
+    cprint("📊 ESTATÍSTICAS FINAIS", "cyan", attrs=["bold"])
+    cprint("="*60, "cyan")
+    cprint(f"Total de vídeos: {stats['total']}", "white")
+    cprint(f"✅ Sucessos: {stats['success']}", "green")
+    cprint(f"❌ Falharam: {stats['failed']}", "red" if stats['failed'] > 0 else "white")
+    
+    if stats['failed_videos']:
+        cprint(f"\n📋 Vídeos que falharam ({len(stats['failed_videos'])}):", "yellow", attrs=["bold"])
+        for failed in stats['failed_videos']:
+            cprint(f"  [{failed['index']}] {failed['url'][:60]}...", "yellow")
+            if 'error' in failed:
+                cprint(f"      Erro: {failed['error']}", "red")
+    
+    success_rate = (stats['success'] / stats['total'] * 100) if stats['total'] > 0 else 0
+    cprint(f"\n✨ Taxa de sucesso: {success_rate:.1f}%", "green", attrs=["bold"])
+    cprint("="*60 + "\n", "cyan")
+
+
+def process_single_video(video_url, preferred_languages=None, prompt_type="copywriting", output_language="pt", show_header=True, video_number=None):
+    """
+    Processa um único vídeo: baixa transcrição e processa imediatamente.
+
+    Args:
+        video_url: URL do vídeo do YouTube
+        preferred_languages: Lista de idiomas preferidos para legendas
+        prompt_type: 'faq', 'copywriting' ou 'framework'
+        output_language: Idioma do output ('pt' ou 'en')
+        show_header: Se deve mostrar o cabeçalho (padrão: True)
+        video_number: Número do vídeo no formato "X/Y" (opcional)
+    
+    Returns:
+        bool: True se processado com sucesso, False caso contrário
+    """
+    if show_header:
+        cprint("\n" + "="*60, "cyan")
+        cprint("🎬 PROCESSAMENTO DE VÍDEO ÚNICO", "cyan", attrs=["bold"])
+        cprint("="*60, "cyan")
+    
+    from core.transcription import get_video_id
+    video_id = get_video_id(video_url)
+    
+    if video_number:
+        cprint(f"\n📹 Vídeo {video_number} - ID: {video_id}", "blue")
+    else:
+        cprint(f"\n📹 Vídeo ID: {video_id}", "blue")
+    cprint(f"🔗 URL: {video_url}", "blue")
+    
+    # 1. Baixa a transcrição
+    cprint("\n📥 Baixando transcrição...", "yellow", attrs=["bold"])
+    
+    # Converte idiomas para lista se necessário
+    if preferred_languages is None:
+        preferred_langs = None
+    elif isinstance(preferred_languages, list):
+        preferred_langs = preferred_languages
+    else:
+        preferred_langs = [preferred_languages]
+    
+    transcription_path = download_transcription(video_url, preferred_langs, max_retries=3)
+    
+    if not transcription_path:
+        cprint("❌ Não foi possível baixar a transcrição do vídeo.", "red", attrs=["bold"])
+        cprint("   Verifique se o vídeo possui legendas habilitadas.", "yellow")
+        return False
+    
+    used_lang = os.path.splitext(transcription_path)[0].split("_")[-1]
+    cprint(f"✅ Transcrição baixada com sucesso! [{used_lang}]", "green", attrs=["bold"])
+    cprint(f"   Arquivo: {transcription_path}", "white")
+    
+    # 2. Processa a transcrição
+    cprint(f"\n🤖 Processando transcrição com: {prompt_type.upper()}", "cyan", attrs=["bold"])
+    cprint(f"🌍 Idioma de saída: {output_language.upper()}", "cyan")
+    
+    # Aviso especial para framework (apenas se for vídeo único)
+    if prompt_type == "framework" and not video_number:
+        cprint("\n⚠️  MODO FRAMEWORK ATIVADO", "yellow", attrs=["bold"])
+        cprint("Este modo processa a transcrição em 7 dimensões + síntese", "yellow")
+        cprint("Tempo estimado: ~5-10 minutos", "yellow")
+        confirm = input(colored("\nDeseja continuar? (s/n): ", "magenta", attrs=["bold"])).strip().lower()
+        if confirm != 's':
+            cprint("Processamento cancelado.", "red")
+            return False
+    
+    try:
+        if prompt_type == "framework":
+            # Usa processador especial de framework
+            from core.framework_processor import process_transcription_framework
+            output_path = process_transcription_framework(transcription_path, output_language)
+            cprint(f"\n✅ Framework completo gerado!", "green", attrs=["bold"])
+            cprint(f"   Arquivo: {output_path}", "white")
+        else:
+            # Usa processador normal (chunks)
+            process_transcription(transcription_path, prompt_type, output_language)
+            cprint(f"\n✅ Processamento concluído!", "green", attrs=["bold"])
+            
+            # Mostra onde o arquivo foi salvo
+            output_dir = os.path.join('data', 'processed')
+            base_name = os.path.basename(transcription_path).replace('.txt', '')
+            output_file = os.path.join(output_dir, f"{base_name}_{prompt_type}_{output_language}_processed.txt")
+            if os.path.exists(output_file):
+                cprint(f"   Arquivo: {output_file}", "white")
+        
+        if not video_number:  # Só mostra mensagem final se for vídeo único
+            cprint("\n" + "="*60, "green")
+            cprint("🎉 PROCESSAMENTO CONCLUÍDO COM SUCESSO!", "green", attrs=["bold"])
+            cprint("="*60, "green")
+        
+        return True
+        
+    except Exception as e:
+        cprint(f"\n❌ Erro ao processar transcrição: {e}", "red", attrs=["bold"])
+        import traceback
+        traceback.print_exc()
+        return False
+
+
+def process_documents(prompt_type="faq", output_language="pt"):
+    """
+    Processa documentos de diferentes fontes: sites, PDFs e Word.
+    
+    Args:
+        prompt_type: 'faq' ou 'framework' (copywriting não faz sentido para documentos)
+        output_language: Idioma do output ('pt' ou 'en')
+    """
+    cprint("\n" + "="*60, "cyan")
+    cprint("📄 PROCESSAMENTO DE DOCUMENTOS", "cyan", attrs=["bold"])
+    cprint("="*60, "cyan")
+    
+    # Valida tipo de prompt
+    if prompt_type == "copywriting":
+        cprint("⚠️  Copywriting não é recomendado para documentos.", "yellow")
+        cprint("   Alterando para FAQ...", "yellow")
+        prompt_type = "faq"
+    
+    cprint("\n📋 Formatos suportados:", "blue")
+    print("  • URL de site (https://exemplo.com)")
+    print("  • Arquivo PDF (.pdf)")
+    print("  • Documento Word (.docx)")
+    print("  • Arquivo de texto (.txt)")
+    print("  • Arquivo Markdown (.md)")
+    print("  • Planilha Excel (.xlsx, .xls)")
+    print("  • Arquivo CSV (.csv)")
+    
+    cprint("\n💡 Dica: Você pode fornecer múltiplas fontes separadas por vírgula", "white")
+    cprint("   Exemplo: https://site.com, documento.pdf, arquivo.docx, texto.txt, planilha.xlsx, dados.csv", "white")
+    
+    sources_input = input(colored("\nDigite a(s) fonte(s) (URL ou caminho do arquivo): ", "magenta", attrs=["bold"])).strip()
+    
+    if not sources_input:
+        cprint("❌ Nenhuma fonte fornecida.", "red", attrs=["bold"])
+        return
+    
+    # Separa as fontes
+    sources = [s.strip() for s in sources_input.split(',') if s.strip()]
+    
+    if not sources:
+        cprint("❌ Nenhuma fonte válida encontrada.", "red", attrs=["bold"])
+        return
+    
+    # Limita a 10 fontes
+    if len(sources) > 10:
+        cprint(f"⚠️  Você forneceu {len(sources)} fontes. Limitando a 10.", "yellow")
+        sources = sources[:10]
+    
+    # Pergunta sobre consolidação (apenas para FAQ e múltiplas fontes)
+    consolidate_faqs = False
+    if prompt_type == "faq" and len(sources) > 1:
+        cprint("\n📊 Opções de geração de FAQ:", "blue")
+        print("[1] Gerar planilha separada para cada fonte")
+        print("[2] Consolidar todos os FAQs em uma única planilha")
+        consolidate_choice = input(colored("\nDigite sua escolha (1 ou 2): ", "magenta", attrs=["bold"])).strip()
+        
+        if consolidate_choice == '2':
+            consolidate_faqs = True
+            cprint("✅ Todos os FAQs serão consolidados em uma única planilha", "green")
+        else:
+            cprint("✅ Cada FAQ será gerado em uma planilha separada", "green")
+    
+    # Processa cada fonte
+    stats = {
+        "total": len(sources),
+        "success": 0,
+        "failed": 0,
+        "failed_sources": []
+    }
+    
+    # Lista para armazenar FAQs se for consolidar
+    all_faqs = [] if consolidate_faqs else None
+    source_names = [] if consolidate_faqs else None
+    
+    for idx, source in enumerate(sources, 1):
+        cprint(f"\n{'='*60}", "cyan")
+        cprint(f"[{idx}/{len(sources)}] Processando fonte {idx}", "cyan", attrs=["bold"])
+        cprint(f"{'='*60}", "cyan")
+        
+        try:
+            result = process_single_document(
+                source, 
+                prompt_type, 
+                output_language, 
+                idx, 
+                len(sources),
+                consolidate=consolidate_faqs
+            )
+            
+            if isinstance(result, dict) and result.get("success"):
+                stats["success"] += 1
+                # Se consolidar, armazena FAQ
+                if consolidate_faqs and "faq_text" in result:
+                    all_faqs.append(result["faq_text"])
+                    source_names.append(result.get("source_name", f"Fonte {idx}"))
+            elif isinstance(result, bool) and result:
+                stats["success"] += 1
+            else:
+                stats["failed"] += 1
+                stats["failed_sources"].append({"source": source, "index": idx})
+        except KeyboardInterrupt:
+            cprint("\n\n⚠️  Processamento interrompido pelo usuário!", "yellow", attrs=["bold"])
+            break
+        except Exception as e:
+            cprint(f"\n❌ Erro ao processar fonte {idx}: {e}", "red", attrs=["bold"])
+            stats["failed"] += 1
+            stats["failed_sources"].append({"source": source, "index": idx, "error": str(e)})
+        
+        # Pausa entre fontes
+        if idx < len(sources):
+            cprint(f"\n⏳ Aguardando 3 segundos antes da próxima fonte...", "blue")
+            time.sleep(3)
+    
+    # Estatísticas finais
+    cprint("\n" + "="*60, "cyan")
+    cprint("📊 ESTATÍSTICAS FINAIS", "cyan", attrs=["bold"])
+    cprint("="*60, "cyan")
+    cprint(f"Total de fontes: {stats['total']}", "white")
+    cprint(f"✅ Sucessos: {stats['success']}", "green")
+    cprint(f"❌ Falharam: {stats['failed']}", "red" if stats['failed'] > 0 else "white")
+    
+    if stats['failed_sources']:
+        cprint(f"\n📋 Fontes que falharam:", "yellow", attrs=["bold"])
+        for failed in stats['failed_sources']:
+            source_display = failed['source'][:60] + "..." if len(failed['source']) > 60 else failed['source']
+            cprint(f"  [{failed['index']}] {source_display}", "yellow")
+            if 'error' in failed:
+                cprint(f"      Erro: {failed['error']}", "red")
+    
+    success_rate = (stats['success'] / stats['total'] * 100) if stats['total'] > 0 else 0
+    cprint(f"\n✨ Taxa de sucesso: {success_rate:.1f}%", "green", attrs=["bold"])
+    cprint("="*60, "cyan")
+    
+    # Se consolidar FAQs, gera planilha única
+    if consolidate_faqs and all_faqs and len(all_faqs) > 0:
+        cprint("\n📊 Consolidando todos os FAQs em uma única planilha...", "cyan", attrs=["bold"])
+        try:
+            from core.faq_to_excel import create_consolidated_faq_excel
+            
+            output_dir = os.path.join('data', 'processed', 'documents')
+            consolidated_path = os.path.join(output_dir, f"FAQ_Consolidado_{output_language}.xlsx")
+            
+            total_items = create_consolidated_faq_excel(all_faqs, source_names, consolidated_path, output_language)
+            
+            cprint(f"✅ Planilha consolidada gerada com sucesso!", "green", attrs=["bold"])
+            cprint(f"   Total de itens FAQ: {total_items}", "white")
+            cprint(f"   Arquivo: {consolidated_path}", "white")
+        except Exception as e:
+            cprint(f"⚠️  Erro ao consolidar FAQs: {e}", "yellow", attrs=["bold"])
+            cprint("   Os FAQs individuais foram gerados com sucesso.", "white")
+            import traceback
+            traceback.print_exc()
+    
+    cprint("\n", "cyan")
+
+
+def process_single_document(source, prompt_type, output_language, doc_number=None, total_docs=None, consolidate=False):
+    """
+    Processa um único documento (site, PDF ou Word).
+    
+    Args:
+        source: URL ou caminho do arquivo
+        prompt_type: 'faq' ou 'framework'
+        output_language: Idioma do output
+        doc_number: Número do documento (opcional)
+        total_docs: Total de documentos (opcional)
+        consolidate: Se True, não gera Excel individual (apenas retorna FAQ)
+    
+    Returns:
+        bool ou dict: True se processado com sucesso, ou dict com FAQ se consolidate=True
+    """
+    from core.document_extractor import extract_text_from_source
+    from core.processing import process_transcription
+    from core.framework_processor import process_transcription_framework
+    from core.faq_to_excel import create_faq_excel
+    
+    try:
+        # Extrai texto da fonte
+        cprint(f"\n📥 Extraindo texto da fonte...", "yellow", attrs=["bold"])
+        text, source_type = extract_text_from_source(source)
+        
+        # Cria nome base para arquivos
+        if source_type == "url":
+            from urllib.parse import urlparse
+            parsed = urlparse(source)
+            base_name = parsed.netloc.replace('.', '_').replace('www_', '')[:30]
+        else:
+            base_name = os.path.splitext(os.path.basename(source))[0]
+        
+        # Salva texto extraído temporariamente
+        temp_dir = os.path.join('data', 'transcriptions', 'documents')
+        os.makedirs(temp_dir, exist_ok=True)
+        temp_file = os.path.join(temp_dir, f"{base_name}_extracted.txt")
+        
+        with open(temp_file, 'w', encoding='utf-8') as f:
+            f.write(text)
+        
+        cprint(f"✅ Texto extraído e salvo: {len(text)} caracteres", "green", attrs=["bold"])
+        
+        # Processa o texto
+        cprint(f"\n🤖 Processando com: {prompt_type.upper()}", "cyan", attrs=["bold"])
+        cprint(f"🌍 Idioma de saída: {output_language.upper()}", "cyan")
+        
+        output_dir = os.path.join('data', 'processed', 'documents')
+        os.makedirs(output_dir, exist_ok=True)
+        
+        if prompt_type == "framework":
+            # Processa com framework
+            output_path = os.path.join(output_dir, f"{base_name}_framework_{output_language}.txt")
+            process_transcription_framework(temp_file, output_language)
+            
+            # Move arquivo gerado para o local correto
+            framework_output = os.path.join('data', 'processed', f"{base_name}_extracted_framework_{output_language}.txt")
+            if os.path.exists(framework_output):
+                import shutil
+                shutil.move(framework_output, output_path)
+            
+            cprint(f"\n✅ Framework completo gerado!", "green", attrs=["bold"])
+            cprint(f"   Arquivo: {output_path}", "white")
+            
+        else:  # FAQ
+            # Processa com FAQ
+            process_transcription(temp_file, prompt_type, output_language)
+            
+            # Lê resultado processado
+            processed_file = os.path.join('data', 'processed', f"{base_name}_extracted_{prompt_type}_{output_language}_processed.txt")
+            
+            if os.path.exists(processed_file):
+                with open(processed_file, 'r', encoding='utf-8') as f:
+                    faq_text = f.read()
+                
+                # Se consolidar, retorna FAQ sem gerar Excel individual
+                if consolidate:
+                    cprint(f"\n✅ FAQ processado! (será consolidado)", "green", attrs=["bold"])
+                    return {
+                        "success": True,
+                        "faq_text": faq_text,
+                        "source_name": base_name
+                    }
+                
+                # Gera Excel individual
+                excel_path = os.path.join(output_dir, f"{base_name}_FAQ_{output_language}.xlsx")
+                num_items = create_faq_excel(faq_text, excel_path, base_name)
+                
+                # Move arquivo TXT também
+                txt_path = os.path.join(output_dir, f"{base_name}_FAQ_{output_language}.txt")
+                import shutil
+                shutil.move(processed_file, txt_path)
+                
+                cprint(f"\n✅ FAQ processado e Excel gerado!", "green", attrs=["bold"])
+                cprint(f"   Total de itens FAQ: {num_items}", "white")
+                cprint(f"   Arquivo Excel: {excel_path}", "white")
+                cprint(f"   Arquivo TXT: {txt_path}", "white")
+            else:
+                cprint(f"⚠️  Arquivo processado não encontrado: {processed_file}", "yellow")
+                return False
+        
+        return True
+        
+    except FileNotFoundError as e:
+        cprint(f"❌ Arquivo não encontrado: {e}", "red", attrs=["bold"])
+        return False
+    except ValueError as e:
+        cprint(f"❌ Erro de validação: {e}", "red", attrs=["bold"])
+        return False
+    except Exception as e:
+        cprint(f"❌ Erro ao processar documento: {e}", "red", attrs=["bold"])
+        import traceback
+        traceback.print_exc()
+        return False
+
+
 def process_all_transcriptions(prompt_type="copywriting", output_language="pt"):
     """
     Processa todos os arquivos de transcrição presentes na pasta 'data/transcriptions'.
@@ -364,12 +832,14 @@ def main():
     cprint(f"  - Idioma de saída: {output_language.upper()}", "white")
     cprint(f"  - Idiomas de legenda: {preferred_languages or 'Qualquer disponível'}", "white")
 
-    # 4. Fonte dos vídeos
-    cprint("\n🎬 Escolha a fonte dos vídeos:", "blue")
+    # 4. Fonte dos vídeos/documentos
+    cprint("\n🎬 Escolha a fonte de conteúdo:", "blue")
     print("[1] Playlist do YouTube")
     print("[2] Canal do YouTube")
+    print("[3] Vídeo(s) do YouTube")
+    print("[4] Documentos (Site, PDF, Word)")
 
-    choice = input(colored("Digite sua escolha (1 ou 2): ", "magenta", attrs=["bold"])).strip()
+    choice = input(colored("Digite sua escolha (1, 2, 3 ou 4): ", "magenta", attrs=["bold"])).strip()
 
     if choice == '1':
         playlist_url = input(colored("Digite a URL da playlist do YouTube: ", "magenta", attrs=["bold"])).strip()
@@ -381,6 +851,47 @@ def main():
             download_transcriptions("canal", channel_id, preferred_languages, prompt_type, output_language)
         else:
             cprint("Erro: Canal não encontrado.", "red", attrs=["bold"])
+    elif choice == '3':
+        video_input = input(colored("Digite a URL do(s) vídeo(s) do YouTube (separados por vírgula, máximo 10): ", "magenta", attrs=["bold"])).strip()
+        # Validação básica
+        if not video_input:
+            cprint("❌ Nenhuma URL fornecida. Por favor, forneça pelo menos uma URL válida.", "red", attrs=["bold"])
+            main()
+            return
+        
+        # Separa as URLs por vírgula
+        video_urls = [url.strip() for url in video_input.split(',') if url.strip()]
+        
+        if not video_urls:
+            cprint("❌ Nenhuma URL válida encontrada.", "red", attrs=["bold"])
+            main()
+            return
+        
+        # Limita a 10 vídeos
+        if len(video_urls) > 10:
+            cprint(f"⚠️  Você forneceu {len(video_urls)} vídeos. Limitando a 10 vídeos.", "yellow")
+            video_urls = video_urls[:10]
+        
+        # Valida URLs
+        valid_urls = []
+        for url in video_urls:
+            if "youtube.com" not in url and "youtu.be" not in url:
+                cprint(f"⚠️  URL ignorada (não parece ser do YouTube): {url[:50]}...", "yellow")
+            else:
+                valid_urls.append(url)
+        
+        if not valid_urls:
+            cprint("❌ Nenhuma URL válida do YouTube encontrada.", "red", attrs=["bold"])
+            main()
+            return
+        
+        # Processa múltiplos vídeos
+        if len(valid_urls) == 1:
+            process_single_video(valid_urls[0], preferred_languages, prompt_type, output_language)
+        else:
+            process_multiple_videos(valid_urls, preferred_languages, prompt_type, output_language)
+    elif choice == '4':
+        process_documents(prompt_type, output_language)
     else:
         cprint("Escolha inválida. Por favor, tente novamente.", "red", attrs=["bold"])
         main()

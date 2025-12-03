@@ -1,0 +1,163 @@
+All right then gang. So I want to move 
+away from prompting context commands and 
+sub aents now and move on to another 
+nice feature in Claude Code which is the 
+Claude Code GitHub app. And this is 
+something we can set up easily from 
+within the Claude Code chat session. And 
+I'm going to show you how to do that in 
+a moment. But basically when we install 
+it, it creates two GitHub actions for us 
+automatically which are both really 
+useful. The first one is that it can 
+autoreview pull requests and provide 
+feedback on those pull requests. The 
+second one allows Claude code to 
+automatically work on issues on a new 
+feature branch when you mention at 
+Claude inside it. Now before I show you 
+how to set up this feature, I will say 
+that you need to have the GitHub CLI 
+already installed on your computer, 
+which you can do by following these 
+installation instructions. So I'm going 
+to leave a link to this repo down below 
+the video, but essentially you can just 
+install it via something like Homebrew 
+on a Mac or Winger on Windows. It's all 
+really simple to do and it outlines the 
+steps in this readme file. Once you've 
+installed the GitHub CLI, you'll also 
+need to login by running this command in 
+your terminal. ghorth orth login. Once 
+you've done that, you're ready to set up 
+the claude code GitHub app. All right, 
+so inside claude code, we can use a 
+built-in slash command, which is 
+slashinstall 
+github app. And I'm going to press enter 
+here. And what that does is set up the 
+GitHub actions for the repository that 
+we want to give it access to. So, I'm 
+going to press enter. And then it's 
+going to ask us which repository we want 
+to use. We can enter a different one if 
+we want, but I'm going to use the one 
+linked up to this local repo right here 
+that I'm in. So, I'm going to press 
+enter on this option. Then, it's going 
+to open a browser and it's going to ask 
+us to install Claude Code on GitHub. So, 
+let's click the install button over 
+here. We need to authorize it. Now, you 
+can choose to allow it access to all 
+repositories or only select 
+repositories. I'm just going to select 
+this one to give it access to the Claude 
+code tutorial one, which is this down 
+here. And then I'm going to install and 
+authorize this. And then once you've 
+authenticated it and installed it on 
+your GitHub account, you can just come 
+back to the terminal and press enter to 
+complete this. And it says select GitHub 
+workflows to install. We're going to 
+install both of them. I'm just going to 
+press enter. And then we're just going 
+to choose the first option here. Create 
+a long live token with your Claw 
+subscription. It's going to ask you to 
+authorize with your Claude Code account. 
+So, I'm going to do that. Once you've 
+authenticated with Anthropic, it's going 
+to ask you to create this pull request. 
+And this is basically two actions that 
+it's created. It explains everything 
+down here. We can just create this pull 
+request. 
+And then one of the actions is to 
+automatically review pull requests. And 
+down here, we're just waiting for some 
+checks to be completed. Once they've 
+completed, you can merge that request. 
+And now up here, if we go to actions, we 
+should be able to see we've got these 
+two actions right here, Claude Code and 
+Claude Code review. Okay, so now we're 
+ready to put Cloud Code to use in the 
+GitHub repository. And I'm going to 
+create an issue in a second. And the 
+issue is going to be that this title up 
+here doesn't link to anywhere. And 
+ideally, it should link to this page, 
+the homepage. So let's create an issue 
+and tell Claude Code to handle this. All 
+right, then. So let's head to issues. 
+And we're going to create a new issue. 
+We'll just say link from title missing. 
+And then I'll say there is no link from 
+the title in navbar 
+to the homepage. 
+All right. So I'm going to create this 
+issue. Now nothing happens 
+automatically. But if I come down here 
+and mention Claude, I can just say at 
+Claude and I'll say, "Can you fix this? 
+I'm going to comment over here." And 
+hopefully just after a minute or so, 
+Claude is going to start work on this 
+task. 
+And you can see now Claude has picked it 
+up and it's starting to work on this 
+issue. 
+All right. So, it's created this little 
+to-do list much like it does in Claude 
+code within the terminal and it's 
+looking at the different things it needs 
+to do. examining the current navbar, 
+adding the link for the title. It's 
+going to test it. Then it's going to 
+commit and push the changes. Then it's 
+also going to provide a PR creation link 
+which we can go and take a look at. All 
+right. So, it's finished its little 
+to-do list now. And there's a summary 
+down here to say that it's fixed it and 
+any changes that have been made. It's 
+also created the PR or rather it gives 
+us a link to create the PR based on this 
+edit. So if we go there, it's 
+prepopulated this description and also 
+the title for the PR. I'm going to 
+create this pull request. And when we 
+create a pull request, Claude Code 
+automatically picks up on the pull 
+request and provides us with a code 
+review. And you can see now down here, 
+the Claude Code review is going in the 
+background. Okay, so now it's finished 
+its review and we can see the feedback 
+down here. We get a big green tick, 
+which means it's pretty good overall. 
+So, we get a tick for code quality, a 
+tick for bugs, a tick for performance 
+and security. Overall, it says approve. 
+Yep. All right. So, let's go down here. 
+We can merge the pull request now and 
+confirm the merge. 
+Okay. So, I just pulled down those 
+changes so we could preview this in a 
+browser. And now, if we hover over this 
+title, you can see it goes purple. We 
+get the little pointer icon. And if we 
+click on it, it goes to the homepage. 
+Awesome. So, that's now working. So then 
+that's how claude code can work directly 
+in your central GitHub repository and I 
+think it's quite a nice addition to the 
+product. You can also make additional 
+actions by the way to include claude 
+code in different ways and different 
+workflows. So it's definitely worth 
+looking through the action files and 
+playing around with them.

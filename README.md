@@ -12,14 +12,32 @@ Sistema automatizado para download e processamento de transcrições do YouTube 
 - 💾 **Sistema de progresso** com retomada automática
 - 🧹 **Logs limpos** com níveis separados (console/arquivo)
 
-## 🚀 Instalação
+## 🚀 Instalação Rápida
+
+### Opção 1: Setup Automático (Recomendado)
+
+```bash
+# Navegue até a pasta do projeto
+cd transform_transcriptions_yt
+
+# Execute o script de setup
+python setup.py
+```
+
+O script irá:
+- ✅ Verificar versão do Python
+- ✅ Verificar e instalar dependências
+- ✅ Criar estrutura de diretórios
+- ✅ Criar arquivo .env a partir do exemplo
+
+### Opção 2: Instalação Manual
 
 ```bash
 # Clone o repositório
 git clone [URL_DO_REPOSITORIO]
-cd "Tratamento de dados"
+cd transform_transcriptions_yt
 
-# Crie ambiente virtual
+# Crie ambiente virtual (recomendado)
 python3 -m venv venv
 source venv/bin/activate  # Linux/Mac
 # ou
@@ -27,22 +45,39 @@ venv\Scripts\activate  # Windows
 
 # Instale dependências
 pip install -r requirements.txt
+
+# Configure variáveis de ambiente
+# Windows:
+copy env.example .env
+# Linux/Mac:
+cp env.example .env
 ```
 
 ## ⚙️ Configuração
 
-1. Copie o arquivo de exemplo:
+1. **Copie o arquivo de exemplo:**
 ```bash
-cp .env.example .env
+# Windows
+copy env.example .env
+
+# Linux/Mac
+cp env.example .env
 ```
 
-2. Edite `.env` e adicione suas chaves:
+2. **Edite `.env` e adicione suas chaves:**
 ```env
 API_KEY=sua_chave_gemini_aqui
 YOUTUBE_API_KEY=sua_chave_youtube_aqui
-LLM_MODEL=gemini-2.5-flash
+LLM_MODEL=gemini-1.5-flash-002
 USE_PROXIES=false
 ```
+
+3. **Verifique a configuração:**
+```bash
+python check_setup.py
+```
+
+> 📖 **Guia completo de configuração:** Veja [SETUP.md](./SETUP.md) para instruções detalhadas.
 
 ### Como Obter as Chaves API
 
@@ -136,7 +171,7 @@ Consulte `docs/PROXY_SYSTEM.md` para detalhes.
 ## 📊 Limites e Quotas
 
 ### Google Gemini (Plano Gratuito)
-- **250 requisições/dia** para gemini-2.5-flash
+- **250 requisições/dia** para gemini-1.5-flash-002
 - Sistema implementa retry automático com rate limiting
 
 Para produção, considere:

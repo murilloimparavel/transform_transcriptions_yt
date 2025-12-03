@@ -78,7 +78,11 @@ t: Trecho exato curto usado como evidência
 
 tags: palavra1, palavra2, palavra3
 
+**IMPORTANTE: O campo `tags` (palavras-chave) é OBRIGATÓRIO e deve conter 3-7 palavras-chave relevantes que descrevem o conteúdo da pergunta e resposta. Use palavras-chave específicas e descritivas que facilitem a busca e categorização.**
+
 categoria: uma das categorias válidas
+
+**IMPORTANTE: A categoria deve ser determinada com base nas palavras-chave (tags) e no conteúdo. Use as palavras-chave para identificar o tipo de conhecimento: se contém termos como "como fazer", "passo a passo", "procedimento" → Procedure; se contém "exemplo", "caso", "história" → Example; se contém "princípio", "regra", "fundamento" → Principle; etc.**
 
 evidence_level: citacao | parafrase | inferencia
 
@@ -93,6 +97,10 @@ confidence: valor entre 0 e 1
 * Gere 15 Q\&A únicos por vez.
 
 * Sempre em português brasileiro.
+
+* **SEMPRE inclua o campo `tags` com 3-7 palavras-chave relevantes e descritivas.**
+
+* **Use as palavras-chave para determinar a categoria de forma precisa. Analise as tags e o conteúdo para escolher a categoria mais adequada.**
 
 * Inclua pelo menos um exemplo ou história sempre que possível.
 

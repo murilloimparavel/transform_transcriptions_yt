@@ -1,0 +1,295 @@
+Okay then gang, in this lesson I want to 
+talk about something called sub aents 
+which are really cool and they allow you 
+to basically create a whole team working 
+on your project where each sub agent can 
+have a different area of expertise that 
+can be isolated and configured to work 
+on certain tasks. For example, we could 
+make a unit test agent whose expertise 
+and function would be to really hone in 
+on writing and running tests. Or we 
+could make a sub agent who specializes 
+in security audits. We could make a UX 
+reviewer who specializes in providing 
+feedback for new components by viewing 
+them in a browser, etc. Now, each of 
+these sub aents all run independently 
+from each other. They have their own 
+system prompts, tools they're allowed to 
+run, and their own context window. So, 
+they're a really good way of isolating 
+certain workflows and tasks. And what's 
+really cool is that Claude Code can 
+delegate tasks to them when it needs to. 
+So you can kind of think of claude code 
+as being maybe a senior developer 
+working on tasks who then instructs 
+these sub aents to carry out certain 
+work. And one of the main benefits of 
+working this way is that each sub aent 
+has a specialized expertise which we can 
+fine-tune to excel in a particular area 
+through detail system prompts. Also 
+because each sub aent has their own 
+isolated context window. It keeps their 
+context clean and focused leading to I 
+think better results a lot of the time. 
+And it also means the main thread stays 
+cleaner and trimmer if we do this 
+correctly because we're delegating tasks 
+to those sub aents. So it reduces the 
+context overload in your main session. 
+So then in this lesson we're going to 
+make a sub agent who can use the 
+playright MCP server to preview and 
+review the UI UX of new components once 
+they've been made. And the workflow is 
+going to look something like this. We're 
+going to use the custom slash command to 
+tell Claude Code to make a new UI 
+component for us. Inside that command, 
+we're going to add an instruction 
+telling it to invoke the UX reviewer sub 
+aent to review its work after it's made 
+code edits. That sub aents going to use 
+playright to open a browser and look at 
+the component from a UX perspective. 
+Then it's going to provide feedback to 
+the main thread on clawed code which 
+will make edits to the component based 
+on that feedback. If needed, it can ask 
+the UX reviewer again to review the code 
+or review the uh component in a browser 
+and provide more feedback until 
+eventually everyone's happy and the 
+component is finished. So let's give 
+this a whirl. So then let's start by 
+making a new sub agent which we can do 
+by coming into the claude code chat 
+session and using a command which is 
+forward/ agents. Now when we do that 
+we're going to see a list of agents 
+you've already created. Now, we've not 
+created any. So, we can make one by 
+selecting this create new agent option. 
+Once we've done that, we can choose a 
+scope for this new agent, either project 
+or personal. I'm going to select the 
+project scope so that anyone working on 
+this project can use the sub agent. 
+Then, we're going to get two options. 
+You can get Claude to generate one for 
+you, or you can manually make one from 
+scratch. Now, what I'd like to do is 
+have Claude make one for me, then just 
+change it where I see fit. So, let's 
+select that first option. And then we're 
+asked to describe what this agent should 
+do and when it should be used. And I'm 
+just going to paste in a summary of this 
+agent now which says expert UI and UX 
+engineer who reviews the UI and UX of 
+React components in a browser using 
+Playright, takes screenshots, then 
+offers feedback on how to improve the 
+component in terms of visual design, 
+user experience, and accessibility. So 
+then I'm going to hit enter and Claude 
+Code's going to go ahead and make this 
+new agent for us. 
+Now, at some point, it's going to ask 
+you what tools you want to provide your 
+agent with. And the default option is to 
+allow all tools, but I'm going to 
+unselect the edit tools because I don't 
+want to give the agent the power to edit 
+files. I only want it to review the 
+components and offer feedback. It's also 
+going to ask you which AI mode you want 
+to use for the sub agent, and I'm going 
+to select the Sonic 4 model. Then it's 
+going to ask you what color you want the 
+sub agent to use when it's providing 
+updates in the terminal. I'm going to go 
+for the purple color. You choose 
+whatever you want. And then finally, 
+it's going to give you a summary of the 
+agent it's making, which you can confirm 
+by pressing enter. Okay. So, we can see 
+that now we have this project agent 
+called UI UX- reviewer that uses the 
+Sonic model. Let's close this off. And 
+if we open up this file tree, we should 
+see inside the claude folder, an agents 
+folder with this markdown file for the 
+agent. So we've got some front matter at 
+the top, which is the name of the agent 
+a description. And then down here, the 
+tools that it's allowed to use. Now, 
+it's added the playright one right here, 
+or a few of the playright tools rather, 
+because we specifically said in the 
+summary, we wanted to use playright, the 
+model, and the color. Then a bit of a 
+description down here. Then we've got 
+the actual workflow. So the setup, the 
+visual documentation, how to analyze, uh 
+some testing methodology. We're not 
+going to read all this, but essentially 
+it's created this for us. And the job of 
+this agent now is to review components 
+using the Playright MCP in a browser. 
+And you can edit this, by the way, if 
+you want to. It's basically like a 
+gigantic prompt for the sub agent which 
+gets used when the sub aent gets 
+invoked. So by all means go through this 
+and just edit anything that you don't 
+agree with or any additional information 
+that you want to add, just add it. Okay, 
+so now we've got this sub aent created. 
+We can go back to the custom UI 
+component command we created earlier in 
+the course. And remember this command 
+instructs claw code to make a new UI 
+component based on certain criteria. And 
+now at the end I'm going to paste in one 
+final instruction which tells Claude to 
+invoke the new sub agent we just created 
+and ask it for feedback. Once it has 
+that feedback it should implement it by 
+updating the component. And then finally 
+if it needs to it can ask for another 
+review and more feedback. So then now 
+everything is kind of set up and ready 
+to go. So let's give this a shot. And 
+remember, we need to exit out of claude 
+code first of all because we just made a 
+change to this command. And then we're 
+going to start the session back up 
+again. 
+All right, then. So, let's use the UI 
+component 
+tool if I can spell it. Components like 
+so. And then the component name is going 
+to be modal. And I'm going to say make a 
+clean modern looking modal which also 
+has a semi transparent 
+backdrop. 
+All right. So, press enter. 
+All right. And we can see already that 
+it has a little to-do list that it's 
+going to work on. And right at the 
+bottom down here, it's going to say 
+review the component with the UI SL uh 
+hyphen UX - reviewer agent. So that's 
+the final step. Okay, so it wants to do 
+something. Yep, we'll allow that. And 
+I'm going to allow for the rest of the 
+session. 
+Okay, so now you can see it's invoked 
+this UIUX reviewer and that reviewer 
+wants to open up a browser. Now, in 
+order to do that, it wants to start the 
+dev server. So, I'm going to let it do 
+that. 
+And now it wants to navigate to the 
+preview page, which is where Claude Code 
+added that component to when it created 
+it. So, let's allow it to do this. 
+And now on my other screen, I can see 
+it's opened up the browser. It's over 
+here. You can see. All right. 
+And it's asking me for permission to 
+take a screenshot. Yes, I'm going to 
+allow it to do that. 
+So something else you can do through 
+playright is click elements on a page. 
+And now it's asking for permission to do 
+that. So we'll say yes. 
+And this is taking a long time by the 
+way because there's so many different 
+variants that Claude Code created for 
+this modal. There's about seven or eight 
+different things it needs to do on the 
+web page to test everything. 
+All right. And now it wants to resize 
+the browser width. So, it's even testing 
+for smaller device screens, which is 
+really nice. So, I'm going to allow it 
+to do that. 
+All right. So, eventually it finished 
+its review process and you can see now 
+it's made some additional edits and 
+these are all the features it's 
+implemented. So, we've got the color 
+variants. We've got the different sizes. 
+We've made sure it's good for 
+accessibility. Uh we've got these 
+different interactions so we can close 
+via the cross button, escape key, or the 
+backdrop click. Um these are the files 
+created for the model and the test. And 
+then it's updated the page, the preview 
+page right here to have interactive 
+demos. So, it says right here, the UI UX 
+reviewer gave it a five out of five 
+stars and marked it production ready. 
+Well, that is really good. So, it 
+obviously did a good job of making these 
+components. So, now let's view these in 
+a browser. All right. So, I'm just on 
+the preview page and I've scrolled all 
+the way down to the modal components. 
+So, we've got buttons here to open the 
+modules. So, I could click on primary 
+and yeah, that looks pretty good. So, we 
+can close it via the cross or clicking 
+over here. I'm going to try the 
+secondary one and then press escape. 
+Yeah, that closes it. Confirm. All 
+right. And then we'll click on cancel. 
+And then finally, we'll click on the 
+cross. So, we've got these different 
+variants, which is really nice. 
+Different sizes. So, that's small. Uh, 
+medium. I think that's a little bigger. 
+Large. Yeah, a little bit bigger again. 
+All right. So, these are the features 
+it's implemented. So, that's nice. It's 
+kind of documented it for me as well. 
+So, these are actually using I think the 
+card component because the card 
+components are up here. So, you know, 
+like I said earlier on in the series 
+that Claude Code does get a little bit 
+giddy sometimes. It likes to use the 
+work it's done elsewhere in the 
+application. So I think this is just an 
+example of that. It's reusing the card 
+component to tell me about this modal 
+component it just created. So kudos. 
+That's very nice. Anyway, all looks 
+pretty good. Maybe I would make some 
+tweaks here and there, but I think it's 
+done a good job of creating and also 
+testing this component in the browser. 
+And one more thing really quickly. Just 
+because we've made a sub agent to 
+automate the review process, it doesn't 
+mean you shouldn't review the work 
+yourself. both in the browser and in the 
+code. This is something I think is 
+really important and something I always 
+do to stay in the loop because even 
+though everything looks okay in the 
+browser, it doesn't mean it's coded 
+correctly and you might find something 
+you don't like. Also, if you're not 
+looking over the code that Claude 
+produces, you're going to find yourself 
+out of the loop very quickly and find it 
+harder to navigate the codebase in the 
+future when you do need to dig into the 
+weeds.

@@ -1,0 +1,787 @@
+I learned MCP for you. In the past 68 
+months, you've probably heard a lot of 
+people talk about MCP. MCP is so 
+amazing. MCP is such a game changer. 
+Well, I must tell you, they are correct. 
+I have taken a bunch of courses, build 
+MCP servers and clients for our team and 
+a couple B2B clients that we work with 
+as well. We've also included a section 
+on MCP in our AI agents boot camp. So, 
+in this video, I'm going to explain to 
+you the fundamentals of MCP, show you 
+how to use MCP servers and how to build 
+your own MCP servers as well, both with 
+code and no code. Throughout this video, 
+there will be little assessments, which 
+if you can answer these questions, then 
+congratulations, you'll be educated on 
+MCP. Now, without further ado, let's go. 
+A portion of this video is sponsored by 
+Balt. Okay, a quick overview of the 
+structure of today's video. First, we're 
+going to define MCP, talk about why it's 
+important, and how it is that we use 
+them. Then we'll be diving under the 
+hood in which I'll cover the 
+fundamentals of MCP, the concepts and 
+frameworks that govern it. Basically, 
+everything you need to know to be able 
+to use and build your own servers. But 
+it is not enough just to know all these 
+concepts. So I'll actually show you how 
+to build one as well, both with code and 
+no code. Let us now define MCP. MCP, 
+which is the abbreviation of model 
+context protocol, is defined by 
+Enthropic, the people who made it, as an 
+open protocol that standardizes how your 
+LM applications connect to and work with 
+your tools and data sources. Okay. What? 
+So first time I read that definition I 
+was like sounds important. So let me 
+actually explain it to you the way that 
+I understood it using an analogy. MCP is 
+like this USB plug here. It allows any 
+device to be able to connect to any 
+other devices to be able to work 
+together. Prior to this universal 
+standard of the USB port, if you wanted 
+to connect things to each other, like 
+say your computer to your microphone, to 
+your webcam, you would be having a very 
+bad time because all of the ports to 
+connect with each other would be 
+different, which means you would have to 
+get a bunch of different special cords 
+and different adapters to manage to get 
+them to work together. And then you 
+would have to write the software to 
+cater towards like those specific port 
+thingies, etc. Very complex, very messy. 
+But with this USB port, we're able to 
+now just connect all these devices to 
+each other and they just work. Amazing. 
+Wow. Do not be fooled. It sounds like 
+such a simple little thing, right? Just 
+like standardizing the port connectors, 
+but it amounted to massive amounts of 
+innovation with this ease of use. Now 
+before MCP existed, if you have your 
+agent and you wanted to give it access 
+to different tools and different context 
+or different types of data, you would 
+have actually faced a very similar 
+problem to the pre- USB port days 
+because each external system and tool 
+that you're trying to connect to has 
+their own specific definition of how it 
+is that you interact with it, which is 
+their special API. For example, if 
+you're trying to make a scheduling 
+agent, you would need to give it access 
+to like your calendar, your email, a 
+note-taking app, Zoom, Calendarly, and 
+you would need to custom write the code 
+for each specific tool that you want to 
+give your agent, which is a pain in the 
+ass. So that's why when Enthropic 
+proposed the model context protocol, the 
+MCP, which would standardize the ways 
+that we interact with all of these 
+external softwares, everybody was like, 
+amazing. Wow, so good. Now your agent is 
+able to have access to all of these 
+different external softwares and tools 
+using the same protocol. Within just 
+months that the number of tools that you 
+can give your AI agents now, which are 
+called MCP servers massively exploded to 
+thousands. Now there's over 20,000 
+pre-built MCP servers that you can just 
+grab and give your AI agent. Here is 
+just a small sample. Now, anybody can 
+easily write them, publish them, and use 
+them. Let me actually show you exactly 
+how easy it is to use an MCP server. 
+Like say for example, I'm looking at 
+these MCP servers here. You can pick any 
+of them, but let's just pick like Alpha 
+Vantage for example. It is a MCP server 
+that enables LLMs and aentic workflows 
+to seamlessly interact with realtime and 
+historical stock market data through the 
+model context protocol. Okay, great. So, 
+you can get access to stock market data. 
+You copy this stuff which allows your LM 
+application to have access to the MCP 
+server. copy it into your LM application 
+like for example cloud code if you want 
+to give the tool to cloud code and voila 
+you'll be able to have access to the MCP 
+server and all the different tools that 
+are defined on the server then you can 
+do something like plot the coffee stock 
+market prices for the past 10 years then 
+Claude will say Claude wants to use the 
+coffee function from Alpha Vantage are 
+we going to allow this and we'll be like 
+okay allow once using that tool was able 
+to get the coffee price data and now 
+it's going to created interactive 
+visualization and there you go, coffee 
+global prices with all of this 
+information. Oh my god, coffee is so 
+expensive these days. So yes, this is 
+pretty much how easy it is to use any 
+MCP server now. And I can also very 
+easily switch what is called the host 
+which is cloud code in this case to 
+something else like NA10 for example or 
+my own custom AI app. So let's now 
+actually dive into the foundations of 
+MCP so you will exactly understand what 
+just happened here and how to build your 
+own MCP servers as well. And by the way, 
+MCP servers are actually even more 
+powerful than just giving your agents 
+tools. There's a lot more that you can 
+actually do, which is why people are 
+able to actually build these MCP servers 
+and then sell them. 
+The best course that I found which 
+covers the foundations of MCP is 
+Anthropic's own course in collaboration 
+with deep learning.AI called MCP, build 
+rich context AI apps with anthropic. The 
+course starts with explaining basically 
+why is MCP important. So I already 
+covered most of that. Um but I do like 
+the diagrams that they gave which shows 
+that see before MCP there was fragmented 
+AI development with each AI app you 
+would need to have a custom 
+implementation custom prompt logic 
+custom tool calls and custom data 
+access. And you got to do that for all 
+of them versus with MCP which is a 
+standardized AI development for each MCP 
+compatible application you're able to 
+have access to a lot of different types 
+of MCP servers. For example, you can 
+have access to a data store MCP server 
+so that you can have access to data 
+stores. You can have a CRM MCP server so 
+that you can have access to CRM systems 
+and a version control MCP server so you 
+can have version control software. All 
+plug-andplay and the other way around as 
+well. Every time you build an MCP 
+server, it would be reusable by various 
+AI applications like a Google Drive MCP 
+server that has access to Google Drive 
+functions that can be used by MCP 
+compatible AI assistant, MCP compatible 
+AI agent, and an MCP compatible desktop 
+app or IDE too. All right. Next 
+important concept to understand is the 
+client server architecture. Within the 
+components that make up MCP, there are 
+three different components. The host, 
+client, and server, HCS for short. And 
+the way that they relate to each other 
+is the host houses the MCP client, which 
+goes through the MCP protocol in order 
+to have access to the MCP server. Hosts 
+are LM applications that want access to 
+certain data or tools through MCP. As I 
+showed earlier, the cloud desktop is an 
+example of a host. NA10 is also an 
+example of a host. You can also have 
+IDs, AI agents. Really any large 
+language model application can be a 
+host. Now the host wants to use the MCP 
+servers which are the lightweight 
+programs that expose different 
+capabilities like the servers here like 
+alpha advantage we talked about earlier 
+that's able to get real-time historical 
+stock data. Uh there's also time 
+provides time and time zone conversion 
+capabilities. Cherry studio that's used 
+for LM provider support like AI 
+assistance and conversions, documented 
+data processing. Postgress SQL to 
+provide readonly access to Postgress SQL 
+databases allowing schema inspection and 
+execution of readonly queries, GitLab, 
+Reddist, etc., etc. There is a lot. Now, 
+in order for the host to actually have 
+access to these MCP servers, they need 
+to maintain what is called an MCP 
+client, which lives inside a host and 
+evokes the MCP protocol to maintain that 
+one-on-one connection with the server. 
+Got it? MCP client lives in MCP host to 
+invoke the MCP protocol in order to have 
+access to the MCP servers which the 
+players being HCS host client and 
+server. All right, time for a little 
+quiz for the example that I showed 
+earlier which allowed cloud desktop able 
+to access historical stock data alpha 
+vantage and cloud code. Which is the 
+host and which is the server? Put your 
+answer into the comments. Okay, let's 
+now talk about what are the things that 
+are actually contained within an MCP 
+server. Well, there are three major 
+things. These are tools, resources, and 
+prompt templates. TRP tools, which are 
+the things that we've kind of seen the 
+most of are functions and tools that can 
+be invoked by the client. So, these are 
+these things over here like time series, 
+intraday, time series, daily, blah blah 
+blah, symbol search, global quote. Also, 
+stuff like sending a message in Gmail, 
+calculator, retrieval and search, 
+sending a message, updating database 
+records. All of these are tools. But 
+that is actually not all. You can also 
+have what are called resources which are 
+readonly data that is exposed by the 
+server. So this is the data that the 
+client is able to query but cannot 
+change. For example, there are certain 
+files like markdown notes that's 
+contained within the server that you 
+might want to read. Maybe it's tracking 
+logs. Say for example, every time you're 
+calling a weather app tool and you're 
+getting that data, you might want to 
+actually save a record of all the 
+different weathers that you've 
+collected. So at some point you might 
+want to compile that together and make 
+like a visualization or something, 
+right? It would not be very efficient if 
+every single time you had to go collect 
+a weather data point. You would have to 
+like use the tool and spam the tool over 
+and over and over again. It could also 
+contain just database records of stuff. 
+Like for example, there's just like 
+information that you're storing like 
+contracts, meeting recordings, and 
+notes. Then there's also prompt 
+templates. These are structured prompt 
+blueprints so that you don't have to 
+force your user to have to come up with 
+their own prompts. Like for example, if 
+you are someone who's trying to use an 
+MCP server that uh is able to summarize 
+like a certain transcript from a meeting 
+and then generate a report based upon 
+it, you could just write something like, 
+oh, summarize this transcript into key 
+action items, then generate a report, 
+right? Like you could write something 
+like that, but that probably won't yield 
+the best results. So instead, the people 
+that actually built the MCP server can 
+put within their MCP server a prompt 
+template that is much more flushed out 
+that's able to actually extract the 
+insights and generate the report in a 
+much better fashion so that the user all 
+they have to do is input like some 
+specifics into that template. This takes 
+the burden of the prompt engineering 
+from the user. As a full example, you 
+can have like a SQLite MCP server which 
+gives access to like a database which is 
+the SQLite database. Don't worry if you 
+don't know what that is. is basically 
+just like a database that can store 
+information. Anyways, so you can have 
+tools that allow you to read the SQL 
+database to insert information into the 
+database to change the information in 
+the database and to delete information 
+from the database. In addition to that, 
+there is a resource that is logging all 
+of the changes that are happening to the 
+database so you have a historical track 
+record of what's happened. And there's 
+also some prompt templates that 
+incorporates the best practices to 
+interact with that database. Make sense? 
+All right, time for our next little 
+assessment. Please answer the questions 
+on screen now and put it into the 
+comments so you are following along. MCP 
+is all about giving your agents more 
+context so that they can do really 
+powerful things. So when you're ready to 
+deploy your AI agents with a lot more 
+functionalities and you want really good 
+UI, NA10 plus Bolt is a really powerful 
+combination and you don't need to write 
+a single line of code or you can just 
+directly build via Bolt. Bolt can take 
+you from an idea to a fully functional 
+product within minutes. Whether that is 
+software for your team, an internal tool 
+or a website. It has everything that you 
+need, whether that's hosting, backend, 
+database, off, domains, and even SEO. 
+One of the things I really like about 
+Bald is that it seamlessly handles the 
+entire process so that you can focus on 
+building real things as opposed to 
+handling infrastructure. You don't need 
+to handle like setup, configs, war, 
+external tools. Bolt puts the most 
+powerful tools used by developers into 
+your hands with an intuitive chat 
+interface. It really is as simple as 
+this. So, here we have the Bolt new 
+landing page. And we can just type 
+something like build an app that blurs 
+out people's faces in pictures and just 
+click build now and then let it do its 
+thing. Of course, you can go into a lot 
+more details and have a lot of like 
+specific specs within the app as well. 
+And look at that. Here we have this 
+application and let's actually try it 
+out. We will put an image. Here is a 
+picture of me when I was still a little 
+Tina. And there you go. We have the 
+original and then we have the blurred 
+version. And you can download the 
+blurred image as well. As well as you 
+keep building, you can include a lot 
+more features and tweak things however 
+it is that you want. Let Bald do the 
+heavy lifting so you can focus on your 
+vision instead of fighting bugs. You can 
+try out Bald V2 for free today at this 
+link over here, also linked in 
+description. Now, back to the video. 
+Okay, so the final concept that I want 
+to cover for MCP before diving into 
+actually building them is the 
+communication life cycle. The way that 
+the MCP client and the MCP server 
+communicate with each other. The first 
+step is the initialization when the MCP 
+client interacts with the MCP server 
+being like, hey, I would like things 
+from you now and they initiate a 
+connection. Then you have the message 
+exchange phase when the MCP client makes 
+a request to the server. for example 
+like I want to use this tool and the MCP 
+server goes like okay and gives it back 
+which is the response. So you do that 
+exchange the messages and then finally 
+there's the termination phase when the 
+client and the server terminate and stop 
+interacting with each other. Now the way 
+that the messages are done is called a 
+transport. The transport handles the 
+underlying mechanics of how messages are 
+sent and received between the client and 
+the server. And there are two different 
+categories of how transports work. First 
+one is when the server is running 
+locally like your MCP server and your 
+host all of this is within a single 
+machine. The analogy that I like to give 
+here is say that your MCP client is like 
+the diner and the chef is like your MCP 
+server who is going to be the one 
+preparing the food for your diner. Now 
+for the server and the client running 
+locally, it'll be like just you and your 
+friend cooking at home with like a 
+notebook. You as the chef is just like 
+cooking it and maybe you're just like 
+writing down what it is that you're 
+doing and like just passing a note to 
+your friend the diner for some reason. 
+So they're like keeping updated about 
+what's happening while you're cooking. 
+That is like the standard out a running 
+log that's just like living locally 
+between you guys. You don't need to rely 
+on like a waiter or a cashier or 
+anything like that. The other category 
+of transports is for remote servers. So 
+these are servers that live in other 
+machines on the cloud somewhere else. 
+And there are two different approaches 
+to interact with a remote server. The 
+first one is called HTTP plus SSE which 
+is server sent events. Don't worry so 
+much about the terminologies. It 
+supports what is called a stateful 
+connection. Going back to that analogy, 
+in this case, you would have to like 
+leave your house and say you're at a 
+restaurant. You, as a diner, would sit 
+down at the restaurant. You're the 
+client, and you would interact with a 
+waiter, which is a server, and you would 
+tell it stuff like, "Oh, here's my 
+table. Here's the appetizers that I want 
+to order, blah, blah, blah." And then 
+your server would like bring you those 
+things, and say if you want to order 
+like the same drink again, you could 
+just say something like, "I'll like to 
+have the same drink again." And you 
+don't have to like exactly specify 
+whatever it is that you ordered the 
+first time. So this is called a stateful 
+connection because the server maintains 
+the state of it like remembering the 
+knowledge the memory of what you ordered 
+all this information throughout the 
+entire interaction. Now there's also 
+what is called stateless stateful 
+stateless. This kind of transport 
+supported by a streamable HTTP. To be 
+stateless is sort of like if you go to a 
+fast food restaurant as opposed to like 
+a sitdown restaurant. Like if you're at 
+McDonald's for example, you would order 
+like a Big Mac and I don't know like 
+fries. But then like if you want to get 
+something else, you want to also get 
+like chicken nuggets, you would actually 
+have to go and like input your order all 
+over again and get like a new ticket and 
+you have to wait again. The cashier 
+that's clashing you out, the server 
+doesn't actually remember everything 
+that you ordered previously. So that's 
+why it's called stateless because it 
+doesn't remember all of the knowledge 
+that came with your prior interactions. 
+Each request is independent of each 
+other. So without going into way too 
+much detail about this like the 
+streamable HTTP is the preferred 
+transport method because it's able to 
+support both stateful and stateless and 
+there are instances in which you want to 
+have like stateful interactions and 
+instances in which you want to have 
+stateless interactions as well. So this 
+section might sound a little bit like 
+detailed and theoretical but it does 
+become very important when we're 
+actually going to be using our MCP 
+servers and building our MCP servers 
+which is right after I give you this 
+final little assessment. 
+Okay, I'm going to show you the no code 
+implementation of building your very own 
+MCP server now. And we're going to be 
+doing this by using n10. So you can do 
+stuff like send an email to Tina with 
+the address tina@ lonelyotopus.com 
+asking her if she wants to grab a coffee 
+sometime. 
+Execute workflow. Press enter. goes 
+through this. We can see that it's 
+accessing the AI agent is accessing the 
+MCP client which is here. It contains 
+the ability to have a calculator and 
+also the tool that allows to send a 
+message to Gmail. So, it's able to 
+access the tool to send a message to 
+Gmail so that you will be able to get 
+this email. Hi Tina, I hope this message 
+finds you well. I was wondering if you 
+like to grab a coffee sometime. Let me 
+know what works for you. Best regards. 
+Email was automatically sent with NATO. 
+Okay. So, how to build this from 
+scratch? start off with a fresh new 
+workflow using NA10. If you have no idea 
+what NA10 is and you're not familiar 
+with it at all, check out this video 
+over here. I go into details about how 
+to build AI agents using NA10. I'm not 
+going to go into this here, so the video 
+is not super long, but basically it's a 
+no code low code tool that allows you to 
+build workflows. Also allows you to 
+build MCP servers. So you have your 
+server trigger over here and you want to 
+add some tools. Like for example, we can 
+add the calculator tool, which is just 
+like the ability to calculate things and 
+do math. Not super innovative but yes. 
+And then we can also add the email tool. 
+So maybe like a Gmail tool. And in here 
+we need to set up the credentials like 
+create new credential. You can kind of 
+go through the process. So all you have 
+to do is like sign into your Gmail um 
+which I will do here. And then you'll 
+have the account that is connected. Yay. 
+Then um because we just want to send 
+emails here. So the operation here is 
+going to be send. So for two we're going 
+to let the model decide these. So, let 
+the model decide the subject. Let's al 
+also let the model decide uh we'll have 
+the email type HTML and the message. 
+Let's also let the model decide that as 
+well. Wonderful. Amazing. So simple. 
+Right now, let's save this. Now, in 
+order to actually use our server, we 
+want to come here, make sure that it's 
+active. So, the server itself is going 
+to be active. And we want to take this 
+production URL. So, this allows access 
+to the server. Now I have another 
+workflow over here which is an AI agent 
+in which you can prompt it directly and 
+respond also attach the open AI chat 
+model here. So in order to add the MCP I 
+can click the MCP client tool the 
+endpoint we're going to copy paste what 
+we got from the MCP server and here in 
+the server transport see we have the 
+server send events which is deprecated 
+and the HTTP streamable the two 
+different transport right so we're going 
+to click HTTP streamable transport and 
+we don't need to change anything else 
+over here. Wow. Now we have the MCP 
+client. So let's actually test it out. 
+Let's actually do math this time. 
+Calculate 10 
+11 * 99. 
+We can see here that the AI agent goes 
+over here. Human says calculate 11 * 99. 
+It goes to the MCP client and it uses 
+the tool cal the calculator tool which 
+we have. And it says useful for getting 
+the results of a math expression. And 
+then the open AI chat model was able to 
+get the results by using the MCP client. 
+And then we were able to get the final 
+result here with the output being the 
+result of 11 multipi by 99 is 1,089. 
+Yay. See how easy it is. There's a lot 
+that you can do with this. Of course, 
+you can add like so many more tools into 
+your MCP server. And you also don't need 
+to have NAN as your host. We can easily 
+switch out the host for something else. 
+Like for example, maybe you want to 
+change out the host for cloud desktop. 
+So what we need to do is go on cloud 
+desktop. So go on help, type in 
+developer. So switch to developer mode 
+and then under developer open the claw 
+desktop config file. So this should be 
+empty. You can open it with whatever 
+text editor. So I'm here I'm just using 
+VS code for it. And you want to copy 
+paste this. So this is defined MCP 
+server and we're using NAN because 
+that's where the server is and we are 
+using SSE over here. And over here just 
+paste the endpoint here. So command S or 
+control S. Save it. Restart Claude and 
+wow amazing. We have NA10 over here 
+under the tools and includes send a 
+message in Gmail and the calculator. And 
+then you can do the same thing here. 
+Send an email to Tina@ lonely 
+octopus.com 
+asking her to host an octopus party. 
+Click enter. 
+See it'll say over here Claude wants to 
+use send a message in Gmail from NA10. 
+And you can click allow once to allow it 
+to use the tool from the MCP server. And 
+moment of truth, we have over here, "Hi 
+Tina, I hope this message finds you 
+well. I want to reach out to see if 
+you'd be interested in hosting an 
+octopus party. I think it'll be a 
+wonderful event and you'll be the 
+perfect host for it. Let me know if 
+you're available and interested. Looking 
+forward to hearing from you. Best 
+regards. Yes, automatically sent with 
+NAT." Voila. See, super easy, right? 
+Okay. So, now I want to show you the 
+code implementation of doing this. Now 
+with code you are able to do a lot more 
+than this no code approach. I think the 
+no code approach is amazing. It's great, 
+right? It's really accessible and easy 
+to use. Remember we talked about earlier 
+about having like additional resources 
+and also prompt templates. You as of 
+right now cannot do that using NAT. You 
+can't actually put in the prompt 
+templates and specify those and you also 
+can't put in additional resources as 
+well. And in the code implementation you 
+can. So I'm not going to go and show you 
+every single line of code right now 
+because I don't want to make this video 
+like super duper long. But I want to 
+show you like the snippet of these are 
+the tools that we're going to be using 
+and this is how you can actually get it 
+to run. Okay. So for this code demo, 
+we're going to be using cloud desktop as 
+the host and I'm going to showcase a 
+simple MCP server that's able to provide 
+tools, resources, and prompts for 
+working with Google Sheets and Google 
+forms. So we can tell that the MC3 
+server is connected because if you go to 
+G Sheets over here, which is the MCP 
+server name, you can see all the tools 
+that are contained over here. So I have 
+a lot of different spreadsheets that are 
+available. So let's actually ask list 
+out the spreadsheets that are available. 
+It will want to use the list 
+spreadsheets. So this is the tool and it 
+tells us that we have 20 spreadsheets 
+that are available in the Google account 
+like NA10 form, anonymous feedback, the 
+only octis alumni blah blah blah etc. 
+All of these different ones. Would you 
+like me to read the data from any of 
+these spreadsheets here? I can say use 
+read sheet to get the columns 
+of the anonymous 
+feedback spreadsheet. 
+So it wants to use read sheet and this 
+is actually a resource. So it allows you 
+it's a readonly file where you can 
+actually read what the column names are. 
+You can see the spreadsheet ID and the 
+information that's contained over there. 
+And finally, I want to show you what it 
+looks like to use some of the prompt 
+templates. So, if we click over here, 
+add from sheets, here are some of the 
+prompt templates. So, let's click 
+analyze sheet data. And we can say use 
+this to analyze the anonymous 
+pretty spell anonymous 
+feedback 
+spreadsheet 
+and create a dashboard just to make it 
+look pretty. 
+And we can see here is what the prompt 
+template actually looks like. And it 
+shall do this. Let it do its thing. So 
+while it's doing that, let me actually 
+show you what the code looks like and 
+how to run this MCP server. Here's the 
+readme. If you follow these 
+instructions, you'll be able to run this 
+MCP server yourself. You can see that 
+the tools that it contains include 
+things like list spreadsheet, read the 
+sheet, write the sheet, append the 
+sheet, etc. It also has the resource 
+where you can use the sheet in order to 
+access sheet data as the resource. And 
+it has prompt templates including 
+analyze sheet data which is template for 
+analyzing sheet data. Creating report 
+template. So a template for creating 
+report spreadsheets and form to sheet 
+which is a template for form to sheet 
+workflow in the code itself. Not going 
+into too much detail over here. You can 
+see that after we define the credentials 
+the way that you can define these tools 
+that you can decorate the function. So 
+you know that's MCP tool. So this one is 
+the function for listing the 
+spreadsheet. This one is for reading the 
+sheet etc. And then the way that you can 
+show that it's a resource is that you 
+just decorate it so that you know that 
+it's a resource. So get sheet resource. 
+And here are the prompt templates 
+themselves. So they're actually 
+hardcoded directly in these different 
+prompt templates. So let's go back to 
+claude here and see what is happening 
+there. Great. We see that it analyzed 
+the anonymous feedback spreadsheet. So I 
+read that information, analyzed the data 
+using the template that we provided and 
+it actually created a dashboard as well. 
+So here is the dashboard. So total 
+response is 43. The average MPS score 
+which is the net promoter score is 4.9 
+5.98 blah blah blah all these things. So 
+it tells you information about this 
+different categories uh how the study 
+plan progress tracker is qualitative 
+information about what attracted 
+students to our boot camp and insights 
+as well. So different types of 
+information including what works well 
+and what doesn't work well etc etc. So 
+yeah there you go. This is the code demo 
+of an MCP server. I hope you can see 
+that there's so much potential for so 
+many different types of things that you 
+can build now that you have the ability 
+to create your own MCP servers. You can 
+of course also change your host. You use 
+this MCP server with NA10 uh with your 
+own agent with your any large language 
+model application that you build as 
+well. The possibilities are endless. So 
+if you do want to dig deeper into this, 
+I highly recommend that you actually 
+check out the anthropic deep learning AI 
+course that goes into the exact 
+implementation step by step how to build 
+this entire MCP server. It is really, 
+really, really powerful. There are of 
+course a lot of other ways that you can 
+implement MCP servers as well, both code 
+and no code approaches. I also really 
+like this one by Network Chuck where he 
+goes into a lot of detail about how to 
+use Docker in order to do this. So I'm 
+going to link his video below as well. I 
+really recommend that you check it out 
+if you're interested in implementing it 
+using Docker. But for this video, I'm 
+going to end it here. I hope that you 
+now have an excellent fundamental 
+understanding of MCP and how to actually 
+build them yourself, too. Here is the 
+final little assessment. Please answer 
+these questions and put them into the 
+comments. 
+Hope you enjoyed this video and thank 
+you so much for staying until the end. 
+I'll see you guys in the next video for 
+live stream. 
+[Music]

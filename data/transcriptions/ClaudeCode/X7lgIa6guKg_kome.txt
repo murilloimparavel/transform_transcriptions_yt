@@ -1,0 +1,385 @@
+All 
+right then, gang. In this lesson, I want 
+to talk about something called MCP and 
+MCP servers, which can give Claude code 
+the ability to connect and communicate 
+with external data sources, services, 
+and APIs. For example, when I'm working 
+with Claude in this project right now, 
+it knows about my project, and it can 
+use all its built-in tools to make 
+changes and run bash commands and 
+whatnot. But those tools only extend to 
+the scope of this codebase, right? And 
+there's no tools for claude code to 
+interact with external data sources, 
+third party services or APIs. I can't 
+tell it for example to reach out to a 
+database to analyze my tables or even 
+create a new one for me because it 
+doesn't have the tools to do that. But 
+that's where MCP servers come into play. 
+So just very briefly, MCP stands for 
+model context protocol. It was designed 
+by Anthropic who made claude code and it 
+defines a way that AI models can 
+interact with external sources. And we 
+do this by providing them with 
+additional tools and context through MCP 
+servers. And different MCP servers come 
+with different tools to do different 
+things and interact with different 
+sources. So you can think of an MCP 
+server as something you can essentially 
+plug into Claude code or whatever client 
+you're using and then Claude directed by 
+the AI model can use whatever tools the 
+server provides to interact with some 
+external data source. For example, the 
+Superbase MCP server contains tools to 
+do things like list tables, deploy edge 
+functions, and even execute SQL 
+commands. So, if I installed the 
+Superbase MCP server, Claude would have 
+access to all those tools. And I could 
+say to Claude code, read the blogs table 
+in Superbase, make an interface to model 
+the records. And in response, Claude 
+would check for any tools it can use to 
+do this. And it would find one in this 
+Superbase MCP server. It would then use 
+that tool which is just a function 
+defined within the server to reach out 
+to the database and find the blogs 
+table. It would read it and then return 
+the format of that table to claude code 
+and then using that data claude code 
+could decide how to make the interface. 
+So when we use MCP servers, it's not the 
+AI itself or the client like Claude code 
+that reaches out directly to these 
+external sources. It's the MCP server 
+that does that and then it provides 
+claude code or whatever client you might 
+be using with the ability to call and 
+use those tools. Another MCP server 
+called Playright provides AI models with 
+the tools to open a browser, navigate 
+through web pages, inspect elements, 
+take screenshots. The context 7 MCP 
+server provides tools to get up-to-date 
+documentation from a lot of frameworks 
+and libraries which you can then ask 
+Claude code to use when implementing new 
+features using those frameworks or 
+libraries. And there's loads more too 
+which you can find on websites like this 
+one, pulsemcp.com. 
+So definitely check that out. We're 
+going to install these two servers right 
+here, context 7 and playright. And over 
+the next couple of lessons, we're going 
+to put them to use in our workflow. 
+First though, how do we actually add the 
+servers? Well, if we take a look at the 
+claude code docs on the MCP installation 
+section, you can see that we can add 
+them locally on our computer or by 
+connecting to them remotely. Now we'll 
+be adding the servers locally. So we'll 
+be using this option at the top. And the 
+way we do this is by using the command 
+claude mcp add and then whatever the 
+server name is then the command and any 
+arguments. Also if you're on Windows 
+then you're currently you'll need to add 
+one more thing which if we scroll down 
+here you're going to see in a big yellow 
+warning box and that is to add cmd and 
+then forward slash c. So the cmd part 
+opens the windows command line to run 
+the command. The forward/ C part makes 
+sure the shell gets closed after it's 
+been run. Now, normally when we use an 
+MCP server, the server docs gives us the 
+whole string to copy and paste in a 
+terminal, which is then going to add the 
+server. But just be aware that you might 
+need to add the cmd/ cart if you're on 
+Windows for servers that use npx. 
+Otherwise, it might not work correctly. 
+Anyway, let's head back to the context 7 
+MCP page and we're going to see what it 
+says there about the installation. So, 
+if we click on this MCP link up at the 
+top, it should take us to the GitHub 
+page for the server, which it does. And 
+then, if you scroll right down, we 
+should eventually see a bunch of options 
+for adding the server to different 
+clients. One of those options should be 
+Clawed Code. So, click on that to expand 
+it. And we're going to get a few 
+different options. The first two are for 
+remote server connections. The one at 
+the bottom is for a local connection. So 
+we say claude mcp add. Then the server 
+name which is context 7. Then we have 
+this double dash. Then the npx command. 
+So we're going to copy this now and 
+paste it into the terminal. And then 
+we're also going to make a few edits. So 
+then I've pasted this into my terminal 
+already and I'm just going to add 
+another few things in. The first thing 
+we'll do is we're going to add another 
+flag to this just before the double dash 
+and that is the scope flag. So when we 
+add MCP servers with claude code, we can 
+add them to three different scopes. 
+Project scope where the MCP setup gets 
+pushed to remotes and everyone working 
+on the project can use the MCPs added to 
+the project. Local scope which is where 
+only you can use the MCP server on this 
+particular project and global scope 
+which is when the MCP is added globally 
+to claude code and you can use it for 
+any project on your computer. Now the 
+default scope is local but I want to 
+make it a project scope so that we can 
+see the MCP configuration here in the 
+project directory and mostly I use 
+either project or global scope. I very 
+rarely use local scope. Anyway to add 
+this scope we use the scope flag 
+followed by project to specify project 
+scope. And again this could also be 
+local or global. Now before we go any 
+further I will say this. If you're 
+running Claude Code natively on Windows, 
+it can be a little bit buggy when you're 
+adding MCP servers, at least at the time 
+of recording this video. If you're on a 
+Mac, then you probably won't have to 
+jump through any hoops or workarounds, 
+and you can just hit enter right now, 
+and this would work. If you're on 
+Windows, though, you have to do a few 
+more things for it to work properly. 
+First, we have to add the cmd and then 
+forward/ C bit just before the rest of 
+this npx command like we talked about 
+earlier. Secondly, if we run this right 
+now, we're going to get an error, which 
+I'll show you by hitting enter. And that 
+error says there's an unknown option Y, 
+which comes right after the npx bit. 
+Now, the Y flag is for auto accepting 
+defaults to prompts when some package is 
+installed, and it needs to be there in 
+this case. So, how do we get around 
+this? Well, one solution is to run the 
+whole thing without the Y flag first, 
+which we'll do now. And when we do that, 
+it's going to work. and claude code 
+makes this MCP.json file in the root of 
+the project. Now if we take a look at 
+that, we'll see this JSON object with an 
+MCP servers property inside. And it's 
+within this property that all project 
+level servers get added. So we can see 
+this context 7 one right here that we 
+just added. And inside that the servers 
+configured with these different 
+properties. The type is standard in out 
+since this is a local MCP connection 
+that we added. The command is cmd and 
+that's because on Windows we added that 
+extra cmd part. Then we have some 
+arguments including the forward sl bit 
+which we also added because we're on 
+Windows. Now again if you're on a Mac 
+this will probably look a little bit 
+different and you won't need to make any 
+changes. But on Windows because we 
+removed that hyphen y flag we should now 
+manually add this in to the arguments 
+array after the npx one. So let's do 
+that now and then save the file. Right 
+then. So hopefully now that's all going 
+to work when we start up Claude Code. 
+But I do think this whole workound when 
+using Windows is a little bit clunky and 
+I'm hoping that it's something that can 
+be made simpler in the future and maybe 
+when you're watching this video it will 
+be. Anyway, now let's try using this. 
+Now when I've just tried using this MCP 
+server, I got some kind of connection 
+error. It failed. It didn't work for 
+whatever reason. So I'm actually going 
+to use the remote server from Context 7. 
+It's strange because when I tried this 
+out before recording, it did work. 
+everything was fine. Uh, but this is the 
+problem sometimes because Claude Code is 
+new, MCP servers are new, they're 
+changing a lot. Sometimes things can 
+just not work and it might take a little 
+while for things to level out. So, what 
+I'm going to do now is go back to the 
+docs and look for the other command I 
+need to run for a remote server. So, 
+we're going to go ahead with this one 
+right here, which uses HTTP as the 
+transport system. So, let's copy this. 
+All right. All right. So, I've pasted 
+that into my terminal. But I'm going to 
+add one more thing and that is the scope 
+flag after the server name. So, after 
+context 7, do double dash then scope and 
+then project to add this at a project 
+level. Press enter. Hopefully, now it's 
+going to add that server for us. And if 
+we close this terminal and take a look 
+over here, we should see the mcp.json 
+file. And yeah, we see that context 7 
+property inside. This time the type is 
+HTTP because we're using a remote 
+connection. And this is the URL for the 
+server as well. Cool. So now we need to 
+start Claude backup, which I'm going to 
+do over here by typing claude and then 
+press enter. Let's get rid of the file 
+tree. And then inside here, I'm going to 
+say forward/mcp. 
+And this time hopefully we will see the 
+concept 7. Okay, it failed to connect. 
+What I'm going to do is press enter and 
+then I'm going to reconnect to this to 
+see if it does connect this time. Okay, 
+looks like it's worked. So forward/mcp. 
+Now we can see a green tick next to 
+that. We're connected to context 7 and 
+we can start using it. So let me escape 
+out of that. Okay. So now I'm going to 
+get Claude code to use context 7 by 
+typing in this prompt and it says, can 
+you check the latest Tailwind docs to 
+see if the theme variables are correctly 
+configured in the global CSS file. Use 
+context 7. I'm also going to reference 
+that CSS file so it knows where to look. 
+So that's source app and then 
+globals.css. 
+And then I'm going to press enter. But 
+before I do that, notice I said use 
+context 7. That's so it explicitly knows 
+to use the MCP server to get the 
+up-to-ate information. So let me press 
+enter to do this. And now it wants to 
+use this resolve library ID tool from 
+context 7. And then it wants to use an 
+additional tool and it wants my 
+permission to do this. So I'm going to 
+press yes right here. And now you can 
+see right here it says looking at your 
+Tailwind CSS configuration. your theme 
+variables are correctly configured blahy 
+blahy blah it's properly structured okay 
+so everything is as it should be awesome 
+so one thing I like to do with context 7 
+is tell claude code to use it whenever 
+it needs to implement some feature using 
+a third party framework or library 
+because a lot of the time it can use 
+legacy code so I want to make sure that 
+it uses the up-to-date documentation 
+every time that it creates some code 
+using those frameworks and that's not 
+just clawed code by the way that's any 
+AI tool tool or model, they can all use 
+legacy code because they're trained on 
+that legacy code. So, what I'm going to 
+do is add a memory using the hash over 
+here. So, if I press hash, we're going 
+to add a memory and then I'm going to 
+paste in this memory that says use 
+context 7 to check up toate docs when 
+needed for implementing new libraries or 
+frameworks or adding features using 
+them. So, if I press enter, we're going 
+to add that to the project memory. And 
+if we then open this file up, we should 
+see that at the bottom now. Yep, there 
+it is. Awesome. 
+Okay then. So now we're going to add 
+another server called Playright which 
+provides Claude Code with the tools to 
+do things like open a browser, click on 
+links, take screenshots, etc. So I'm on 
+the Playright MCP page right here. And 
+for Claude Code, it says run this 
+command, which because we're on Windows, 
+we're going to have to tweak again. I 
+also want to make sure we're using 
+project scope when we add it. So copy 
+this command, then head back to your 
+terminal. So then I've already added 
+this command in as well as two other 
+things. the scope flag first of all over 
+here to say we want to add this at 
+project level and then also the cmd 
+slash cart because we're running this on 
+Windows this time we don't need to add 
+the y flag for this particular server 
+all right so now let's hit enter 
+hopefully that's going to add the 
+playright server to the mcpjson file so 
+let's take a look at that over here and 
+yeah we can see we've got the context 7 
+one now and also the playright one and 
+this time the type is standard in out 
+the command cmd then the arguments down 
+here. Awesome. So then now we need to 
+start cla back up again so that we can 
+try using this. Okay, so I've started 
+clawed up and the first thing I'm going 
+to do is use the MCP tool to make sure 
+that they're connected correctly. Yep. 
+Okay, cool. And now I'm going to escape 
+and I'm just going to ask Claude Code to 
+maybe open a browser and navigate to 
+netinja.dev 
+dev and give me a summary of the site. 
+So this is just to show you that it can 
+navigate to a site using playright or 
+playright can on its behalf and provide 
+feedback that we need. So it's going to 
+ask for permission first of all. So 
+we'll say yes. And then on my other 
+screen it's opened up netinja.dev which 
+we can see right here. So it's just 
+going to do its browsing. I'm going to 
+take that back off screen. All right. So 
+now it's come back with a little bit of 
+information. It says, "Net Ninja is a 
+comprehensive coding education platform 
+created by Sha focused on web 
+development training. The site positions 
+itself as a coding dojo where aspiring 
+developers become coding ninjas. So I'm 
+quite pleased with that. It gives us 
+this other information about it as well 
+which is quite extensive to be honest. 
+But Playright can do more than just 
+this. And what I'd like to do is use 
+Playright to give us feedback on the UX 
+of components that we make when it views 
+them in the browser. So, in the next 
+lesson, what we're going to be doing is 
+making our own sub agent with claw code, 
+and we're going to be using the 
+playright MCP from within that sub agent 
+to do just

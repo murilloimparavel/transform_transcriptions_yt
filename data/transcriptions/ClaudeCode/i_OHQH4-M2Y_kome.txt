@@ -1,0 +1,340 @@
+Okay then. So now we've got Claude code 
+set up and running inside this project. 
+I would like to start using it to make 
+some changes to the code and working on 
+new components. But before we do that, 
+it's always a good idea when you're 
+starting to use the forward/init command 
+to initialize a claude.md file inside 
+the project root. And when we do this, 
+claude scans the entire codebase. It 
+looks at the folder structure, how we 
+start the application, any state 
+management we use, etc. the whole Shazam 
+so that it gets a good feel for the 
+project, where everything goes and how 
+it should code new features in the 
+future. Then it summarizes all of that 
+and it dumps the information into a 
+claude.md file in a structured human 
+readable format. Then whenever we have 
+an active session with claude code to 
+either ask about our project code or to 
+make changes to the code, it uses that 
+claude.md file as context and guidance. 
+It's almost like a mini documentation of 
+your code for claw to use whenever it's 
+trying to figure out the best way to 
+implement something or to give feedback. 
+So then I'm going to press enter now to 
+run this command and see what it comes 
+up with. 
+And you can see as it's doing this, it's 
+created a little to-do list for itself. 
+It's going to explore the repository, 
+analyze the package.json and the source 
+code. It's going to check for exe 
+existing documentation files. And then 
+finally, it's going to create this 
+claw.md file at the bottom. And you can 
+see that it's kind of checking things 
+off as it does it. So, it's really good 
+to see the progress of what it's doing 
+in between all that. It's reading the 
+files. It's searching for things. So, 
+yeah, it's doing a real extensive kind 
+of task. 
+All right. Then, so now once it's done 
+all that, you can see it's created this 
+plan. And if we scroll right to the 
+bottom, it's asking us, do you want to 
+create this claw.md file? And I'm going 
+to select yes. So then it goes ahead to 
+create that file, which we can see in 
+the root of the project directory now. 
+So let's open that up over here and see 
+what it looks like. So you can see this 
+file provides guidance to claude code 
+when working with code in this 
+repository. So it's got some different 
+development commands that it's found 
+from the package.json thing right here. 
+It's got an architecture overview. So it 
+says what it is briefly. It's a Nex.js15 
+blog application. You can see the 
+different things we're using inside it. 
+So React 19, Tailwind, V4, uh, Vest, 
+etc. We've got a project structure, 
+which is quite nice. So it knows that 
+when it's creating new files, hopefully 
+where to put those files. Uh, we've got 
+some data architecture right here. So it 
+knows that we're using Higgraph for the 
+content. And down here we've got 
+information about the styling. Um, we've 
+got a testing setup right here and some 
+additional development notes as well. 
+So, this is quite comprehensive. It 
+gives Cloud Code now a good guide as to 
+what we're doing. And whenever we make 
+changes, it can use this guide. Now, 
+since I'd already started this project 
+before Claude Code got involved, it was 
+able to scan my existing codebase and 
+pick up on a lot of things. So, it could 
+make a detailed Claude file based on the 
+code I've got. But if you're starting 
+with a brand new project with virtually 
+no setup files or code, then it's going 
+to have much less to work with. And the 
+claw.md file is probably not going to 
+have much in it. But in that case, you 
+can manually go into the file and edit 
+it yourself to outline any highlevel 
+project structures you're going to put 
+in place, any tools, packages, or 
+frameworks you're going to be using, 
+your code style preferences, and just 
+basically an overall summary of the 
+application. And you can just update it 
+as you go then. And that last bit is 
+important whether you're starting with a 
+new project or an existing one because 
+you should keep this file updated if you 
+change your file structure, any packages 
+you use, or anything else outlined 
+inside this file. If you don't, then 
+claude code might not automatically pick 
+up on those changes, and it could go off 
+in a completely different direction when 
+you ask it to do something. Anyway, this 
+Claude MD file now gets added to the 
+session context automatically so that 
+Claude can refer to it when it makes 
+changes. And you'll find that keeping an 
+up-to-date Claude file like this leads 
+to much better code generations. So then 
+now that we have this file, let's ask 
+Claude code to do something and see if 
+it sticks to the guidance. So what I 
+would like Claude Co to do for us is 
+make a new hook which is going to store 
+the user's theme preference based on 
+whatever theme they have when they 
+toggle that little icon in the top right 
+hand corner. Now I noticed that inside 
+the clawed file over here, we don't 
+reference a hooks folder. So this would 
+be a good opportunity to just update 
+this file so that Claude code knows 
+where to create hooks. So I'm going to 
+save this inside the project structure 
+bit right here where it says all hooks 
+reusable hooks go inside this hooks 
+folder. So now if I ask Claude code to 
+make a hook hopefully it's going to 
+place inside that folder. All right 
+then. So you can see we don't actually 
+have a hooks folder at the moment but 
+hopefully Claude Code will create that 
+as well. I'm going to open up the 
+terminal and then I'm going to ask it to 
+create this new hook. I will say can you 
+create a hook to store the users's theme 
+preference in 
+when they toggle the theme on the site 
+and I will say store the value in local 
+storage for next time and then I'm also 
+going to say don't use the hook anywhere 
+yet because claw code has this habit of 
+if it creates a new feature, hook, 
+component, whatever it might be, it 
+wants to use that hook somewhere in your 
+project. So, a lot of the time I add 
+this at the end to make sure it doesn't 
+do that. So, I'm going to press enter. 
+The only thing I'm really concerned with 
+at the moment is to test whether claude 
+code looks at that claw.md file and 
+creates the hook in the correct folder. 
+Okay, so it looks like it's come up with 
+some code. And if we take a look at this 
+over here, you can see it wants to place 
+it inside the hooks folder. All right. 
+So, if we open this up a little bit, 
+this is the hook it's created right 
+here. And again, I'm not going to 
+examine the code too much. I would 
+normally, if this was something I was 
+working on, I would definitely examine 
+the code, but for now, I'm just going to 
+say yes. I'm going to accept that 
+change. And you can see it's created the 
+hooks folder and it's created the use 
+theme file within the folder. Awesome. 
+You can also add a memory to the claw. 
+MD file directly from the chat session 
+by using a hash symbol. For example, I 
+could add a hash then say something like 
+when making new page components, always 
+add a link to that page in the header. 
+And you can see down here as I type that 
+it's telling us it's going to memorize 
+what we're telling it because we added 
+that hash. And the long and short of 
+that is that it's going to place this 
+instruction inside the claw.md file for 
+future reference. So that now whenever 
+it creates a page component, it should 
+hopefully create a header link for it 
+too. Now when we hit enter, we're going 
+to see a few options. We can save it to 
+project memory which is into the 
+claude.md file we just created for this 
+project. You could save it to local 
+project memory in the same root folder 
+but with the local part added to the 
+file name. And you can also save it to 
+global memory which is to a global 
+claude file stored in the root claude 
+folder on your computer which the 
+installation added for us. So project 
+memory is what gets set up when we run 
+the forward/init command to create this 
+claw.nd file in the root of the project. 
+And this file is meant to be tracked by 
+version control and pushed to your 
+remote repository so that any other 
+developers working on the project have 
+the same clawed file with the same 
+guidance for clawed code for this 
+project. And that means any memories or 
+information in this file should be 
+specific to the project. For example, 
+folder structure, naming conventions, 
+tests, frameworks, etc. The local 
+project memory is a file meant for your 
+own personal guidance and preferences 
+when it comes to working with claude 
+code. So, for example, outlining any 
+kind of personal tooling you might use 
+that isn't necessarily something other 
+developers working on the same project 
+would use. And this file wouldn't be 
+pushed to the remote repository and it 
+would just be local to you inside this 
+project. And finally, user memory is 
+your personal guidance to Claude when it 
+comes to all projects you work on. So 
+any tools you use globally across many 
+projects or any personal code style 
+preferences that you have would go in 
+that file. And again, this would just be 
+for you on your computer, but it would 
+be for every project that Claude Code 
+runs in. For now, we're just going to 
+add this to the project memory, meaning 
+it should get added to the claude.md 
+file that we already have. So, if I 
+close this off and open this file up, we 
+should be able to see at the bottom that 
+new memory has been added. And you can 
+see right here, when making new page 
+components, always add a link to that 
+page in the header. Awesome. All right. 
+So, now we're going to test this out. 
+So, I'm going to open code backup, and 
+I'm going to paste in a prompt, which 
+says, can you add a new about page with 
+only an H2 title and a single line of 
+Lauram as contact uh content rather? So, 
+press enter. Hopefully, it's going to 
+read that instruction in the claw. MD 
+file as well and create a link for us. 
+And you can see in its to-dos, it says 
+right here, add about page link to the 
+header navigation. So, it knows about 
+that. All right. So, I'm just going to 
+accept these changes. Again, normally 
+you should check this, but for the sake 
+of this tutorial, I'm just going to 
+accept this. And again, it's asking for 
+permission to edit the file, the layout 
+file this time to add a new link. Again, 
+I'm going to press yes. You can do this. 
+And then another change to the layout 
+file, which I'm going to accept as well. 
+Okay. And now it's done. So if I close 
+this off, open up app and then we can 
+see this about page and inside there we 
+have an H2 title and just a single line 
+of Lauram Ipsum. Awesome. And then if we 
+go to the layout page which it's edited. 
+Hopefully it's added a link right here. 
+So it's added it to this nav. So it says 
+about right here. Now let's try this out 
+in a browser. Okay. So yes, it has done 
+that. You can see the about link here. 
+And if we click on that, we go to the 
+about page. Now you can see also 
+retrospectively it's added these other 
+two links which I didn't ask it to do. 
+And this is one of the things I've 
+noticed about clawed code. Sometimes 
+like I mentioned before it sometimes 
+likes to do things beyond the scope of 
+what you've asked it to do. So it is 
+important to maybe tell claw code look 
+don't do this just do this. And that 
+could be something you add to your 
+claude.md file. Now just really quickly 
+I do want to mention that on the Claude 
+code docs they say that the local memory 
+is being deprecated in favor of 
+importing unttracked files within the 
+project level memory to provide that 
+personal context to Claude. And I'll 
+show you how to import and reference 
+files later in the course. But at the 
+time of recording this video the local 
+option still shows in the terminal when 
+you use the memory hashtag shortcut to 
+add new memories. Another way you can 
+access your memory files is by using the 
+memory command which is just forward 
+slashmemory. And by the way, if it isn't 
+already obvious, when I say memory 
+files, I'm just talking about the 
+claw.md files, whether they're project 
+local or global. But anyway, when you 
+use this memory command, claude code's 
+going to ask you which memory file you 
+want to open and edit. So you can select 
+any of these and press enter to open 
+that file up. For example, if I select 
+the project memory, it's going to open 
+up the claw.md file right here in VS 
+Code so that I can edit it directly 
+myself. So then just to summarize, it's 
+always good practice to use the 
+forward/init command when you bring 
+claud code into a project because it 
+gives Claude the chance to learn about 
+the codebase and outline any structural 
+patterns, frameworks, libraries, naming 
+conventions, etc. in a claude file. That 
+file is then used by Claude as context 
+automatically when it makes decisions 
+about your project in the future and it 
+can be added to your remote repository 
+so that other developers working on the 
+project have access to it as well for 
+their own workflow using clawed code. 
+Finally, it's not something you should 
+just create and then forget about, but 
+rather keep on top of edit and update 
+when things change within your project. 
+That way, you're always keeping Claude 
+in the loop, and you'll find its work to 
+be much more in line with your project's 
+existing current code and structure.

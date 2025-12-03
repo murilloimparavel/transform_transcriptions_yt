@@ -1,0 +1,493 @@
+Hey guys, welcome to my cursor and coding with AI crash course. So in this video I'm going to introduce you to 
+cursor and go over the features and interface, but I I'm also going to spend time talking about just coding with AI 
+in general. So a lot of these practices and workflows and the stuff we talk about, they're going to apply whether 
+you're working with cursor, claude code, winds surf, or any of these other tools. So we're going to talk about things like 
+agents, rules, context, uh models, things like that. So, I want to give you 
+kind of three different examples because there's different levels of of how much 
+AI assistance you can use in your in your project. So, I want to start off doing what I would suggest beginners do, 
+which is opening an existing project that you've been working on, open it in cursor, and then start to use it 
+gradually. So, you can use things like tab completion and inline editing. And 
+you can do that before you move to the the main chat interface where you just vibe code and pretty much just tell it 
+what to do. So, we'll start off that way and we're going to use uh just an existing shopping cart UI that I have. 
+And then we're going to move on to some vibe coding and we'll use the chat interface to create a a SAS landing page 
+with an interactive calculator where you know you can change the number of users or the number of of any kind of resource 
+and the price will update in real time. So we'll generate that. We'll go back and forth ask it questions talk about 
+context. And then finally we're going to create a next.js project that will be a 
+markdown resume editor. So something a little more in depth and we'll again 
+talk about context. I'll show you how we can create a a context file. Uh we'll also talk about setting rules and so on. 
+All right. So this will be kind of a it'll be longer than most cursor tutorials because I feel like a lot of 
+them they just jump in and show you the chat interface and generate something and that's it. I want to go over the 
+settings and and go over, like I said, the the kind of workflow that that I would use for each of these different um 
+these different levels of of AI assistance. All right, so let's get into it. 
+All right, guys. So, I just wanted to take a second and tell you about today's sponsor. So, Savella is an all-in-one 
+solution for hosting your apps, your APIs, static sites, and they support 
+just about any popular language and and framework that you can think of. And I myself have been doing web development 
+for about 20 years now. And I remember the the absolute nightmare that came with deployment and DevOps up up until 
+really just a few years ago. But Sabella is a platform that makes it super easy. Gives you a simple UI to work with to 
+deploy your applications as well as spin up databases like Postgres in in really 
+just a couple of clicks. And you can deploy from GitHub or GitLab or from a Docker image. They offer free static 
+site hosting and then app and database hosting from $5 per month. And then 
+obviously you can scale as needed. And I don't take on sponsors that I don't believe in. Sabella has a great service, 
+great product. So check them out and the links in the description below. All right, so let's talk about what cursor 
+actually is. So it's essentially a supercharged version of VS Code with AI built directly into the editor. So it's 
+not just another extension that you add on top. The AI features are baked into the core experience and you get that 
+familiar VS Code interface and you have, you know, powerful AI assistants that 
+can help you write, edit, and understand code. And I would say the main difference between cursor and a lot of 
+the other ai tools is how seamlessly integrated everything is. So instead of switching between your editor and a 
+separate uh AI chat interface or dealing with clunky extensions, cursor just 
+gives you multiple ways to interact with the AI right from where you're already working and it knows full context of 
+your project. All right. So, I I want to talk a little bit about pricing because it can be pretty confusing and even 
+Curser themselves admitted that their their roll out for pricing was horrible and it's changed over the past few 
+months and it'll probably change again or I know it will change again. It's just a matter of when. So, by the time 
+you watch this, this could be different. And I'll explain it to how I understand it because it still confuses me a little 
+bit as well. And if if I'm wrong about anything, feel free to correct me. So, for the individual plans, you have the 
+free tier, the hobby tier, you get a a two-eek trial of the pro tier, and you 
+get very limited agent requests, which are basically interactions with the AI. So, whether that's in the chat interface 
+or inline, you get very limited requests, limited tab completions. And 
+then the $20 per month gives you extended limits on agent requests and uh unlimited tab completions. You also get 
+something called background agents where you can run tasks in the background. Um access to bugbot which will look at your 
+pull requests and and look for bugs and then access to maximum context windows. 
+Now there's kind of a caveat from what I understand with the $20. So if you want 
+to use a specific model because you can use multiple models with cursor whether it's GPT or claude or Gemini. If you 
+want to use like let's say Claude for Sonnet and you want to only use that you 
+you get allocated $20 per month towards that and if you go over that if you want 
+to keep using that specific model then you'll be either be asked to upgrade to the 200 or you'll be asked if you want 
+to pay the normal price for that model. Now, if you don't want to pay more than $20 per month, you don't have to, but 
+you just switch to auto mode, which means that cursor selects the model that's going to be used based on 
+basically based on the task that you're doing. Um, so that's kind of the caveat of this. You can't just use whatever 
+model you want forever. Um, and then the $200 plan is is everything the $20 is. 
+It's just more, right? You get 20 times the usage on these these premium models like GPT, Claude, Gemini, Grock. You can 
+use pretty much anything, any of the real popular models. So, that's the pricing from what I understand. Now, to 
+get Cursor, just go ahead and download it, install it just like anything. It'll ask you if you want to import your VS 
+Code settings, and that includes your extensions. So, the interface is, you know, very, very familiar. So, let's 
+open cursor up and I'm going to, like I said, I'm going to be using it in a project that already exists, which is 
+this shopping cart UI. And before I get into anything any of the code, I just want to talk about the settings and the 
+interface. So, the biggest the most notable change here between VS Code and 
+Cursor is going to be this chat interface on the right. And this is where you're going to spend a lot of 
+time if you're using AI a lot, if you're basically vibe coding. So from here you 
+can add context, right? Context is just is basically what the AI sees and it 
+does see your entire project without having to add context. But if you wanted to focus on specific functions or a 
+specific problem, you know, uh lines or whatever, then you can add right here 
+you can add certain you know files and folders code documentation. So like uh 
+if you wanted to add let's say the font awesome docs or something like that or git repositories pass chat rules which 
+I'll talk about in a few minutes terminals your active tabs so if I open a tab that's automatically going to be 
+in my context you can see right here one tab and you can also specify with at so 
+let's say I wanted to add like um index CSS or or whatever I could add it that 
+way. All right. So, just be aware of what is in your immediate context. Now, 
+this stuff, agent auto, I'm going to talk about that in a minute, but I want to get into the settings. So, let's go 
+to cursor settings and then cursor settings. So, from here in the general tab, you have your manage account. This 
+is where you can see all your usage, the exact models that you use, the tokens, all that stuff. And then this is just 
+basic settings. Privacy mode. So if you have this on, which I do, your data 
+won't be trained on or used to improve the product. So that's that's up to you if you want to keep it on or off. I just 
+I value my privacy, so I keep it on. And then the chat tab here. So this is where 
+you can choose the default mode of agent or ask. Now, I would say at least 95% of 
+the time you're going to be in agent mode because the agent is what actually uh creates files, edits your code, um 
+runs terminal commands, runs tests. So, it does it does all that stuff. It's 
+like the the virtual coder where ask mode is more like a chatbot like chat 
+GPT or Claude AI. So if you want to ask specific questions either about the project or about something else like 
+maybe you want to know more about the use ref hook from React or something like that then you would use ask. So 
+you're most likely not going to have the default as ask. But if you want to use it you can go here in the chat interface 
+and you can select ask. Okay. And you might also want to use this if you want to ask a question but not worry about it 
+actually editing your code because sometimes the agent will edit stuff that you don't want to. It'll run code. It'll 
+um you know run tasks that you don't want. And you can also uh use background agents from here as well. So yeah, all 
+this stuff is pretty basic. The include full folder folder context. 
+I wouldn't suggest adding that because that can it can add to your tokens. It can slow things down. Um web search 
+tools. So you want to allow agents to search the web for relevant information. I would suggest leaving that on. So, 
+let's see. Auto run mode, also known as YOLO, uh, YOLO mode, will just run tools 
+like command line tools and stuff without asking or needing your permission. So, I would say leave this 
+at ask every time if you're just getting started with cursor. And then once you get a feel for it, once you get add some 
+rules, then you can just have it run everything automatically if you want. There's also an allow list. Okay, so 
+tab, this just has to do with tab completions. There's partial accepts. So if you want to accept a part of a 
+suggestion, you can do that with command or control arrow. Now models, this is where your models are enabled or 
+disabled. So I pretty much have the defaults. I've uh GPT5, Claude 4 Sonnet, Claude 3.7, Cursor 
+small, which is Cursor's own model. Um that's pretty much all I have enabled, but you also have like 03, you have 
+Gemini, you have Grock. Uh yeah. So if you want to enable other models here you 
+can. Now claw 4 opus is for it. You can use that with cursor but only in max 
+mode. So max mode will get maximum context window in tool calls. And this 
+can again really just just raise your token your usage. Um it can also really 
+slow things down. So I would only use this if you're doing really difficult stuff like difficult calculations or 
+whatever. So otherwise I would I would suggest keeping that off. So background 
+agents I haven't really gotten into. Um MCP tools. So basically model model 
+context protocol servers you can add those here. Um basically like let's say 
+Neon database or or or Kubernetes or Firebase. These these services have 
+these MCP servers that you can use to basically directly interact with the AI 
+kind of like kind of like an API. And then rules and memories. Rules are really important when it comes to coding 
+with AI because if you don't have rules then it's just going to do things however it wants. So here you have both 
+user rules and you also have project rules. So user rules are global that pertains to any project where project 
+rules obviously pertain to that specific project and stuff that is is directly 
+related to specific technologies like React or or Python whatever it is you're 
+using usually that's going to go in your project rules and then more general stuff more highlevel rules will go in 
+your user rules. So you can see mine. We'll just look at these for instance. Prioritize clean, efficient, and 
+maintainable code. Follow best practices and design patterns. Generate concise, actionable responses. Some of these are 
+are kind of redundant, but I think that they're important. So uh most of them are are pretty general, but some are 
+related to technologies like I have used TypeScript over JavaScript for any React 
+or Nex.js projects. Um, and and some of this stuff you'll add as you go along 
+and you notice that it's doing things you don't want or that you want to change. For instance, anytime I would 
+generate a Nex.js project and use Tailwind, it was using Tailwind 3 and it 
+was creating a config file. So, I specifically said always use Tailwind 4 syntax and refer to the docs for version 
+4. Never use version three. Another thing it was doing was suppressing my TypeScript errors. So I said do not 
+ignore suppressed TypeScript errors. Focus on clean passing code. I said never use the any type unless absolutely 
+necessary. So I mean you know rigorous rigorously apply dry and kiss principles 
+in all code. So most of it's pretty high level but rules are are very important. 
+Now when you create a project rule it creates it in your uh in your file structure. It'll be a folder called I 
+believe curse.cursor cursor and then a rules folder. It used to be a single file called cursor rules, but that's 
+been deprecated, but you can still use that. It still works. And then indexing. 
+This just shows that 100% of my codebase is indexed. Um, so basically it sees your whole codebase, but again add the 
+context if you want to focus on something specific and your open tabs will be in your context. So no need to 
+add those manually. All right. So that's kind of just the the gist of of every everything and how it works. So now what 
+I want to do is give you a couple different examples. I'm going to start with just using cursor with an existing 
+project. So let's start that. All right. So as I mentioned, there's different levels of of AI assistance that you can 
+use in your projects. Anything from using it to write every line of code to 
+you just using a little bit of tab completion, using it to ask questions and learn. And that's the way I would 
+suggest using it if you're a beginner, not just a beginner to to programming in general, but to a specific language or 
+framework or or anything you're using. So that's what I want to show you first is to use it in an existing application. 
+So I have this shopping cart UI and this is just a very simple project from my React course. It's not an e-commerce 
+platform or anything. It's just some products that you can add to your cart. And I I basically used it to show how to 
+use the context API because as you can see there's a context and there's an add to cart function in that context. And 
+what I want to use tab completion to do is to make it so we have a quantity 
+selector that will pass a quantity in here instead of just adding one to it, which is what it's currently doing. So 
+let's run the project. I'm going to open up my terminal. It uses JSON server. So, I'm going to say run JSON- 
+server. And then I'll open up another tab 
+and let's do npm npm rundev. 
+And then I'll open that up. Okay. So, this is what it looks like. We just have some cards with some products. 
+This is the cart right here. And if I click add to cart, gets added. And I can click multiple times and add multiple 
+quantities. But like I said, I want to have a a a quantity selector. Basically, a button to to increase or decrease the 
+quantity. All right. So, let's do that. I'm going to jump over to components product card. And I'm just going to put 
+my my cursor here. And you can see it's recommending use state import use state. 
+It's also recommending to add uh the quantity as a state, which is what I 
+want to do. So, I'm going to hit tab. It'll accept both of those. Now, it's going to keep going. So you see this tab 
+to next move. So I can either hit it or I can scroll down and I'll still see I'll see right here tab to jump here. So 
+I'll do that. And then the recommendation is to pass the quantity into the function. So I'll accept that. 
+All right. Now there's no quantity buttons here. So I'm going to click above the add to cart button and it 
+should suggest. So it's suggesting an opening div. I'll go ahead and accept that. Now it's accepting or sorry it's 
+suggesting a button with an on click to set the quantity to to minus whatever it 
+is. So the decrease button I'll accept that. Then it's suggesting the span 
+which is going to show the quantity and the the button to add to the quantity. So I'll accept that. Now it's showing 
+the closing button and the closing div. So I'll click that tab to wrap it up. And now we should see the buttons. So, 
+I'll go ahead and go to the the browser here. And now we have these quantity 
+buttons. All right. And I didn't write one line of code. Now, these aren't going to work just yet. If I have it to 
+three and I hit add to cart, you'll see it's only one. That's because this add 
+to cart, even though, you know, we're passing a quantity in, it doesn't accept that. So, what I want to do is go to 
+that function, which is in this, it's in the context coming from use cart. So, 
+I'm going to commandclick that. go to that file. And now notice it says tab to next move. So if I come up here, it says 
+tab to jump here. So not only does the tab follow me, you know, through the file going to different lines, but it 
+follows me across multiple files. So I'll hit tab. And now it suggesting that I add the quantity. I'll accept it. Now 
+right here, another one's popping up. And you can't see that, but it says tab or whatever. It says tab to to go here. 
+I'm going to do that. And what it's going to do is get rid of that one. And it's going to use that quantity that's 
+passed in. Okay. So now I'll save that. We'll go back to the project. I'm just 
+going to clear the cart and I'm going to select three of the headphones. Add to cart. And now you'll see three times 
+$59.99. Okay. So we now added that functionality. And I didn't write any 
+code, but I did see exactly what it did. So this this way of using AI is much 
+different than just saying, you know, add the add the quantity buttons. I mean, you could do that and then look at 
+the file, but this shows you everything. So now I want to show you the inline edit, which is also very helpful. So 
+let's say now that we added those buttons, we don't like the look of them, right? So let me just make this a little 
+smaller. So we don't like the look of them. So I'm going to select the div 
+that wraps those buttons. Right? So I want to select this whole div and the two buttons and the quantity display. 
+And then I'm going to hit you can either click this quickedit or command or control K. And then this input is going 
+to pop up and I'm going to say can you style the or can you style um this area 
+better? And then you have options. You have edit selection, so that's whatever's highlighted. You have edit 
+full file if you wanted to look at the full file. Quick question, so if you just had a quick question, which is 
+which is great for learning, and then send to chat, which is just going to put what whatever you put here is going to 
+go to the chat. So I want edit selection. And I'll hit enter or click send. So it says generating now. It's 
+going to make the changes and give me the diff. So anything that is gone that 
+it gets rid of is in red. Anything it adds is in green. So you can see it added the class of justify center gap 
+three and margin top four. And then it added a bunch of classes onto the button. Now you can if you don't want 
+this the suggestion or the change, you can just hit undo or you can hit keep to 
+keep it. Usually there's a keep all button so you don't have to go through and click all these. Okay. Now let's 
+save it. Let's go back. And now you can see that it's styled differently. It's in the middle. It has rounded buttons. 
+Okay, just make sure it still works, which it does. It added three. So, that's inline editing. Now, let's uh 
+let's use inline editing for some other things. I'm just I'm not going to make any selection. And I'm going to hit 
+command K. And then uh I don't want a selection. 
+So, let's just go like right here and command K. All right. All right. So, 
+it's just it's saying edit selection no matter what. But what I want to do is edit full file. Okay. And then I'm going 
+to say can you uh can you add we'll say area 
+attributes to the elements 
+in this file. Okay. Okay. So now it's going to select the whole file and look at it. 
+And there we go. So it shows me the difference, right? So what in red is 
+what it gets rid of, green, it's what it adds. I'll click accept. And then it it accepts all of those. I don't have to go 
+through and hit keep. So now if we take a look, we have like area described by, 
+we have uh let's see, Arya label. So it went ahead and added those accessibility 
+attributes. So let's say we want to add another piece of state. Let's do a hover. So a card hover. So I'll hit um 
+enter. Put my cursor here. Actually this is this is suggesting an is added which 
+we could do this. So basically it'll say added to cart if we clicked if we 
+clicked on the add to cart. So I'll go ahead and accept that. And then it says tab to next move right here. Going to 
+hit that tab. And then it's going to add a set is added to true. Okay, so this 
+popup is what it it'll it'll add if I hit tab again, which I'm going to. And then it says tab to next move again. 
+Brings me down here and shows me that it's going to add a turnary and show added to cart if that is added is true. 
+So I'll hit tab to accept that. Okay, let's save it. Let's go back here. Let's click add to cart. And now it says added 
+to cart. So now I want to add a hover effect. And I could do that in in a 
+bunch of different ways. I could use inline editing. I could just use tab completion, but let's use the the chat 
+interface. So I'll say um and this this is in context. You can see right here 
+one tab. So my product card file is in the context. So, I'm going to say, can 
+you can you make it so there is a we'll just say an effect 
+uh an effect on the cards 
+when hovering. Okay, so this is similar to using inline 
+edit. So, it should show me the the diff. 
+So it shows me which cut which um file it's working on. So product card 
+it's applying and now it shows the diff. And then there's a keep all button. So I'm going to hit that and then let's 
+save it. And also it gives you a summary of what it did. So card container 
+enhance shadow on hover. It shows me exactly what it did. So pay attention to that. Don't just randomly add stuff and 
+and let it do all the work. learn from it as you're doing it. So now if I hover over these cards, then I get that that 
+zoom effect. Okay, so those are the different ways that you can use AI to enhance your your 
+coding experience, but you can still, you know, still know what you're doing. And another great way to use it is to 
+just ask questions. So, for instance, if I want to go to the context and let's 
+just grab the um the add to cart. Actually, let's we'll we'll take the 
+whole provider. So, I'll take the provider here 
+and I'm going to say quickedit or or command K and I'll say can you 
+can you explain what this provider 
+function does. Okay. And then I'm going to select I'll just keep edit selection or not edit. 
+Sorry, I don't want to edit selection. I'm not editing anything. It's a quick question. 
+So it'll answer me right here. So the cart provider function creates a React context provider for a shopping cart, 
+initializes the cart from local storage, persists cart changes, provides functions. All right. Okay. And then I 
+can keep I can add a followup and keep asking it if if it's not clear. And then I could do the same thing over here in 
+the chat interface. So you can do it in in either area. All right. So that's pretty much what I wanted to show you 
+with an existing project. So now let's jump in and do some some higher level stuff and a little bit of vibe coding. 
+All right. So we looked at how to kind of gradually use AI in cursor into an 
+existing project. Now we're going to do something more highlevel and do some vibe coding. And it's going to be 
+something really simple, a SAS landing page with uh an interactive calculator. 
+And we're just going to kind of oneshot it. If this were a more in-depth project, then I would do a lot more 
+planning. Um I think that since we don't have to like write boilerplate and and a lot of time is freed up now with AI, if 
+you if you're using it, then put that that energy into planning, into structuring everything out, you know, 
+your database models, your layout. So you want to really kind of up your your 
+project management skills. But let's go ahead and just put we're this is really simple. So we'll say create 
+uh create a say landing page 
+for a SAS product with an interactive 
+calculator. And let's say add a hero section 
+features testimonials 
+and say add a pricing uh pricing slider 
+that updates costs. and we'll say based on based on number 
+of users and other resources and I'll say use CSS animations 
+um what else create or we'll say make it responsive 
+responsive with a simple hamburger menu 
+I notice that sometimes it over complic complicates just like hamburger menus and it over complicates vanilla 
+JavaScript a lot in my experience. So, I'm going to say um keep we'll say keep 
+the the JS very simple, clean, 
+and readable. And I'm going to specifically say do do 
+not uh overengineer 
+Okay. Um, what else do I want to put? I'm going to say use use only 
+HTML and I'm going to say plain CSS because it will it might use Tailwind if 
+I don't and vanilla JS. 
+And I think that's it. Yeah. So, let's try that out. Very basic prompt. Uh 
+again, if it were a more serious project, I might put that through chat GBT or Claude AI first and then have it 
+create uh something that's more, you know, better formatted and just more in-depth. But this is something very 
+simple and and I don't want this video to be, you know, three hours long. All right, so let's see what we got 
+here. I'm just going to open it up first and take a look. So I'm using live server. So cloud scale, scale your 
+business to the cloud. Got some cool little animations here. API, DB, AI. So, 
+it looks like a legit SAS landing page. Why choose Cloud Scale? I like that. I 
+like these effects. So, those are the features. We get the calculator that I 
+asked for. All right. So, very simple, but I think it's clean. I think it looks nice. I mean, I might like decrease the 
+spacing here and do some small little adjustments, but I'm not going to do that in this video. Uh, let's test the 
+the calculator. So, we got number of users. As I scale that up, you'll see the price goes up. Storage, bandwidth. 
+So, that will all cause the price price to go up. Now, I'd like to have a toggle here so that it would show maybe a 
+savings if you were to pay annually versus monthly. So, that's maybe that's something we can ask for. Uh, let's see. 
+Get started. That has a cool effect when I click it. So, let's um let's check let's check 
+mobile. So, we got Okay, that's that's fine. 
+Little hamburger menu and everything stacks. 
+So, yeah, this actually looks really good. I've generated quite a few things like this and this is one of the better 
+ones. So, let's um yeah, let's let's ask for it to add the annual option on the 
+calculator. So, I'm going to go back to cursor and we're just going to keep all here. 
+And let's say, can you add a toggle switch 
+on the calculator that will display 
+monthly versus yearly pricing? 
+And let's save them let's say 20 uh 20% 
+if if they pay excuse me yearly. 
+And while it's doing that let's just take a look here. So the index the the HTML is usually pretty good with this um 
+using you know semantic tags and all that. So pretty simple pretty straightforward. The CSS 
+again just got a reset. We got our containers typography. I would have liked to have the colors in in in custom 
+properties. That's something we could ask for, but uh at first glance just 
+looks looks fine. And script.js. So we get our DOM content loaded. We have a 
+function that initializes these functions, the hamburger menu, the pricing calculator, and so on. 
+Um, this just toggles the the active class on the on the menu. 
+Close the menu when clicking on the nav links. Close menu when clicking outside. 
+We got our pricing calculator initialization. So, it's just grabbing all the DOM elements and putting them 
+into variables. We have our rates object. 
+Looks like it just added some stuff here. So, anything in the green it just added. Um, just going to keep all. So, 
+we get our rates object. So, you can easily change this if you want, you know, more than $5 per user or per 
+storage, whatever. Update pricing. So, this will do the calculation and then 
+update that pricing based on that. So, looks like it just added this stuff, 
+the is yearly, because I just asked for that. We'll check that in a minute. animate value. 
+So, scrolling animations just kind of adds and removes classes. We got an 
+inter uh uh intersection observer smooth scrolling 
+create ripple. So, that's that effect that get started had um as a ripple effect. 
+Yeah. So, some of this is probably overkill with the animations. But uh overall I think it it it looks 
+all right. But let's check that switch. So we got monthly. It's at 85 right now. If I hit 
+yearly, wait. Yeah, monthly 85. Yearly 
+it would be 816. But I'd like to see the monthly rate if I pay yearly. Does it show me 
+that? Well, it shows the yearly savings, I guess. Um, yeah, I'd like to show the month. 
+So, let's go back here and let's say, can you also show 
+what what the monthly 
+price will be if paid 
+uh annually? See what that does. 
+Okay, so let's check that out. So, let's see. We got monthly 85. If I hit 
+yearly, so now it shows me the effective monthly cost would be 68 versus 85. All right, 
+perfect. So, yeah, this looks pretty good. There's not much I'd change in terms of 
+of the design. So, a lot of times what I'll do is um is 
+have a change document that will just update as I make changes. So why don't 
+we do that? Let's say can you can you create a changes I'll call it 
+changes.md file that will 
+that will track we'll say track any um major 
+major changes and features features that we make 
+and add the changes that we already made. 
+All right. So, looks like it added the changes file. So, uh let's see core 
+features implemented hero section navigation and mobile menu. So it looks 
+like just the initial features that it added modern CSS animations and then 
+here new features added monthly verse yearly billing toggles. So it's good it 
+log that the yearly pricing with 20% discount enhanced pricing UI 
+technical improvements. Okay, so this should keep going as you work and it's nice to just have a a 
+place where you can see everything that's been changed since your initial generation. Uh, and of course, you know, 
+you're using git and so on, but this is it's nice to have just a single file as well. So yeah, that's really all I 
+wanted to do is just give you guys an example of generating something and talk a little bit about the workflow. And we 
+could even do an uh Lighthouse report and see what kind of scores we get for performance and uh what else? 
+Accessibility. I think it does SEO. 
+All right. So pretty good scores. 91 performance, 92, 96 for best practices. 
+SEO is 90. I mean, we could try to improve them a little bit. You could actually take a screenshot maybe of this 
+stuff right here and uh and you could put that in the context. That's another thing you can do is you can actually 
+load images in here. Uh you could even put an image of a layout and ask it to to to replicate it with HTML, CSS, 
+JavaScript, whatever. But yeah, I think that I'm going to stop here as far as this project goes and then we'll jump 
+into uh we'll jump into creating a Nex.js application. So last thing I want 
+to do is generate a Nex.js JS project and we're going to do something simple cuz I'm you know trying to fit all this 
+in one video and we're going to create a simple split uh split view resumeé 
+editor where we have a form on one side to add our information add our our experience and then create a markdown 
+resume on the other side and if we have time we'll add like PDF export but for 
+for now it's going to be pretty simple and what I'll usually do for a larger project is create this project d-context 
+text MD file and just put in basically my my vision of the project. And this 
+one is very simple. Usually it'll be a lot more than this, but this is a really simple project. So I'll put the goal. So 
+build a clean split screen resume editor with live preview. The text stack is next TypeScript and Tailwind React 
+Markdown for preview and local storage for persistence. Then we have some quick rules. So use TypeScript interfaces for 
+all data client components for forms and server components for display arrow functions. Keep it simple and focused. 
+Have a modern look. Ask to manually test code after each feature. And then I just 
+um you know mapped out the the resume data type which will be name, email, phone, summary, experience with some 
+other fields and then skills. So uh the layout structure left side 
+will be the form right side will be the preview split 50/50 clean professional styling and then key features real-time 
+preview updates clean form with proper spacing etc. So I'm not going to put 
+this in the prompt. What I do is put this in the root and then in the prompt I'll tell it to look at this in the 
+context. So let's uh let's go ahead and open up cursor 
+and I have an empty folder called markdown editor and then what I'm going to do is is generate a new nex.js 
+project using create next app. Now you could go up here and say create me a 
+nextjs project with tailwind 4. But when I do that it seems to have get something wrong. When you do it yourself you have 
+no margin of error. You know exactly what you're getting. So I would always suggest just gener generating the boiler 
+plate on your own. So I'll say npx and then let's say create next- app and 
+let's do at latest and then dot because we want it in this directory. And I'm going to say yes to all this 
+eslint typescript tailwind um source directory app router turboac and no to 
+the import alias changing that. Okay. Okay. And then while that's going 
+on, I'm going to take my project context that I just showed you and move that over to the root. 
+All right. And then I also have rules that I use for Nex.js and TypeScript. So 
+this is just, you know, best practices, app router patterns, um, React 19 
+optimization. So it doesn't use use memory or use callback because the compiler does that. Um, component 
+architecture, data fetching patterns. It's just a standard file. Um, and you can go to cursor.directory. And there's 
+tons of rules for TypeScript and and next. But I'll just go ahead and um, how 
+do I want to do this? I guess I'll just copy this. And then I'm going to go to 
+uh, file. Let's see. Not file. Cursor settings. Cursor settings. We'll go to 
+our rules. And this is these are going to be project rules. So right here, I could say add rule. And I'll call this t 
+uh ts- next. And then you can apply it manually, 
+meaning you tell you prompt and you tell it to use it, or you can do apply to specific files or always apply. I like 
+to do apply intelligently, which lets the agent decide when it's relevant. So we'll do that. And then I'm just going 
+to go ahead and paste in uh what I just showed you. All right. So I'll save that. And now we 
+have those rules. and it's going to create this dot dot cursor folder and a rules folder inside of it with that file 
+which has an MDC extension. Okay, so now that we have the context, we have the rules, we have the Nex.js 
+boilerplate, we'll go ahead and run the server. So, npm rundev. And this is just my way of doing it. 
+There's a million ways to do it. You might find uh a different way, you know, something you like better, but 
+everything in this video is pretty much just how I like to do it. And obviously I'm pretty new to it. I mean, everyone 
+is really. So, we got the Next.js boilerplate up and running. Now what 
+I'll do is come over to the prompt and I'll say uh take a look take a look at 
+and then we can use the at symbol and then project context file and I'll say 
+let me know if you we'll say if you understand 
+the instructions or something like that. You can phrase 
+it however you want. So it gives me the project overview, key requirements, technical guidelines. So sometimes this 
+is easier than than writing the prompt. Oh, you just create your context, you tell it to look at it, and then you go 
+from there. So I'm ready to start building this resume editor. Should I begin by examining the current project 
+structure and then implementing the core components? I'll make sure to use Tailwind 4. So I'm going to say I 
+probably should have put this in the context. I thought I did, but I'll say I already I already generated 
+the app with Tailwind 4. So, no need. Let's Let's 
+start to build out the layout and 
+components. Okay. So, it's going to examine the 
+current project, which is just a, you know, boilerplate. All right. So, let's see. So, it's going 
+to install React Markdown, create the resumeé interface, build the split view layout, create the form components, and 
+create the preview component. So, that sounds like a good plan. Let's go ahead and run the React Markdown install. 
+Now, let me create the core components. First, I'll create the RSé interface and types. So, it's going to create the 
+TypeScript file. If we take a look at that, we have a ré type with these fields. experience will be an array of 
+experiences. So this type here you get res uh resume form data. So I'll just 
+say keep all to that. And you don't have to approve them like see the check mark. I can I can reject 
+the changes or I can hit the check mark. But even if you don't hit the check mark, it's still going to approve it. 
+So now let me create the components directory and the resume form component. and you can like you know check things 
+out as it's as it's building it. So this will be a client component because it's going to use hooks. You can't use hooks 
+in in server components. And let's see got our state for the form 
+data. A use effect to check if it's in local storage. 
+Save data to local storage when when the form changes. Update your experience. So we should be 
+able to add multiple experiences. Here's the form, the function to do 
+that. You'll be able to remove an experience, update your skills, 
+personal information. So, pretty simple stuff. 
+And you're going to see errors and and and it's going to stop working. Like, it's probably broken right now. Well, no, it's not. But you'll see errors and 
+stuff because it's in the middle of creating files. A file might be half created. So, if you try to load it, 
+you're going to see an error. Just make sure that you wait until everything is done before you actually try it out and 
+test it because it's, you know, it's still going now. So, I'm not going to test it yet. 
+But, I mean, this doesn't look bad. You know, we got our split view, which we asked for. We get the live preview. 
+Hopefully, that works. Got the form. We got uh an experience. So, little module 
+to add experience. Add skill. 
+Now I have it so it'll run npm run build very frequently because I don't want it 
+to I don't want to have any weird TypeScript errors. I don't want to have linting errors. I don't want to suppress 
+them. So I just want to make sure everything is nice and clean. 
+Make sure it all passes. So it looks like there's got a small issue. 
+So it'll it'll automatically try to fix those issues. And now it looks like it passed. So the build is successful with 
+a minor eslint warning. Let me fix that quickly. 
+And it's going to check again. So it'll fix it or try to fix it and then check it again to verify it. 
+Okay. So let's see. Resume editor complete. So it basically created our 
+what we've asked for so far. We got the live preview, the form components, the split view, the um local storage, modern 
+UI. So, let's test it out. Come over here and just going to Whoops. So, this 
+will happen often, this internal server error, just because things are happening so fast, and sometimes you just need to 
+uh to refresh the server. So, that's what I'm going to do. 
+And then once it refreshes, you should have no issues. It should just reload. 
+Sometimes it takes a second. All right. So, let's say John. And you 
+can see that as I type, it's giving me a live preview. I should probably put my full name or or a full name. John Doe. 
+Let's say Johngmail.com 
+555. So, the the text in the input is super light. I can't even see it. So, we'll 
+have to fix that. Uh, actually, you know what? I have a form filler. I'm just going to use that. So, I'm going to go 
+ahead and just fill these out. So, and it added an experience. I know you can't really see that here. Um, now if I want 
+to add another experience, I can click that and it has another box. So, I'll fill that out. Now, I have two 
+experiences. And then skills. Looks like it's going to be just commaepparated values. Again, 
+I know you can't really see the inputs, but let's see if I do JS and then PHP. 
+Oh, wait. No, it's not. I'm sorry. It's not commaepparated. We have a skill button here. So, I'll say JavaScript 
+add skill. All right. So, this is cool. So, we got PHP add skill 
+um I don't know CSS. Cool. And we can delete them. So, if I click the delete, that goes away. If I 
+click the remove on the job experience, that goes away. But let's add a couple. 
+Let's add it back just to have something. Okay. And then it should stay. If I 
+refresh the page, it stays because remember it gets saved to local storage. In fact, we can check make sure check 
+that. So, local storage and you can see resumeé data. So, all of our data is 
+getting saved. Now, this obviously doesn't look very good. I mean, you're not going to go 
+apply to a job with this, but it gives you an idea of how this works. Right now, I do want to make the text so we 
+can actually see it in the form. So, I'll I'll just say that the form input 
+text is I'll say way too light. 
+Please darken. And that's something that's really 
+simple. So, that should just should be pretty quick. 
+Yep, there we go. So now this is docker. 
+Yep, this one summary looks good. 
+So I mean you can imagine you could you could make this you could add a ton of features to this. So so you can add 
+multiple résumés um obviously PDF export maybe send to employer or something like 
+that. that you can have authentication with with Google login, GitHub login, 
+maybe even have premium features and and charge people for those extra features. 
+So, why don't we try one more thing? Why don't we try adding a PDF export? So, I'm going to say add a PDF export for 
+the resume. And it'll probably use a package like um JSPDF, I guess. 
+HTML2 canvas. Not sure if I've used those. 
+So now we have a utils folder with PDF export.ts. So we're using those two packages. We 
+have our export. Looks like this is all the styling for the PDF. 
+Adding it to the canvas. So we'll see how it looks. It might look 
+like crap to begin with, but you got to, you know, work through it. Um, the symptom tracker that I'm creating, it it 
+generates health reports, and it took me a long time. It took me like like three 
+or four hours to get the the PDF looking decent. It just looked horrible at first. That's what happens with a lot of 
+these packages. You really got to tweak them. So, now it's going to run npm run build. 
+And I know it's still working, but I'm just going to see. So, we do have the export PDF now. I don't want to try it 
+though until this is completely done. Okay, so feature has been added. We're 
+probably going to get yep, internal server error. So, that's no problem. Just uh just restart the server. 
+So, it says the export button will now appear on the top right. Generate professional PDFs. 
+So, let's try that out. I'm going to refresh this. 
+All right. So, we got this Michelle uh Jacobson get some experience. Excuse me. 
+Let's export. So, we got the download. Let's open the PDF. 
+And there we go. Actually, it looks the exact same really. I mean, there's some text over here, so you might have to mess with that. um probably within that 
+excuse me within that utility file but uh but the you know PDF export works 
+perfectly. So you just work at it you know you just keep going and just keep asking 
+questions try to get a feel of the code and try not to just let it snowball like 
+I mentioned before and and you know get all this technical debt um you want to kind of understand what's going on. So 
+that's it guys. Hopefully you enjoyed this and and learned something from it, even if it's just a little bit of, you 
+know, how to use your how to create a workflow when you're using AI. Um, all it obviously I will do some some 
+vibecoded projects, but obviously that's not going to be the main focus. The main focus of the channel is always to to 
+teach people how to code. So that's it for now. Thanks for watching and I'll see you next

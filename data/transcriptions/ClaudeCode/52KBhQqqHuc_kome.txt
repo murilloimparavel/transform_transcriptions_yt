@@ -1,0 +1,332 @@
+Okay, then my friends, in this lesson, 
+we're going to talk about something 
+called slash commands, which I'm just 
+going to call commands from here on out 
+because it's much shorter. And we're 
+also going to make a custom command as 
+well. So then, we've already seen and 
+used several built-in commands that 
+Claude Code gives to us out of the box. 
+And we've done that by typing a slash, 
+then whatever the command name was, for 
+example, clear to clear the context, or 
+initialize 
+a claw.md file. Now if you just type 
+slash on its own then you're going to 
+see a list of all the available commands 
+that come with claude code and you can 
+key up and down to go through these. So 
+we've got add dur to give claude access 
+to another working directory which in 
+essence it allows multiple repository 
+development then from one location which 
+could be useful if you have related 
+projects like a backend and a front end. 
+We've got forward/ aents for managing 
+sub aents which we will see later on in 
+the course. There's clear and compact 
+down here which we've used already. 
+There's a model one which if we use 
+allows us to choose which model we want 
+to use. I've got Sonic 4 selected at the 
+moment. And also you can escape these 
+screens by just hitting the escape key. 
+There's also a permissions one somewhere 
+which we can use to add permissions for 
+different tools in Claude Code for this 
+project. And that adds those permissions 
+to the local settings file for you when 
+you set them up this way. I normally 
+just manually add them myself. But 
+anyway, I'm not going to read all these 
+different commands now because there's 
+way too many and we will be using some 
+of them in future lessons. But 
+definitely take a look through and have 
+a little play around with them. The 
+thing I'd like to focus on in this 
+lesson is making a custom command which 
+we can add to this list. And we would 
+make a custom command for common tasks 
+we might perform in the project. For 
+example, in this project, I might be 
+making a lot of UI components. So I 
+could make a command for generating 
+those components which includes a 
+detailed prompt. Any context needed and 
+any other specific details I can pass to 
+the AI model. Then whenever I need to 
+make a new UI component, I can just use 
+that custom component command to do it. 
+So let's give this a shot. The first 
+thing we need to do is make a commands 
+folder inside this.claw folder. And if 
+you don't see that claw folder already, 
+you can go ahead and make that too. Then 
+inside the commands folder, we can make 
+a new markdown file called whatever we 
+want the command to be named. For 
+example, I'm going to call it UI- 
+component.mmd. 
+All right. So now inside this file, we 
+can give Claude code whatever 
+instructions that we want to make a new 
+UI component. So I could tell Claude 
+where the file should go, the naming 
+convention, any component variants I 
+want, how to test the component, etc. 
+For now, I'm just going to paste in a 
+simple set of instructions which tells 
+it to make a new single UI component in 
+the components folder and then in the UI 
+folder. And I say that the component 
+should be a functional component with 
+the name in Pascal case. I'm also 
+telling it to add the following variants 
+and sizes for the component using the 
+colors from the theme variables in the 
+CSS file. And notice how I'm using the 
+at sign to load in another file as 
+context here. You can do that in these 
+custom uh custom commands. Then I tell 
+Claude to make a test file for the 
+component as well. And I want it to run 
+the test until they all pass. Finally, I 
+ask it to add the component to the 
+preview page so that we can preview it 
+in the browser when we're done and not 
+to add it anywhere else in the project 
+because sometimes Claude can get giddy 
+and it wants to use this new stuff 
+everywhere else, too. So, by adding 
+this, it's just going to get added to 
+the preview page. And all this, by the 
+way, is just like a really big prompt. 
+When we use a custom command, claude 
+code essentially pulls in this markdown 
+file and it uses it as a prompt. All 
+right, so let me close this file. And we 
+also need to restart a new Claude 
+session for it to pick up on this new 
+tool that we've just created or this new 
+command rather we've just created. So 
+exit out of the current session, then 
+start cla back up again. All right. So 
+now if we do forward slash, we should 
+see the new command that we just 
+created. this one right here, UI 
+component. So, I'm going to tap on that 
+and then I'm just going to press enter 
+to run this command. And notice though, 
+nowhere in the command did we say what 
+kind of UI component to make. So, it's 
+basically just handing the reins over to 
+the AI to make whatever component it 
+sees fit. 
+All right, so we can see that it's 
+decided to create a card component. So, 
+let's go ahead and let it do this. If 
+you wanted it to do something different, 
+you could say no and tell clog what to 
+do differently. We're just going to 
+press yes and don't ask again for make 
+the commands in this project. 
+Okay. And we're going to allow it to 
+make these changes. 
+And now it wants to run this bash 
+command to test out the component. 
+Okay, so it looks like it's all done. 
+It's created the card component, the 
+test file. It's got five variants, three 
+sizes, and all the tests have passed. 
+It's added the preview to the preview 
+page as well. Let's just check over here 
+that everything is added before we 
+preview this in the browser ourselves. 
+So, if we go to UI, we can see the card 
+folder and the card file over here. So, 
+this is the component. And again, I 
+would normally just go through this 
+thoroughly, make sure it is coded how I 
+would want it. Same for this file. any 
+content that Claude generates, I would 
+just have a look through. Then if we go 
+to app and then go to preview, we can 
+see we've got changes in the page file. 
+So somewhere in here, there should be a 
+new card component probably right at the 
+bottom. So let's scroll all the way 
+down. 
+It's a big file now, but there we go. We 
+can see the different variants of the 
+card component. So now let's see what it 
+looks like in a browser. All right. 
+Right. So, I'm just on the preview page 
+and if we scroll right down, we should 
+hopefully see these cards. Yeah, we do. 
+So, we can see these different 
+variations as well. They look pretty 
+nice to be honest. So, we've got 
+primary, secondary, success, warning 
+card, danger, and they've all got a 
+little hover effect as well, which I 
+quite like. We've got different sizes, 
+interactive cards. Wow, that's quite 
+nice. Uh, disabled card, uh, feature 
+cards with little icons on them. So, 
+it's done a pretty extensive job here 
+and I could easily see myself using 
+these kind of cards in this project. 
+Let's just check what they look like in 
+dark mode. So, let's click on this. And 
+if we scroll right down, yeah, we've got 
+dark mode variations as well. Awesome. 
+All right. So, that worked and it looked 
+okay. But currently, whenever we use 
+this command, we're getting a mystery 
+component. We don't know what it's going 
+to be and we're passing that decision to 
+cla code. Instead, when I use this 
+command, I'd like to specify exactly 
+what UI component that I want. So, for 
+example, I would say forward/ UI 
+component and then something like card 
+with maybe a brief description as well. 
+And we can do that using command 
+arguments. So, if we open up the command 
+file, I'm going to add this little 
+section at the top of the file. And 
+there's a few things we need to go over. 
+First of all, we've got this front 
+matter at the top of the file, which is 
+a markdown feature that lets us supply a 
+kind of metadata for the file. In this 
+case, we've got two properties inside 
+the front matter. Description, which is 
+what the command does, right? And an 
+argument hint to tell us what kind of 
+arguments are expected when we run this 
+command. Now, both of these are going to 
+show up in the chat interface when we 
+use the tool to remind us of what this 
+command does and what it needs. Next up, 
+I've added this new context section 
+where we instruct Claude code to pass 
+this dollar sign arguments variable to 
+get some values. Now, this arguments 
+thing is how Claude code captures 
+whatever arguments we pass into the 
+command when we call it. And it doesn't 
+matter whether we pass one, two, or five 
+arguments. They're all caught within 
+this single dollar sign arguments value. 
+In our case, I want to be able to pass 
+two arguments, a name and a summary of 
+the component we're making. So, we 
+somehow need to pass those two arguments 
+from the arguments value. Now, I've not 
+seen any official guidance on how to 
+pass multiple values from this on the 
+docs or anywhere else, but I found the 
+following method works really well. I 
+use square brackets to essentially 
+create variables with values where the 
+name of the variable is the thing in the 
+square brackets and the text on the 
+right is telling Claude code what to 
+store for this. This is actually how we 
+make reference links in markdown, but I 
+also find it works well for this kind of 
+thing. So, we're telling Claude code to 
+try and pass the arguments to find and 
+store these values, which means we can 
+then use them down here in the 
+instructions. 
+So, I'm now just going to highlight all 
+of this task part, delete it, and 
+replace it with a new instruction 
+incorporating those argument values. And 
+I still tell it to make a UI component, 
+but this time I tell it to use the name 
+and summary values. first for the folder 
+and file names, second for the component 
+name, and lastly I tell it to reference 
+the summary when making the component 
+itself. So now when we call this command 
+from claude code, we can pass in the 
+arguments which then get passed and then 
+used by the AI to come up with the 
+component using those values. Before we 
+do that though, we need to exit Claude 
+and restart it again because we made a 
+change to the command file. So exit out 
+and then fire it back up. 
+Okay, then. So now if I press forward 
+slash we can see UI component and it 
+tells us create a UI component in this 
+directory. I'm going to press tab on 
+this and you can see it's given us a 
+hint for the arguments it expects now. 
+So let's make maybe an icon component. 
+So it should be called icon. Then I'm 
+going to do a pipe to do the second 
+argument. And I'll just say an icon 
+component for showing icons with a 
+circular background. Let's see what it 
+does for that. And let's press enter. 
+All right, then. So, it's asking to make 
+edits. So, I'm going to select the 
+second option and press enter. 
+Okay, so it looks like it's done 
+everything. So let's close this and also 
+this and see what files it's created and 
+changed. If we take a look inside the UI 
+folder, we can see now we've got an icon 
+folder. We've got the test file and the 
+component itself. So we have the 
+variants that we can pass in the size. 
+We have the on click. We also have a 
+class name as well. They're the icon 
+props. Okay, let's have a look around 
+here. So, the child I think will be a 
+icon itself, I think. Let's have a look 
+what it's done inside the preview page. 
+Let's scroll right to the bottom where 
+the icons are. Yeah, it's added them. 
+Okay, so we have these little emojis 
+embedded into the icon. So, I guess 
+whatever icon we want, we would output 
+it here, whether it's an emoji or some 
+icon from a package that you might use. 
+All right. So, I'm just on the preview 
+page again and I'm going to scroll right 
+the way down. All right. So, we can see 
+these icons right here and they look 
+okay. I think instead of using emojis, I 
+would probably have used some icon 
+package. I would have preferred that. 
+And to be honest, that's something I 
+would have just gone back and told 
+Claude and it could have edited those 
+files again and it would have updated it 
+to make it work correctly as I see fit. 
+And that's the importance of staying in 
+the loop, looking what it's doing, and 
+not just accepting everything it does by 
+default. 
+And in fact, I couldn't help myself. 
+I've just been back to the code. I've 
+asked Cloud Code to change it and use an 
+icon library instead. And if we take a 
+look at these now, I'm hopeful that 
+they're going to look a little bit 
+better. If we go right down. Okay, there 
+we go. Yeah, that looks loads better. 
+We've got all these different variants. 
+We've got different sizes, interactive 
+icons. We've got action bars, different 
+ways we can use them. Yeah, they all 
+look loads better. Anyway, I think 
+that's enough on commands and custom 
+commands. And in the next lesson, we're 
+going to look at MCP servers.

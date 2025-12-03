@@ -10,9 +10,63 @@ load_dotenv()
 # Configura a API do Gemini usando a chave da API do .env
 genai.configure(api_key=os.environ["API_KEY"])
 
-# Inicializa o modelo Gemini usando a configuração do .env
-model_name = os.environ.get("LLM_MODEL", "gemini-1.5-flash")
-model = genai.GenerativeModel(model_name)
+# Cache do modelo válido
+_model_cache = None
+
+def get_available_models_simple():
+    """Lista modelos disponíveis."""
+    try:
+        models = list(genai.list_models())
+        return [
+            m.name.replace('models/', '') 
+            for m in models 
+            if 'generateContent' in m.supported_generation_methods
+        ]
+    except:
+        return []
+
+def get_model_instance():
+    """Obtém instância do modelo, criando se necessário."""
+    global _model_cache
+    
+    if _model_cache:
+        return _model_cache
+    
+    # Tenta modelo do .env primeiro
+    preferred = os.environ.get("LLM_MODEL", "").replace("models/", "").strip()
+    
+    # Lista modelos disponíveis
+    available = get_available_models_simple()
+    
+    if available:
+        # Se tem preferido e está disponível, usa
+        if preferred and preferred in available:
+            model_name = preferred
+        # Senão, procura flash
+        elif any('flash' in m.lower() for m in available):
+            model_name = [m for m in available if 'flash' in m.lower()][0]
+        else:
+            model_name = available[0]
+        
+        _model_cache = genai.GenerativeModel(model_name)
+        print(f"🤖 Modelo configurado: {model_name}")
+        return _model_cache
+    else:
+        # Fallback: tenta modelos comuns
+        for model_name in ["gemini-1.5-flash-latest", "gemini-1.5-flash", "gemini-pro"]:
+            try:
+                _model_cache = genai.GenerativeModel(model_name)
+                print(f"🤖 Modelo configurado (fallback): {model_name}")
+                return _model_cache
+            except:
+                continue
+        
+        # Último recurso: modelo padrão da biblioteca
+        _model_cache = genai.GenerativeModel()
+        return _model_cache
+
+# Variável global para compatibilidade
+model = None
 
 def split_text_into_chunks(transcription_text, max_chunk_size=10000):
     return [transcription_text[i:i+max_chunk_size] for i in range(0, len(transcription_text), max_chunk_size)]
@@ -45,7 +99,8 @@ def load_prompt(prompt_type="copywriting", output_language="pt"):
     return prompt_content + language_instruction.get(output_language, "")
 
 def interview_transcription_with_gemini(chunk, prompt):
-    chat = model.start_chat(
+    current_model = get_model_instance()
+    chat = current_model.start_chat(
         history=[
             {"role": "user", "parts": prompt + "\n\n" + chunk}
         ]

@@ -15,8 +15,108 @@ load_dotenv()
 
 # Configura Gemini
 genai.configure(api_key=os.environ["API_KEY"])
-model_name = os.environ.get("LLM_MODEL", "gemini-1.5-flash")
-model = genai.GenerativeModel(model_name)
+
+# Cache do modelo válido para evitar múltiplas tentativas
+_valid_model_cache = None
+
+def get_available_models():
+    """
+    Lista modelos disponíveis que suportam generateContent.
+    """
+    try:
+        models = list(genai.list_models())
+        available = [
+            m.name.replace('models/', '') 
+            for m in models 
+            if 'generateContent' in m.supported_generation_methods
+        ]
+        return available
+    except Exception as e:
+        print(f"⚠️  Erro ao listar modelos: {e}")
+        return []
+
+def find_valid_model(preferred_name=None):
+    """
+    Encontra um modelo válido, tentando o preferido primeiro.
+    """
+    global _valid_model_cache
+    
+    # Se já temos um modelo válido em cache, usa ele
+    if _valid_model_cache:
+        return _valid_model_cache
+    
+    # Lista modelos disponíveis
+    available = get_available_models()
+    
+    if not available:
+        # Fallback para modelos comuns se não conseguir listar
+        fallback_models = [
+            "gemini-1.5-flash-latest",
+            "gemini-1.5-flash",
+            "gemini-1.5-pro-latest",
+            "gemini-1.5-pro",
+            "gemini-pro",
+        ]
+        
+        for model_name in fallback_models:
+            try:
+                model = genai.GenerativeModel(model_name)
+                _valid_model_cache = model_name
+                print(f"✅ Modelo válido encontrado (fallback): {model_name}")
+                return model_name
+            except:
+                continue
+        
+        raise ValueError("Nenhum modelo Gemini disponível encontrado!")
+    
+    # Se tem modelo preferido, tenta primeiro
+    if preferred_name:
+        preferred_clean = preferred_name.replace('models/', '').strip()
+        if preferred_clean in available:
+            _valid_model_cache = preferred_clean
+            print(f"✅ Usando modelo preferido: {preferred_clean}")
+            return preferred_clean
+    
+    # Procura por modelos flash primeiro
+    flash_models = [m for m in available if 'flash' in m.lower()]
+    if flash_models:
+        model_name = flash_models[0]
+        _valid_model_cache = model_name
+        print(f"✅ Usando modelo Flash disponível: {model_name}")
+        return model_name
+    
+    # Se não tem flash, usa o primeiro disponível
+    model_name = available[0]
+    _valid_model_cache = model_name
+    print(f"✅ Usando primeiro modelo disponível: {model_name}")
+    return model_name
+
+def get_model():
+    """
+    Obtém o modelo Gemini configurado.
+    Cria o modelo dinamicamente para garantir que sempre use o valor atual do .env
+    """
+    # Recarrega .env para garantir valor atualizado
+    load_dotenv(override=True)
+    
+    # Obtém modelo preferido do .env
+    preferred_model = os.environ.get("LLM_MODEL", "").replace("models/", "").strip()
+    
+    # Garante que não está usando modelo antigo conhecido como inválido
+    if preferred_model in ["gemini-1.5-flash", "gemini-2.5-flash"]:
+        print(f"⚠️  Modelo '{preferred_model}' não é válido. Procurando alternativas...")
+        preferred_model = None
+    
+    # Encontra modelo válido
+    try:
+        model_name = find_valid_model(preferred_model)
+        print(f"🤖 Usando modelo: {model_name}")
+        return genai.GenerativeModel(model_name)
+    except Exception as e:
+        print(f"❌ Erro ao encontrar modelo válido: {e}")
+        # Última tentativa com modelo padrão da biblioteca
+        print("🔄 Tentando modelo padrão da biblioteca...")
+        return genai.GenerativeModel()  # Usa padrão da biblioteca
 
 
 class FrameworkProcessor:
@@ -106,7 +206,9 @@ Você é um especialista em extrair frameworks de implementação de conteúdos 
         max_retries = 3
         for attempt in range(max_retries):
             try:
-                chat = model.start_chat(history=[])
+                # Cria modelo dinamicamente para garantir valor correto
+                current_model = get_model()
+                chat = current_model.start_chat(history=[])
                 response = chat.send_message(prompt)
 
                 result = response.text.strip()
@@ -173,7 +275,9 @@ Você é um especialista em sintetizar frameworks de implementação.
         max_retries = 3
         for attempt in range(max_retries):
             try:
-                chat = model.start_chat(history=[])
+                # Cria modelo dinamicamente para garantir valor correto
+                current_model = get_model()
+                chat = current_model.start_chat(history=[])
                 response = chat.send_message(synthesis_prompt)
 
                 self.synthesis = response.text.strip()
@@ -224,7 +328,7 @@ Você é um especialista em sintetizar frameworks de implementação.
 - **Total de dimensões processadas**: {len(self.dimensions)}
 - **Timestamp da síntese**: {self.synthesis and datetime.now().isoformat()}
 - **Tamanho total do framework**: ~{len(final_document)} caracteres
-- **Processado com**: {model_name}
+- **Processado com**: {os.environ.get("LLM_MODEL", "gemini-1.5-flash-002")}
 
 ---
 
@@ -243,7 +347,7 @@ Você é um especialista em sintetizar frameworks de implementação.
             "metadata": {
                 "generated_at": datetime.now().isoformat(),
                 "language": self.output_language,
-                "model": model_name,
+                "model": os.environ.get("LLM_MODEL", "gemini-1.5-flash-002"),
                 "transcription_size": len(self.transcription)
             },
             "synthesis": self.synthesis,

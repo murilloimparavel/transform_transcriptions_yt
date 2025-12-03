@@ -1,0 +1,258 @@
+Let’s cover 10 pro tips for working with the 
+Cursor agent. So, I’ve got Cursor open and my   
+agent on the right. And the first tip is to use 
+Plan Mode. So, in the agent input, I’m going to   
+hit Command N to make a new chat. And then I can 
+hit Shift Tab to switch and toggle into Plan Mode.   
+Now, what Plan Mode can do is it can actually 
+go look at my codebase, research and understand   
+how my app is set up, and then help me create a 
+high-quality plan to implement a feature. So, this   
+is on my personal website. I’m going to say let’s 
+make a new page to show my top artists on Spotify   
+and I’m going to hit Enter. Now, I’ve already set 
+up Spotify in my app and I’m using it to display   
+the track that I last listened to on my homepage. 
+So, we’re going to see that it’s planning the   
+next moves here and it’s going to come back to 
+us with a few questions to help clarify what   
+the implementation’s going to look like. So, 
+it reads my current Spotify implementation.   
+It reads some of the code that I’ve already set 
+up and it’s going to help me figure out how I   
+would actually add this feature. So, let’s do, 
+uh, slash, we’ll do slash music and then we’re   
+going to do, let’s do top 10. Yeah, top 10 works. 
+Time range, um, let’s do all time and last three   
+months. Two buckets, sure. And then for displaying 
+what we want to show, we can do, um, use your best   
+judgment. I’m just going to see what the model 
+comes up with and we can change it and tweak it   
+from there. So, it’s starting to make the plan 
+and we see as it’s making the plan, it creates   
+a new Markdown file and it’s giving some details 
+on what needs to be created. It’s calling specific   
+components and files and referencing them in our 
+application. And it even makes some to-dos that we   
+can use to implement the feature. So, this seems 
+fine. We can just read through here. It looks   
+okay. If I wanted to make any changes, I could go 
+in here and say, um, we don’t need a brief intro   
+about music taste. So, we can get rid of that. 
+I’ll save the plan. The to-dos seem fine. Okay.   
+So, now if this looks good and we’re happy with 
+it, we can hit Build. And Build is going to accept   
+this plan. And then for our given model, which I’m 
+using Claude 4.5 Sonnet here, it’s going to go and   
+actually implement the plan. So, let’s let this 
+cook. Okay, so the model finished, but it actually   
+didn’t work. I tried to load the page and I got a 
+permissions error. So, I needed to reauthorize my   
+Spotify token to have the additional permissions. 
+So, I just pasted in the error I saw and now it   
+works. So, if I go back to my app, I now have this 
+list of my top artists. So, thank you Plan Mode. 
+The second pro tip I want to show is accessing 
+the context menu and specifically a feature at   
+branch. So, I’m going to go ahead and Command 
+Shift P, create branch, and we’ll call this   
+top-artists. And then inside of our chat window, 
+I’m going to make a new chat. And in this new chat   
+if you type the @ symbol. So, let’s just do that. 
+What you get is this menu with all these different   
+options. And one of them is get and specifically 
+at branch. So, on this branch, what I want to do   
+is review all of the changes and see if there 
+are any issues. So, I’ll kick that off. Now,   
+inside of that menu, there’s actually a lot 
+of stuff. I can just pull it up here. We have   
+files and folders. You can reference public 
+documentation, past chats, linter errors, uh,   
+all sorts of different things, especially 
+tagging in specific files or folders that   
+will go into the context. So, if you know, for 
+example, you’re going to use this Spotify file,   
+you can tag that into the context and put it in 
+the context window for working with an agent. So,   
+I find these get commands pretty helpful. 
+And it looks like the code seems pretty good.   
+We’re having the AI review the AI-generated code, 
+but maybe there’s one issue with the cache times   
+that are different. Nice. Okay, so overall 
+seems pretty good. That was pretty helpful. 
+The third pro tip I want to show is creating 
+custom commands. So, in the Cursor folder,   
+inside of here, I’m going to make a new folder 
+and we’re going to call it commands. And inside   
+of here, I can add in Markdown files as commands. 
+So, we’re going to call this one PR. And inside   
+of here, I can call this file whatever I want. 
+I can put whatever prompt I want in here. So,   
+we’re going to use this to make PRs. So, uh, 
+your job is to create a PR with a descriptive   
+title. Always use the GitHub CLI. Now, we could 
+add in specific rules or specific guidelines,   
+commit guidelines in here as well, but, um, let’s 
+also say if you haven’t already made a commit,   
+do that first. Great. So, we have this command. 
+Now, over here in the agent panel, I can do   
+slash and it’s going to show up as an option 
+as a custom command I can run. So, slash PR,   
+and we even see this little hover of what the 
+custom prompt here is. So, slash PR. Let’s run   
+that and see what happens. Now, my hope here is it 
+will use a shell command to use the GitHub CLI to   
+go ahead and first make a commit and then make a 
+PR. So, it’s going to check and get status here.   
+Great. We have some, if I go over to my source 
+control view, got some stuff on this branch,   
+uh, and some changes that we need to commit. So, 
+it’s going to go ahead and look at the changes,   
+try to figure out what the PR is about, 
+and then make this change for us.   
+Okay, so this just finished and I see I 
+have a link to my new pull request. Nice. 
+The fourth agent pro tip is that you can pass 
+images to the agent. So, we have our list of   
+top artists, but maybe we want it to look more 
+like the Spotify Wrapped. So, let’s copy this   
+image. We can go back to here and paste it in 
+so we can see what the image looks like here.   
+And we’re going to say make the top artists 
+and music page look closer to the image with   
+artist photos please. Now, this is not scientific, 
+but I think if you add please and thank you, the   
+models perform better. You are burning more energy 
+in the data centers, so, you know, there are some   
+trade-offs here, but we’re going to see if please 
+and thank you help us get a better response. So,   
+it’s going to go and make some changes to our 
+Spotify code to how it’s fetching the data for   
+the artist. So, we need to get the images as well. 
+And then it’s also going to update the top artist,   
+so this component that displays each kind of 
+element in the list. That makes sense. So,   
+it’s kind of cooking away here. And it probably 
+also needs to update the configuration to handle   
+these images from a remote URL. So, 
+we’ve got the Spotify images here. So,   
+it’s going to go and update that. That seems 
+right. Next config, uh, okay. I’ll keep that.   
+Seems good. And I think that’s everything. 
+Let’s go check it out. Uh, reload the page.   
+Okay. So, it was very honest to the image 
+where it’s got these big numbers kind of   
+like the Wrapped and we do have images. Um, 
+so, that’s not bad actually. Um, yeah. Yeah,   
+I can now tweak it from here if I want to make 
+it look even better, but it’s a good start. 
+The fifth agent pro tip is that you 
+can fork or duplicate chats. So,   
+let’s say I like what I have here, but I 
+want to try a couple different options.   
+I can keep all of the context I have so far 
+and I can click on this dot dot dot and go to   
+duplicate chat and then make some changes 
+from here. That’s one option. In general,   
+I try to recommend using the smallest number 
+of tokens in the context as possible. So,   
+maybe you want to do that. Maybe you want to 
+start from scratch. Either one are valid options. 
+The sixth pro tip is you’re going to want to 
+make sure you’re keeping an eye on this context   
+window gauge. So, this gauge shows that for 
+the 200k context window of Claude Sonnet 4.5,   
+we’ve used about 12%. Now, as this 
+conversation grows and grows and   
+grows and grows, you also have the option to 
+do a slash command in here, like summarize,   
+which is going to take your current conversation 
+and compact it down to the smallest, smallest bit.   
+And this is kind of a pro tip 6.5, but you want 
+to be very intentional about how you use that. 
+The seventh agent pro tip is that if you 
+want visibility into your usage in settings,   
+you can toggle usage summary from 
+auto, which will only show up when   
+you’re close to your limits, to always. 
+And you can see it down at the bottom.   
+I’ve used 38% of my usage limit. And 
+you can also see when that resets. So,   
+if you’re a person who’s trying to be very 
+cost-conscious, you can see that here. 
+The eighth agent pro tip is keyboard shortcuts. 
+So, you can use Command I to open up the agent   
+window and then Command Slash to change the model 
+that you’ve selected. So, maybe I want GPT-5 High   
+Fast or maybe I want Claude 4.5 Sonnet. I use 
+these two shortcuts all the time, but there   
+are a bunch of shortcuts you can configure 
+inside of the settings in any way you want. 
+The ninth agent pro tip is to start new 
+conversations frequently. So, in this past   
+conversation around the artist’s photos, I 
+used about 12% of the context window. Now,   
+something I see a lot of beginners do is they keep 
+this conversation going and going and going and   
+adding feature after feature after feature 
+here to the point where they’re running up   
+against the limits of the context window and the 
+quality of the model degrades over time as you add   
+more stuff into the context. So, I generally 
+try to recommend starting new conversations   
+for new features. And as a reminder, you can do 
+Command N keyboard shortcut to start a new chat. 
+The 10th agent pro tip is that you can actually go 
+back in time in a conversation with an agent. So,   
+we have our top artists here and maybe I decide 
+actually I don’t know if I like those numbers   
+that big. So, let’s make the numbers for the 
+rankings smaller. Sure. And we’re going to go   
+and kick off this change and we’ll see what it 
+ends up making. Now, if I decide, for example,   
+that I don’t like that change, I can just 
+go back here and see. They’re a little bit   
+smaller. Maybe that’s better. Maybe that’s not. 
+Uh, if I decide that I don’t want that change,   
+we’ll just let this finish. Great. 
+It’s done. I can go back to here. So,   
+I can click this button to go back to this 
+checkpoint. And it says, do you want to   
+discard all changes up to this? Yes. Let’s go back 
+here. And now we have our big numbers back. So,   
+this can be small changes or you can go very far 
+up in a conversation and kind of roll back. Now,   
+this is very helpful and I still also recommend 
+using and learning about Git. Git helps you   
+save those changes in a more persistent way. 
+So, you probably want a little bit of both. 
+Okay, I know I only said 10, but we’re going 
+to do a lightning round with some other really   
+fun pro tips. Did you know in settings you 
+can have the agent play a completion sound   
+when it’s done? You can also have it show 
+system notifications when it finishes or   
+if there’s some command that you need to give 
+permission to run. Pretty nice. Did you also   
+know you can ask the agent to generate 
+visualizations for your codebase? So,   
+I asked it to generate a Mermaid diagram of the 
+entire Spotify flow. And look at this. Look how   
+detailed this is. The user to app to the API 
+endpoints. How the OAuth flow works. What the   
+handoff is for access tokens and refresh tokens. 
+Pretty nice. Makes it easy for documentation. 
+All right, the final final one in our bonus 
+lightning round of agent pro tips is the new agent   
+layout. So, you can try this out in beta today. 
+It’s a new way of working and managing agents in   
+your codebase with all of your agents on the left 
+sidebar, your main conversation in the middle,   
+and then the diffs on the right. 
+This can integrate with your browser,   
+so it can read network logs, it can look at 
+the DOM, you can run terminals from here.   
+Everything that you love about the Cursor 
+editor, now redesigned for working with   
+agents. We’d love your feedback if you try 
+this out and stay tuned for the next video.

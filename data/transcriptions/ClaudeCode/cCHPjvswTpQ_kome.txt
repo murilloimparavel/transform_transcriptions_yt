@@ -1,0 +1,161 @@
+All right then gang, we have reached the 
+end of the series and I really hope 
+you've enjoyed it and maybe you're 
+seeing the benefit of adding Claude code 
+into your own development workflow. Now 
+I do want to end the course on a few 
+final thoughts, words of caution and 
+just a little bit of advice for using 
+claude code and also some shortcuts and 
+tips near the end of the video as well. 
+So first of all, and I think I've 
+stressed this throughout the videos 
+quite a lot already, always check the 
+code yourself. AI can make mistakes 
+sometimes, so be sure it's correct. 
+Don't automatically assume everything it 
+does is right. Checking the code 
+yourself also helps to keep you in the 
+loop, understand your code base, and 
+know how everything is fitting together. 
+And that's going to really help in the 
+future if you do ever need to do some 
+manual debugging or code edits. 
+Secondly, context is key when you're 
+using any kind of AI tool like Claude 
+Code. And I don't just mean bombard the 
+model with context about everything. I 
+mean be smart about your context. Keep 
+it focused, concise where you can, and 
+keep the context history lean where 
+possible to keep the model on track. 
+Don't be afraid to clear the context or 
+start a new session if it ever gets 
+bloated. And as a rule of thumb, I tend 
+to clear the context and start over 
+whenever I work on a new feature or 
+task. And finally, I would say don't 
+rely on AI to do everything for you. 
+Yes, it can be good as a coding 
+assistant and loads more things. I'd 
+probably compare it to maybe having a 
+junior or even a mid-level developer 
+working alongside you. But if you use it 
+too often and rely on it for every 
+single problem, it's going to turn you 
+into a lazier programmer who might not 
+learn new skills and even forget current 
+ones because you're not using them. And 
+on that same note, I would also say 
+this. A lot of coders right now think AI 
+is going to replace them. And I think 
+that's not true for several reasons 
+right now. I do think the way we code 
+will be different and AI will certainly 
+play a big role in whatever the 
+landscape looks like in the future. But 
+I don't think, at least not yet, it's in 
+any position to completely replace web 
+developers. And in fact, I think AI just 
+brings more opportunities to developers. 
+Think of all the new types of 
+applications and programs that are being 
+developed that incorporate AI. MCP 
+servers, agents, custom AI integrations, 
+even developing sites and APIs with AI 
+usage and security in mind. All those 
+things are now being developed and I 
+think that brings a whole new level of 
+opportunity for web developers to 
+specialize in. I also think because we 
+will be getting a whole sway of 
+applications built almost entirely using 
+AI. Unfortunately, there's still going 
+to be a big call for coders who can go 
+into the weeds, understand the code, and 
+manually work on it. And for all these 
+reasons, I think learning to code is 
+arguably more important now than it was 
+before. Anyway, now my pattern wisdom is 
+out of the way. Let's end on a few 
+shortcuts that we can use within Claude 
+Code to make life working with it a 
+little bit easier. All right, so first 
+of all, you can use the up and down 
+arrow keys to cycle through previous 
+prompts to see them if you want to send 
+a previous prompt again. Um, there's 
+another one. If you press escape, then 
+you can clear out the chat. Also, if you 
+go into something, say we use a tool 
+like or not a tool, sorry, a command 
+like MCP, you can always press escape to 
+exit out of these windows and it goes 
+back to the chat. Um, you can also use 
+the question mark to go into bash mode. 
+So now you can run bash commands. So for 
+example, I could say get status and it's 
+going to run that command for us. 
+Exactly. So it's on branch main. And you 
+can double escape. I think I might have 
+shown this in a previous lesson, but you 
+can double escape to go to previous 
+sections of the chats. So, I could go 
+back to this one if I wanted to, or this 
+one, and it's going to take me back to 
+that point in the chat, and it's going 
+to clear out any history beyond that. 
+So, if I press double escape now, then 
+you can see there's no chats after this 
+current one. And down here at the 
+bottom, there is this little hint here 
+that says question mark for shortcuts. 
+So, if I press question mark, you're 
+going to see some of those shortcuts 
+that we've seen as well. So this was the 
+bash mode I just showed you. This for 
+tools, this for file path for adding 
+context and this to memorize something 
+inside the claude.md file. Okay then my 
+friends. So that just about wraps it up. 
+If you enjoyed this series, please don't 
+forget to give the videos a thumbs up 
+and subscribe to the channel. Maybe 
+share the videos if you're feeling kind 
+as well. And please let me know in the 
+comments if you would like more Claude 
+Code courses in the future. I have 
+debated making a whole big master class 
+about claude code where we use it to 
+help build an entire application from 
+scratch. So let me know if that's 
+something you would like to see in the 
+future. Anyway, thanks for watching and 
+I'm going to see you all in the next 
+series. So then my friends, I really 
+really hope you enjoyed this series and 
+you learned something along the way. If 
+you did, please please please don't 
+forget to share, subscribe, and like. 
+That really means a lot. And if you want 
+to access all of my YouTube courses 
+without adverts, also get access to 
+premium courses and early access courses 
+as well, you can do at netinja.dev. 
+You can sign up for Net Ninja Pro, which 
+is just $9 a month and also half price 
+for the first month with this promo code 
+right here. And for that, like I said, 
+you get access to every course without 
+adverts, without YouTube adverts. You 
+also get access to exclusive courses not 
+found anywhere else. you get access to 
+my premium courses on Udemy and also 
+early access to all of my YouTube 
+courses as well. So, the link to this 
+page to sign up is going to be down 
+below. Again, I really hope you enjoyed 
+this series and I'm going to see you in 
+the very next one. 
+Heat. Heat. N. 
+Heat.
