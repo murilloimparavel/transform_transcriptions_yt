@@ -158,7 +158,7 @@ Tamanho da transcrição: 25000 caracteres
   "metadata": {
     "generated_at": "2025-11-26T10:30:00",
     "language": "pt",
-    "model": "gemini-1.5-flash",
+    "model": "gemini-2.5-flash",
     "transcription_size": 25000
   },
   "synthesis": "...",

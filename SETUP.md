@@ -56,7 +56,7 @@ pip install -r requirements.txt
    ```env
    API_KEY=sua_chave_gemini_aqui
    YOUTUBE_API_KEY=sua_chave_youtube_aqui
-   LLM_MODEL=gemini-1.5-flash-002
+   LLM_MODEL=gemini-2.5-flash
    USE_PROXIES=false
    PROXIES=
    ```

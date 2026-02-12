@@ -38,9 +38,17 @@ def get_model_instance():
     # Lista modelos disponíveis
     available = get_available_models_simple()
     
+    # Modelos válidos conhecidos
+    valid_models = [
+        "gemini-2.5-flash",
+        "gemini-2.5-flash-lite", 
+        "gemini-2.5-pro",
+        "gemini-3-pro"
+    ]
+    
     if available:
-        # Se tem preferido e está disponível, usa
-        if preferred and preferred in available:
+        # Se tem preferido e está disponível (ou é um dos novos modelos), usa
+        if preferred and (preferred in available or preferred in valid_models):
             model_name = preferred
         # Senão, procura flash
         elif any('flash' in m.lower() for m in available):
@@ -53,7 +61,7 @@ def get_model_instance():
         return _model_cache
     else:
         # Fallback: tenta modelos comuns
-        for model_name in ["gemini-1.5-flash-latest", "gemini-1.5-flash", "gemini-pro"]:
+        for model_name in valid_models:
             try:
                 _model_cache = genai.GenerativeModel(model_name)
                 print(f"🤖 Modelo configurado (fallback): {model_name}")

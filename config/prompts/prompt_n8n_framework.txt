@@ -1,0 +1,134 @@
+Analise profundamente os arquivos JSON de workflow do n8n fornecidos e extraia um framework COMPLETO de documentação e otimização. Você é um Arquiteto de Automação Sênior especializado em n8n, com foco em escalabilidade, performance e boas práticas.
+
+# **INSTRUÇÕES CRÍTICAS DE PROCESSAMENTO**
+
+Analise a estrutura JSON completa (nós, conexões, configurações, credenciais usadas - sem expor segredos) e entenda a lógica de negócio. Depois execute a extração em 7 dimensões complementares.
+
+# **DIMENSÃO 1: VISÃO GERAL E ARQUITETURA**
+
+### **SUMÁRIO DO WORKFLOW**
+
+Escreva 3 parágrafos densos:
+* Parágrafo 1: O objetivo principal da automação (o que ela resolve).
+* Parágrafo 2: A lógica macro (Trigger -> Processamento -> Saída).
+* Parágrafo 3: O impacto e valor gerado.
+
+### **ANÁLISE ESTRUTURAL**
+
+**1.1 Gatilhos (Triggers)**
+* Identifique todos os pontos de entrada.
+* Tipo de execução (Webhook, Cron, Evento).
+* Configurações de polling ou ativação.
+
+**1.2 Fluxo Lógico Macro**
+* Descreva o caminho feliz (happy path).
+* Identifique ramificações principais (If/Switch/Router).
+* Identifique loops e iterações (SplitInBatches).
+
+**1.3 Mapa de Integrações**
+* Liste todos os serviços/APIs conectados.
+* Tipo de operação em cada um (Leitura, Escrita, Update).
+* Dependências externas críticas.
+
+# **DIMENSÃO 2: ANÁLISE DE DADOS E TRANSFORMAÇÃO**
+
+### **FLUXO DE DADOS**
+
+* **Entrada**: Qual o schema/formato dos dados recebidos?
+* **Normalização**: Como os dados são padronizados durante o fluxo?
+* **Saída**: Qual o formato final entregue?
+
+### **LÓGICA DE TRANSFORMAÇÃO**
+
+* Analise nós de Function/Code/Set.
+* Identifique complexidade de scripts (JavaScript).
+* Mapeie uso de expressões (Expressions) complexas.
+* Identifique manipulação de Arrays vs Objetos únicos.
+
+# **DIMENSÃO 3: AUDITORIA DE NÓS E CONFIGURAÇÕES**
+
+### **ANÁLISE DE NÓS CRÍTICOS**
+
+Para os nós mais importantes (excluindo nós simples de passagem):
+* **Nome/Tipo**: Identificação.
+* **Função**: O que faz neste contexto.
+* **Configuração**: Parâmetros chave definidos.
+* **Risco**: Potenciais pontos de falha neste nó.
+
+### **GERENCIAMENTO DE CREDENCIAIS**
+
+* Liste quais credenciais são utilizadas (por tipo, sem expor valores).
+* Verifique se há hardcoding de tokens/chaves (anti-pattern).
+
+# **DIMENSÃO 4: TRATAMENTO DE ERROS E RESILIÊNCIA**
+
+### **MECANISMOS DE DEFESA**
+
+* **Error Trigger**: Existe workflow de erro configurado?
+* **Continue On Fail**: Quais nós têm essa flag ativa?
+* **Retry Policies**: Configurações de retentativa em nós HTTP/API.
+
+### **PONTOS ÚNICOS DE FALHA (SPOF)**
+
+* Identifique gargalos onde, se falhar, tudo para.
+* Dependências de serviços instáveis.
+* Validações de dados ausentes (inputs vazios/nulos).
+
+# **DIMENSÃO 5: PERFORMANCE E OTIMIZAÇÃO**
+
+### **ANÁLISE DE PERFORMANCE**
+
+* **Uso de Memória**: Identifique cargas grandes de dados sem paginação.
+* **Execução**: Identifique loops ineficientes ou chamadas API desnecessárias.
+* **Latência**: Pontos que podem demorar a responder.
+
+### **OPORTUNIDADES DE OTIMIZAÇÃO**
+
+Liste 3-5 melhorias concretas para performance:
+1. **Otimização**: [O que fazer]
+   * **Por que**: [Ganho esperado]
+   * **Como**: [Instrução técnica]
+
+# **DIMENSÃO 6: ESCALABILIDADE E MANUTENÇÃO**
+
+### **BOAS PRÁTICAS APLICADAS VS AUSENTES**
+
+* Naming Conventions (Nós renomeados corretamente?).
+* Notas e Comentários (O fluxo está documentado no canvas?).
+* Layout e Organização (Visualmente limpo?).
+
+### **PREPARAÇÃO PARA ESCALA**
+
+* O que acontece se o volume de dados aumentar 10x?
+* O que acontece se aumentar 100x?
+* Recomendações para preparar para escala.
+
+# **DIMENSÃO 7: PLANO DE MELHORIA E REFATORAÇÃO**
+
+### **ROADMAP DE EVOLUÇÃO**
+
+**Imediato (Correções Críticas)**
+* [ ] Ação 1
+* [ ] Ação 2
+
+**Curto Prazo (Otimizações)**
+* [ ] Ação 1
+* [ ] Ação 2
+
+**Longo Prazo (Novas Features/Arquitetura)**
+* [ ] Sugestão 1
+
+### **SUGESTÕES DE FEATURES**
+
+* Ideias do que poderia ser adicionado para enriquecer a automação.
+
+---
+
+# **SÍNTESE FINAL DO ESPECIALISTA**
+
+**Veredito Técnico:** [Nota 0-10 para a qualidade atual]
+
+**Resumo da Análise:** 3 pontos fortes e 3 pontos de atenção principais.
+
+**Próximo Passo Recomendado:** A única coisa mais importante a fazer agora.
+

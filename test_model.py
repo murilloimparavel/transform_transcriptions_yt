@@ -17,7 +17,7 @@ if not api_key:
 genai.configure(api_key=api_key)
 
 # Obtém modelo do .env ou usa padrão
-model_name = os.getenv("LLM_MODEL", "gemini-1.5-flash-002").replace("models/", "")
+model_name = os.getenv("LLM_MODEL", "gemini-2.5-flash").replace("models/", "")
 print(f"🔍 Testando modelo: {model_name}")
 
 try:
@@ -36,7 +36,7 @@ except Exception as e:
     print(f"\n❌ ERRO ao usar o modelo '{model_name}':")
     print(f"   {e}")
     print("\n💡 Dica: Verifique se o modelo está correto no arquivo .env")
-    print("   Modelos válidos: gemini-1.5-flash-002, gemini-1.5-pro")
+    print("   Modelos válidos: gemini-3-pro, gemini-2.5-pro, gemini-2.5-flash, gemini-2.5-flash-lite")
     
     # Lista modelos disponíveis
     print("\n📋 Modelos Flash disponíveis:")

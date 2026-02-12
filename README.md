@@ -1,15 +1,32 @@
 # 🎬 YouTube Transcription Processor
 
-Sistema automatizado para download e processamento de transcrições do YouTube com IA, incluindo suporte a proxies rotativos e análise avançada de conteúdo.
+Sistema completo para download e processamento de transcrições do YouTube com IA, incluindo **frontend web**, **API REST**, **processamento assíncrono** e análise avançada de conteúdo.
 
-## ✨ Características
+## ✨ Características Principais
 
+### 🎨 Frontend Web (NOVO!)
+- 📊 **Dashboard** com estatísticas em tempo real
+- 🆕 **Interface gráfica** para criar processamentos
+- ⏳ **Acompanhamento de progresso** visual
+- 📄 **Visualização e download** de resultados
+- 📈 **Gráficos e métricas** interativas
+
+### 🔌 API REST (NOVO!)
+- ✅ **API FastAPI** completa
+- 📚 **Documentação automática** (Swagger)
+- 🔄 **WebSocket** para progresso em tempo real
+- 🎯 **15+ endpoints** para todas as operações
+
+### ⚙️ Processamento
 - 📥 **Download automático** de transcrições de vídeos, playlists e canais
 - 🌍 **Multi-idioma** com detecção automática de legendas disponíveis
+- 📄 **Suporte a documentos** (Excel, CSV, PDF, Word, etc.) - NOVO!
 - 🔄 **Sistema de proxies** rotativos para evitar bloqueio de IP
 - 🤖 **Processamento com IA** usando Google Gemini
 - 📊 **3 modos de análise**: FAQ, Copywriting e Framework Completo
+- ⚡ **Processamento assíncrono** com Celery - NOVO!
 - 💾 **Sistema de progresso** com retomada automática
+- 🗄️ **Banco de dados** para histórico completo - NOVO!
 - 🧹 **Logs limpos** com níveis separados (console/arquivo)
 
 ## 🚀 Instalação Rápida
@@ -68,7 +85,7 @@ cp env.example .env
 ```env
 API_KEY=sua_chave_gemini_aqui
 YOUTUBE_API_KEY=sua_chave_youtube_aqui
-LLM_MODEL=gemini-1.5-flash-002
+LLM_MODEL=gemini-2.5-flash
 USE_PROXIES=false
 ```
 
@@ -86,9 +103,35 @@ python check_setup.py
 
 ## 📖 Uso
 
+### 🎨 Opção 1: Frontend Web (Recomendado)
+
 ```bash
-python3 app.py
+# Terminal 1: Iniciar API
+python scripts/start_api.py
+
+# Terminal 2: Iniciar Frontend
+python scripts/start_frontend.py
 ```
+
+Acesse: http://localhost:8501
+
+### 🔌 Opção 2: API REST
+
+```bash
+# Iniciar API
+python scripts/start_api.py
+
+# Acessar documentação
+# http://localhost:8000/docs
+```
+
+### 💻 Opção 3: CLI Original
+
+```bash
+python app.py
+```
+
+> 📚 **Veja [Guia Completo](./docs/QUICK_START.md) para mais detalhes**
 
 ### Fluxo de Uso
 
@@ -171,7 +214,7 @@ Consulte `docs/PROXY_SYSTEM.md` para detalhes.
 ## 📊 Limites e Quotas
 
 ### Google Gemini (Plano Gratuito)
-- **250 requisições/dia** para gemini-1.5-flash-002
+- **250 requisições/dia** para gemini-2.5-flash
 - Sistema implementa retry automático com rate limiting
 
 Para produção, considere:
@@ -204,6 +247,15 @@ WARNING: [video_id] Legendas desabilitadas
 
 ## 📚 Documentação
 
+### 🆕 Nova Documentação
+- [Guia de Início Rápido](./docs/QUICK_START.md) - Como usar o sistema completo
+- [PRD Frontend](./docs/PRD_FRONTEND.md) - Product Requirements Document
+- [Arquitetura](./docs/ARCHITECTURE.md) - Arquitetura do sistema
+- [Status de Implementação](./docs/IMPLEMENTATION_STATUS.md) - Progresso atual
+- [Resumo Final](./docs/FINAL_SUMMARY.md) - Resumo completo
+- [README Completo](./README_COMPLETE.md) - Guia completo
+
+### 📖 Documentação Original
 - `docs/PROXY_SYSTEM.md` - Sistema de proxies completo
 - `docs/PROXY_IMPROVEMENTS.md` - Melhorias implementadas
 - `docs/LOGS_LIMPOS.md` - Sistema de logs
