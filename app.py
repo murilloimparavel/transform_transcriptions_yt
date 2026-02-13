@@ -1,6 +1,7 @@
 import os
 import json
 import time
+from datetime import datetime
 from termcolor import colored, cprint
 from dotenv import load_dotenv
 from core import (
@@ -230,14 +231,14 @@ def process_multiple_videos(video_urls, preferred_languages=None, prompt_type="c
     Args:
         video_urls: Lista de URLs dos vídeos do YouTube
         preferred_languages: Lista de idiomas preferidos para legendas
-        prompt_type: 'faq', 'copywriting' ou 'framework'
+        prompt_type: 'faq', 'copywriting', 'framework' ou 'agent_builder'
         output_language: Idioma do output ('pt' ou 'en')
     """
     total_videos = len(video_urls)
     cprint("\n" + "="*60, "cyan")
     cprint(f"🎬 PROCESSAMENTO DE {total_videos} VÍDEOS", "cyan", attrs=["bold"])
     cprint("="*60, "cyan")
-    
+
     # Estatísticas
     stats = {
         "total": total_videos,
@@ -246,14 +247,16 @@ def process_multiple_videos(video_urls, preferred_languages=None, prompt_type="c
         "skipped": 0,
         "failed_videos": []
     }
-    
-    # Aviso especial para framework com múltiplos vídeos
-    if prompt_type == "framework":
+
+    # Aviso especial para modos multi-stage com múltiplos vídeos
+    if prompt_type in ["framework", "agent_builder"]:
+        mode_name = "FRAMEWORK" if prompt_type == "framework" else "AGENT BUILDER"
+        mode_desc = "7 dimensões + síntese" if prompt_type == "framework" else "7 blocos de conhecimento para agente IA"
         estimated_time = total_videos * 7  # ~7 minutos por vídeo
-        cprint("\n⚠️  MODO FRAMEWORK ATIVADO", "yellow", attrs=["bold"])
-        cprint(f"Este modo processa cada transcrição em 7 dimensões + síntese", "yellow")
+        cprint(f"\n⚠️  MODO {mode_name} ATIVADO", "yellow", attrs=["bold"])
+        cprint(f"Este modo processa cada transcrição em {mode_desc}", "yellow")
         cprint(f"Tempo estimado: ~{estimated_time} minutos para {total_videos} vídeo(s)", "yellow")
-        confirm = input(colored(f"\nDeseja processar {total_videos} vídeo(s) no modo Framework? (s/n): ", "magenta", attrs=["bold"])).strip().lower()
+        confirm = input(colored(f"\nDeseja processar {total_videos} vídeo(s) no modo {mode_name}? (s/n): ", "magenta", attrs=["bold"])).strip().lower()
         if confirm != 's':
             cprint("Processamento cancelado.", "red")
             return
@@ -288,6 +291,10 @@ def process_multiple_videos(video_urls, preferred_languages=None, prompt_type="c
             cprint(f"Processados {idx-1}/{total_videos} vídeos antes da interrupção.", "cyan")
             break
         except Exception as e:
+            if "429" in str(e):
+                cprint("⚠️ Cota estourada (429). Aguardando 60 segundos...", "red", attrs=["bold"])
+                time.sleep(60)
+
             cprint(f"\n❌ Erro ao processar vídeo {idx}: {e}", "red", attrs=["bold"])
             stats["failed"] += 1
             stats["failed_videos"].append({
@@ -298,8 +305,8 @@ def process_multiple_videos(video_urls, preferred_languages=None, prompt_type="c
         
         # Pausa entre vídeos (exceto no último)
         if idx < total_videos:
-            cprint(f"\n⏳ Aguardando 3 segundos antes do próximo vídeo...", "blue")
-            time.sleep(3)
+            cprint(f"\n⏳ Aguardando 30 segundos antes do próximo vídeo para evitar Rate Limit...", "blue")
+            time.sleep(30)
     
     # Mostra estatísticas finais
     cprint("\n" + "="*60, "cyan")
@@ -315,10 +322,41 @@ def process_multiple_videos(video_urls, preferred_languages=None, prompt_type="c
             cprint(f"  [{failed['index']}] {failed['url'][:60]}...", "yellow")
             if 'error' in failed:
                 cprint(f"      Erro: {failed['error']}", "red")
-    
+
     success_rate = (stats['success'] / stats['total'] * 100) if stats['total'] > 0 else 0
     cprint(f"\n✨ Taxa de sucesso: {success_rate:.1f}%", "green", attrs=["bold"])
     cprint("="*60 + "\n", "cyan")
+
+    # Consolidação automática para Agent Builder
+    if prompt_type == "agent_builder" and stats['success'] > 0:
+        cprint("\n🔗 Iniciando consolidação automática do Agent Builder...", "cyan", attrs=["bold"])
+        try:
+            from core.agent_consolidator import consolidate_agent_builder_outputs
+
+            # Pergunta nome do projeto
+            project_name = input(colored("\nDigite um nome para o projeto (ou Enter para usar timestamp): ", "magenta", attrs=["bold"])).strip()
+            if not project_name:
+                project_name = f"projeto_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+
+            output_dir = consolidate_agent_builder_outputs(
+                source_dir=os.path.join('data', 'processed'),
+                project_name=project_name,
+                output_language=output_language
+            )
+
+            if output_dir:
+                cprint(f"\n🎉 Consolidação concluída!", "green", attrs=["bold"])
+                cprint(f"📁 Arquivos organizados em: {output_dir}", "white")
+                cprint("\n📂 Estrutura de pastas:", "cyan")
+                cprint("   ├── mega_planilha/     → Planilha Excel consolidada", "white")
+                cprint("   ├── system_prompt/     → System Prompt para o agente", "white")
+                cprint("   ├── json/              → JSONs originais de cada vídeo", "white")
+                cprint("   └── txt/               → TXTs originais de cada vídeo", "white")
+        except Exception as e:
+            cprint(f"\n⚠️  Erro na consolidação: {e}", "yellow", attrs=["bold"])
+            cprint("   Os arquivos individuais foram gerados com sucesso.", "white")
+            import traceback
+            traceback.print_exc()
 
 
 def process_single_video(video_url, preferred_languages=None, prompt_type="copywriting", output_language="pt", show_header=True, video_number=None):
@@ -328,11 +366,11 @@ def process_single_video(video_url, preferred_languages=None, prompt_type="copyw
     Args:
         video_url: URL do vídeo do YouTube
         preferred_languages: Lista de idiomas preferidos para legendas
-        prompt_type: 'faq', 'copywriting' ou 'framework'
+        prompt_type: 'faq', 'copywriting', 'framework' ou 'agent_builder'
         output_language: Idioma do output ('pt' ou 'en')
         show_header: Se deve mostrar o cabeçalho (padrão: True)
         video_number: Número do vídeo no formato "X/Y" (opcional)
-    
+
     Returns:
         bool: True se processado com sucesso, False caso contrário
     """
@@ -375,17 +413,19 @@ def process_single_video(video_url, preferred_languages=None, prompt_type="copyw
     # 2. Processa a transcrição
     cprint(f"\n🤖 Processando transcrição com: {prompt_type.upper()}", "cyan", attrs=["bold"])
     cprint(f"🌍 Idioma de saída: {output_language.upper()}", "cyan")
-    
-    # Aviso especial para framework (apenas se for vídeo único)
-    if prompt_type == "framework" and not video_number:
-        cprint("\n⚠️  MODO FRAMEWORK ATIVADO", "yellow", attrs=["bold"])
-        cprint("Este modo processa a transcrição em 7 dimensões + síntese", "yellow")
+
+    # Aviso especial para modos multi-stage (apenas se for vídeo único)
+    if prompt_type in ["framework", "agent_builder"] and not video_number:
+        mode_name = "FRAMEWORK" if prompt_type == "framework" else "AGENT BUILDER"
+        mode_desc = "7 dimensões + síntese" if prompt_type == "framework" else "7 blocos de conhecimento para agente IA"
+        cprint(f"\n⚠️  MODO {mode_name} ATIVADO", "yellow", attrs=["bold"])
+        cprint(f"Este modo processa a transcrição em {mode_desc}", "yellow")
         cprint("Tempo estimado: ~5-10 minutos", "yellow")
         confirm = input(colored("\nDeseja continuar? (s/n): ", "magenta", attrs=["bold"])).strip().lower()
         if confirm != 's':
             cprint("Processamento cancelado.", "red")
             return False
-    
+
     try:
         if prompt_type == "framework":
             # Usa processador especial de framework
@@ -393,11 +433,18 @@ def process_single_video(video_url, preferred_languages=None, prompt_type="copyw
             output_path = process_transcription_framework(transcription_path, output_language)
             cprint(f"\n✅ Framework completo gerado!", "green", attrs=["bold"])
             cprint(f"   Arquivo: {output_path}", "white")
+        elif prompt_type == "agent_builder":
+            # Usa processador especial de agent builder
+            from core.agent_builder_processor import process_transcription_agent_builder
+            output_path = process_transcription_agent_builder(transcription_path, output_language)
+            cprint(f"\n✅ Base de conhecimento para agente gerada!", "green", attrs=["bold"])
+            cprint(f"   Arquivo TXT: {output_path}", "white")
+            cprint(f"   Arquivo JSON: {output_path.replace('.txt', '.json')}", "white")
         else:
             # Usa processador normal (chunks)
             process_transcription(transcription_path, prompt_type, output_language)
             cprint(f"\n✅ Processamento concluído!", "green", attrs=["bold"])
-            
+
             # Mostra onde o arquivo foi salvo
             output_dir = os.path.join('data', 'processed')
             base_name = os.path.basename(transcription_path).replace('.txt', '')
@@ -578,21 +625,22 @@ def process_documents(prompt_type="faq", output_language="pt"):
 def process_single_document(source, prompt_type, output_language, doc_number=None, total_docs=None, consolidate=False):
     """
     Processa um único documento (site, PDF ou Word).
-    
+
     Args:
         source: URL ou caminho do arquivo
-        prompt_type: 'faq' ou 'framework'
+        prompt_type: 'faq', 'framework' ou 'agent_builder'
         output_language: Idioma do output
         doc_number: Número do documento (opcional)
         total_docs: Total de documentos (opcional)
         consolidate: Se True, não gera Excel individual (apenas retorna FAQ)
-    
+
     Returns:
         bool ou dict: True se processado com sucesso, ou dict com FAQ se consolidate=True
     """
     from core.document_extractor import extract_text_from_source
     from core.processing import process_transcription
     from core.framework_processor import process_transcription_framework
+    from core.agent_builder_processor import process_transcription_agent_builder
     from core.faq_to_excel import create_faq_excel
     
     try:
@@ -629,16 +677,35 @@ def process_single_document(source, prompt_type, output_language, doc_number=Non
             # Processa com framework
             output_path = os.path.join(output_dir, f"{base_name}_framework_{output_language}.txt")
             process_transcription_framework(temp_file, output_language)
-            
+
             # Move arquivo gerado para o local correto
             framework_output = os.path.join('data', 'processed', f"{base_name}_extracted_framework_{output_language}.txt")
             if os.path.exists(framework_output):
                 import shutil
                 shutil.move(framework_output, output_path)
-            
+
             cprint(f"\n✅ Framework completo gerado!", "green", attrs=["bold"])
             cprint(f"   Arquivo: {output_path}", "white")
-            
+
+        elif prompt_type == "agent_builder":
+            # Processa com agent builder
+            output_path = os.path.join(output_dir, f"{base_name}_agent_builder_{output_language}.txt")
+            process_transcription_agent_builder(temp_file, output_language)
+
+            # Move arquivo gerado para o local correto
+            agent_output = os.path.join('data', 'processed', f"{base_name}_extracted_agent_builder_{output_language}.txt")
+            if os.path.exists(agent_output):
+                import shutil
+                shutil.move(agent_output, output_path)
+                # Move também o JSON
+                agent_json = agent_output.replace('.txt', '.json')
+                if os.path.exists(agent_json):
+                    shutil.move(agent_json, output_path.replace('.txt', '.json'))
+
+            cprint(f"\n✅ Base de conhecimento para agente gerada!", "green", attrs=["bold"])
+            cprint(f"   Arquivo TXT: {output_path}", "white")
+            cprint(f"   Arquivo JSON: {output_path.replace('.txt', '.json')}", "white")
+
         else:  # FAQ
             # Processa com FAQ
             process_transcription(temp_file, prompt_type, output_language)
@@ -696,7 +763,7 @@ def process_all_transcriptions(prompt_type="copywriting", output_language="pt"):
     Processa todos os arquivos de transcrição presentes na pasta 'data/transcriptions'.
 
     Args:
-        prompt_type: 'faq', 'copywriting' ou 'framework'
+        prompt_type: 'faq', 'copywriting', 'framework' ou 'agent_builder'
         output_language: Idioma do output ('pt' ou 'en')
     """
     transcriptions_dir = os.path.join('data', 'transcriptions')
@@ -713,10 +780,12 @@ def process_all_transcriptions(prompt_type="copywriting", output_language="pt"):
 
     cprint(f"\n📝 Total de transcrições para processar: {len(transcription_files)}", "cyan")
 
-    # Aviso especial para framework
-    if prompt_type == "framework":
-        cprint("\n⚠️  MODO FRAMEWORK ATIVADO", "yellow", attrs=["bold"])
-        cprint("Este modo processa cada transcrição em 7 dimensões + síntese", "yellow")
+    # Aviso especial para modos multi-stage
+    if prompt_type in ["framework", "agent_builder"]:
+        mode_name = "FRAMEWORK" if prompt_type == "framework" else "AGENT BUILDER"
+        mode_desc = "7 dimensões + síntese" if prompt_type == "framework" else "7 blocos de conhecimento para agente IA"
+        cprint(f"\n⚠️  MODO {mode_name} ATIVADO", "yellow", attrs=["bold"])
+        cprint(f"Este modo processa cada transcrição em {mode_desc}", "yellow")
         cprint("Tempo estimado: ~5-10 minutos por transcrição", "yellow")
         confirm = input(colored("\nDeseja continuar? (s/n): ", "magenta", attrs=["bold"])).strip().lower()
         if confirm != 's':
@@ -734,14 +803,29 @@ def process_all_transcriptions(prompt_type="copywriting", output_language="pt"):
                 from core.framework_processor import process_transcription_framework
                 output_path = process_transcription_framework(file_path, output_language)
                 cprint(f"✅ Framework completo gerado: {output_path}", "green", attrs=["bold"])
+            elif prompt_type == "agent_builder":
+                # Usa processador especial de agent builder
+                from core.agent_builder_processor import process_transcription_agent_builder
+                output_path = process_transcription_agent_builder(file_path, output_language)
+                cprint(f"✅ Base de conhecimento gerada: {output_path}", "green", attrs=["bold"])
             else:
                 # Usa processador normal (chunks)
                 process_transcription(file_path, prompt_type, output_language)
                 cprint(f"✅ Processamento concluído", "green")
+            
+            # ESPERE 30 SEGUNDOS entre cada vídeo para não estourar a cota gratuita
+            if idx < len(transcription_files):
+                cprint(f"⏳ Aguardando 30 segundos para evitar Rate Limit...", "blue")
+                time.sleep(30)
+
         except Exception as e:
-            cprint(f"❌ Erro ao processar: {e}", "red")
-            import traceback
-            traceback.print_exc()
+            if "429" in str(e):
+                cprint("⚠️ Cota estourada (429). Aguardando 60 segundos...", "red", attrs=["bold"])
+                time.sleep(60)
+            else:
+                cprint(f"❌ Erro ao processar: {e}", "red")
+                import traceback
+                traceback.print_exc()
 
 
 def main():
@@ -790,8 +874,9 @@ def main():
     cprint("\n📝 Escolha o tipo de análise:", "blue")
     print("[1] FAQ - Extração de conhecimento estruturado")
     print("[2] Copywriting - Frameworks de vendas high ticket")
-    print("[3] Framework Completo - Extração profunda em 7 dimensões (RECOMENDADO)")
-    prompt_choice = input(colored("Digite sua escolha (1, 2 ou 3): ", "magenta", attrs=["bold"])).strip()
+    print("[3] Framework Completo - Extração profunda em 7 dimensões")
+    print("[4] Agent Builder - Base de conhecimento para treinar agentes IA (RECOMENDADO)")
+    prompt_choice = input(colored("Digite sua escolha (1, 2, 3 ou 4): ", "magenta", attrs=["bold"])).strip()
 
     if prompt_choice == '1':
         prompt_type = "faq"
@@ -799,9 +884,11 @@ def main():
         prompt_type = "copywriting"
     elif prompt_choice == '3':
         prompt_type = "framework"
+    elif prompt_choice == '4':
+        prompt_type = "agent_builder"
     else:
-        cprint("Escolha inválida. Usando 'framework' como padrão.", "yellow")
-        prompt_type = "framework"
+        cprint("Escolha inválida. Usando 'agent_builder' como padrão.", "yellow")
+        prompt_type = "agent_builder"
 
     # 2. Idioma de saída
     cprint("\n🌍 Escolha o idioma de saída da IA:", "blue")
@@ -838,8 +925,9 @@ def main():
     print("[2] Canal do YouTube")
     print("[3] Vídeo(s) do YouTube")
     print("[4] Documentos (Site, PDF, Word)")
+    print("[5] Consolidar Agent Builder (arquivos já processados)")
 
-    choice = input(colored("Digite sua escolha (1, 2, 3 ou 4): ", "magenta", attrs=["bold"])).strip()
+    choice = input(colored("Digite sua escolha (1, 2, 3, 4 ou 5): ", "magenta", attrs=["bold"])).strip()
 
     if choice == '1':
         playlist_url = input(colored("Digite a URL da playlist do YouTube: ", "magenta", attrs=["bold"])).strip()
@@ -892,10 +980,74 @@ def main():
             process_multiple_videos(valid_urls, preferred_languages, prompt_type, output_language)
     elif choice == '4':
         process_documents(prompt_type, output_language)
+    elif choice == '5':
+        consolidate_existing_agent_builder(output_language)
     else:
         cprint("Escolha inválida. Por favor, tente novamente.", "red", attrs=["bold"])
         main()
         return
+
+
+def consolidate_existing_agent_builder(output_language="pt"):
+    """
+    Consolida arquivos Agent Builder já processados anteriormente.
+    """
+    from core.agent_consolidator import consolidate_agent_builder_outputs
+
+    cprint("\n" + "="*60, "cyan")
+    cprint("🔗 CONSOLIDAÇÃO DE AGENT BUILDER", "cyan", attrs=["bold"])
+    cprint("="*60, "cyan")
+
+    # Verifica se existem arquivos
+    source_dir = os.path.join('data', 'processed')
+    if not os.path.exists(source_dir):
+        cprint("❌ Diretório data/processed não encontrado.", "red", attrs=["bold"])
+        return
+
+    # Conta arquivos Agent Builder
+    agent_files = [f for f in os.listdir(source_dir) if 'agent_builder' in f and f.endswith('.json')]
+
+    if not agent_files:
+        cprint("❌ Nenhum arquivo Agent Builder encontrado em data/processed/", "red", attrs=["bold"])
+        cprint("   Execute primeiro o processamento de vídeos com a opção Agent Builder.", "yellow")
+        return
+
+    cprint(f"\n📁 Encontrados {len(agent_files)} arquivos Agent Builder para consolidar:", "blue")
+    for f in agent_files[:10]:  # Mostra no máximo 10
+        cprint(f"   • {f}", "white")
+    if len(agent_files) > 10:
+        cprint(f"   ... e mais {len(agent_files) - 10} arquivos", "white")
+
+    # Nome do projeto
+    project_name = input(colored("\nDigite um nome para o projeto: ", "magenta", attrs=["bold"])).strip()
+    if not project_name:
+        project_name = f"projeto_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+
+    # Executa consolidação
+    try:
+        output_dir = consolidate_agent_builder_outputs(
+            source_dir=source_dir,
+            project_name=project_name,
+            output_language=output_language
+        )
+
+        if output_dir:
+            cprint(f"\n🎉 Consolidação concluída com sucesso!", "green", attrs=["bold"])
+            cprint(f"📁 Arquivos organizados em: {output_dir}", "white")
+            cprint("\n📂 Estrutura de pastas criada:", "cyan")
+            cprint("   ├── mega_planilha/     → Planilha Excel com todo o conhecimento", "white")
+            cprint("   ├── system_prompt/     → System Prompt consolidado para o agente", "white")
+            cprint("   ├── json/              → JSONs originais de cada vídeo", "white")
+            cprint("   └── txt/               → TXTs originais de cada vídeo", "white")
+            cprint("\n💡 Próximos passos:", "blue")
+            cprint("   1. Use a mega_planilha para criar embeddings (RAG)", "white")
+            cprint("   2. Use o system_prompt como base para seu agente", "white")
+            cprint("   3. Os JSONs podem ser usados para integração programática", "white")
+    except Exception as e:
+        cprint(f"\n❌ Erro na consolidação: {e}", "red", attrs=["bold"])
+        import traceback
+        traceback.print_exc()
+
 
 if __name__ == "__main__":
     main()

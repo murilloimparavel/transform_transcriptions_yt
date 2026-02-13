@@ -102,10 +102,7 @@ def get_model():
     # Obtém modelo preferido do .env
     preferred_model = os.environ.get("LLM_MODEL", "").replace("models/", "").strip()
     
-    # Garante que não está usando modelo antigo conhecido como inválido
-    if preferred_model in ["gemini-1.5-flash", "gemini-2.5-flash"]:
-        print(f"⚠️  Modelo '{preferred_model}' não é válido. Procurando alternativas...")
-        preferred_model = None
+    # Nota: gemini-2.5-flash e outros modelos são válidos, não precisa de verificação especial
     
     # Encontra modelo válido
     try:
