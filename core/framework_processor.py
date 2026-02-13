@@ -9,7 +9,7 @@ import json
 from datetime import datetime
 from dotenv import load_dotenv
 import google.generativeai as genai
-from google.api_core.exceptions import DeadlineExceeded
+from google.api_core.exceptions import DeadlineExceeded, ResourceExhausted
 
 load_dotenv()
 
@@ -51,11 +51,10 @@ def find_valid_model(preferred_name=None):
     if not available:
         # Fallback para modelos comuns se não conseguir listar
         fallback_models = [
-            "gemini-1.5-flash-latest",
-            "gemini-1.5-flash",
-            "gemini-1.5-pro-latest",
-            "gemini-1.5-pro",
-            "gemini-pro",
+            "gemini-2.5-flash",
+            "gemini-2.5-flash-lite",
+            "gemini-2.5-pro",
+            "gemini-3-pro",
         ]
         
         for model_name in fallback_models:
@@ -69,13 +68,25 @@ def find_valid_model(preferred_name=None):
         
         raise ValueError("Nenhum modelo Gemini disponível encontrado!")
     
-    # Se tem modelo preferido, tenta primeiro
+    # Se tem modelo preferido, tenta usar diretamente (confia na config do usuário)
     if preferred_name:
         preferred_clean = preferred_name.replace('models/', '').strip()
-        if preferred_clean in available:
+        # Se está na lista de disponíveis OU é um dos modelos novos solicitados
+        valid_models = [
+            "gemini-2.5-flash", 
+            "gemini-2.5-flash-lite", 
+            "gemini-2.5-pro", 
+            "gemini-3-pro"
+        ]
+        
+        if preferred_clean in available or preferred_clean in valid_models:
             _valid_model_cache = preferred_clean
             print(f"✅ Usando modelo preferido: {preferred_clean}")
             return preferred_clean
+        
+        # Se não achou na lista mas o usuário forçou, tenta mesmo assim
+        print(f"⚠️  Modelo '{preferred_clean}' não listado na API, mas será tentado.")
+        return preferred_clean
     
     # Procura por modelos flash primeiro
     flash_models = [m for m in available if 'flash' in m.lower()]
@@ -94,16 +105,15 @@ def find_valid_model(preferred_name=None):
 def get_model():
     """
     Obtém o modelo Gemini configurado.
-    Cria o modelo dinamicamente para garantir que sempre use o valor atual do .env
     """
-    # Recarrega .env para garantir valor atualizado
-    load_dotenv(override=True)
+    # Removido: load_dotenv(override=True) para evitar sobrescrever a escolha do usuário
+    # que foi salva no .env (se disponível) ou está em memória
     
     # Obtém modelo preferido do .env
     preferred_model = os.environ.get("LLM_MODEL", "").replace("models/", "").strip()
     
     # Nota: gemini-2.5-flash e outros modelos são válidos, não precisa de verificação especial
-    
+
     # Encontra modelo válido
     try:
         model_name = find_valid_model(preferred_model)
@@ -111,9 +121,9 @@ def get_model():
         return genai.GenerativeModel(model_name)
     except Exception as e:
         print(f"❌ Erro ao encontrar modelo válido: {e}")
-        # Última tentativa com modelo padrão da biblioteca
-        print("🔄 Tentando modelo padrão da biblioteca...")
-        return genai.GenerativeModel()  # Usa padrão da biblioteca
+        # Última tentativa com modelo 2.5 flash
+        print("🔄 Tentando modelo padrão (gemini-2.5-flash)...")
+        return genai.GenerativeModel("gemini-2.5-flash")
 
 
 class FrameworkProcessor:
@@ -200,7 +210,7 @@ Você é um especialista em extrair frameworks de implementação de conteúdos 
 
         prompt = self.create_dimension_prompt(dimension_number, dimension_name)
 
-        max_retries = 3
+        max_retries = 5  # Aumentado para 5 tentativas
         for attempt in range(max_retries):
             try:
                 # Cria modelo dinamicamente para garantir valor correto
@@ -218,16 +228,33 @@ Você é um especialista em extrair frameworks de implementação de conteúdos 
                 print(f"✅ Dimensão {dimension_number} concluída ({len(result)} caracteres)")
                 return result
 
+            except ResourceExhausted:
+                # Tratamento específico para erro 429 (Cota)
+                wait_time = 65  # Espera 65 segundos (o limite renova a cada minuto)
+                print(f"⏳ Cota excedida (429). Aguardando {wait_time}s para renovar tokens... (Tentativa {attempt + 1}/{max_retries})")
+                time.sleep(wait_time)
+                if attempt == max_retries - 1:
+                    raise
+
             except DeadlineExceeded:
                 if attempt < max_retries - 1:
                     print(f"⏳ Timeout - tentativa {attempt + 1}/{max_retries}")
                     time.sleep(5)
                 else:
                     raise
+            except RuntimeError as e:
+                # Erros críticos de API Key
+                if "403" in str(e) or "API key" in str(e):
+                    raise
+                if attempt < max_retries - 1:
+                    print(f"⚠️  Erro Runtime - tentativa {attempt + 1}/{max_retries}: {e}")
+                    time.sleep(5)
+                else:
+                    raise
             except Exception as e:
                 if attempt < max_retries - 1:
                     print(f"⚠️  Erro - tentativa {attempt + 1}/{max_retries}: {e}")
-                    time.sleep(5)
+                    time.sleep(10)
                 else:
                     raise
 
@@ -325,7 +352,7 @@ Você é um especialista em sintetizar frameworks de implementação.
 - **Total de dimensões processadas**: {len(self.dimensions)}
 - **Timestamp da síntese**: {self.synthesis and datetime.now().isoformat()}
 - **Tamanho total do framework**: ~{len(final_document)} caracteres
-- **Processado com**: {os.environ.get("LLM_MODEL", "gemini-1.5-flash-002")}
+- **Processado com**: {os.environ.get("LLM_MODEL", "gemini-2.5-flash")}
 
 ---
 
@@ -344,7 +371,7 @@ Você é um especialista em sintetizar frameworks de implementação.
             "metadata": {
                 "generated_at": datetime.now().isoformat(),
                 "language": self.output_language,
-                "model": os.environ.get("LLM_MODEL", "gemini-1.5-flash-002"),
+                "model": os.environ.get("LLM_MODEL", "gemini-2.5-flash"),
                 "transcription_size": len(self.transcription)
             },
             "synthesis": self.synthesis,
@@ -383,6 +410,11 @@ Você é um especialista em sintetizar frameworks de implementação.
                 if dim_num < 7:
                     print("⏳ Aguardando 20s antes da próxima dimensão...")
                     time.sleep(20)
+            except RuntimeError as e:
+                # Erro crítico (API Key, etc) - Aborta tudo
+                print(f"🛑 Processamento ABORTADO na dimensão {dim_num}: {e}")
+                print("⚠️  Verifique sua API KEY no arquivo .env")
+                return
             except Exception as e:
                 print(f"❌ Erro ao processar dimensão {dim_num}: {e}")
                 # Continua com as outras dimensões

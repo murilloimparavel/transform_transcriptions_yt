@@ -1,16 +1,19 @@
 # YouTube Transcription Processor
 
-Sistema automatizado para download, processamento e transformacao de transcricoes do YouTube (e documentos) em bases de conhecimento estruturadas usando Google Gemini. Suporta proxies rotativos, multiplos modos de analise com IA e consolidacao para treinamento de agentes.
+Sistema automatizado para download, processamento e transformacao de transcricoes do YouTube (e documentos) em bases de conhecimento estruturadas usando Google Gemini. Suporta proxies rotativos, multiplos modos de analise com IA, consolidacao para treinamento de agentes, frontend web e API REST.
 
 ## Funcionalidades Principais
 
 - **5 fontes de conteudo**: Playlists, canais, videos individuais, documentos (URL/PDF/Word/Excel/CSV/TXT/Markdown) e consolidacao de outputs existentes
-- **4 modos de analise com IA**: FAQ, Copywriting, Framework Completo (7 dimensoes) e Agent Builder (RAG-ready)
+- **5 modos de analise com IA**: FAQ, Copywriting, Framework Completo (7 dimensoes), Agent Builder (RAG-ready) e PRD BMAD
 - **Transcricao dual-source**: YouTube Transcript API com fallback automatico para Kome.ai
 - **Proxy system**: Rotacao automatica com validacao em massa, lista VIP persistente e fallback
 - **Progresso persistente**: Retomada automatica de tarefas interrompidas
 - **Multi-idioma**: Legendas em qualquer idioma + output em PT-BR ou EN
 - **Consolidacao para agentes**: Gera planilha Excel, system prompt e JSON consolidado a partir de multiplos videos
+- **Frontend Web**: Dashboard com estatisticas, interface grafica e acompanhamento de progresso
+- **API REST**: FastAPI com documentacao Swagger e WebSocket para progresso em tempo real
+- **N8N Workflows**: Analise de workflows do n8n a partir de arquivos JSON
 
 ---
 
@@ -63,11 +66,29 @@ python check_setup.py
 
 ## Uso
 
+### 🎨 Opção 1: Frontend Web (Recomendado)
+
 ```bash
 python app.py
 ```
 
 O menu interativo guia pelas etapas:
+
+### 🔌 Opcao 2: Frontend Web + API
+
+```bash
+# Terminal 1: Iniciar API
+python scripts/start_api.py
+
+# Terminal 2: Iniciar Frontend
+python scripts/start_frontend.py
+```
+
+Acesse: http://localhost:8501
+
+> Veja [Guia Completo](./docs/QUICK_START.md) para mais detalhes
+
+### Fluxo de Uso
 
 ### 1. Escolha do modo de analise
 
@@ -92,6 +113,7 @@ O menu interativo guia pelas etapas:
 | **Video(s)** | 1 a 10 URLs de videos individuais separados por virgula |
 | **Documentos** | URL de site, PDF, Word (.docx), Texto (.txt), Markdown (.md), Excel (.xlsx/.xls) ou CSV. Ate 10 fontes separadas por virgula |
 | **Consolidar Agent Builder** | Consolida arquivos Agent Builder ja processados em estrutura unificada |
+| **N8N Workflow** | Analisa workflows do n8n a partir de arquivos JSON |
 
 ---
 

@@ -48,7 +48,7 @@ Crie um arquivo chamado `.env` na raiz do projeto (pode copiar de `.env.example`
 API_KEY="SUA_CHAVE_DA_API_DO_GEMINI"
 
 # Modelo do LLM a ser usado (opcional)
-LLM_MODEL="gemini-1.5-flash" 
+LLM_MODEL="gemini-2.5-flash" 
 
 # Chave de API do YouTube (necessária para buscar vídeos de um canal)
 YOUTUBE_API_KEY="SUA_CHAVE_DA_API_DO_YOUTUBE"

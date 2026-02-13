@@ -36,19 +36,18 @@ def fix_env():
             llm_model_found = True
             current_value = line.split("=", 1)[1].strip()
             
-            # Verifica se está usando modelo inválido
-            if current_value in ["gemini-1.5-flash", "gemini-2.5-flash", "gemini-1.5-flash-002"]:
-                if current_value != "gemini-1.5-flash-002":
-                    print(f"⚠️  Modelo inválido encontrado: {current_value}")
-                    print("✅ Corrigindo para: gemini-1.5-flash-002")
-                    new_lines.append("LLM_MODEL=gemini-1.5-flash-002\n")
-                    fixed = True
-                else:
-                    print(f"✅ Modelo correto já configurado: {current_value}")
-                    new_lines.append(line)
+            # Verifica se está usando modelo antigo
+            if current_value in ["gemini-1.5-flash", "gemini-1.5-flash-002", "gemini-1.5-pro"]:
+                print(f"⚠️  Modelo antigo encontrado: {current_value}")
+                print("✅ Corrigindo para: gemini-2.5-flash")
+                new_lines.append("LLM_MODEL=gemini-2.5-flash\n")
+                fixed = True
+            elif current_value in ["gemini-2.5-flash", "gemini-3-pro", "gemini-2.5-pro", "gemini-2.5-flash-lite"]:
+                print(f"✅ Modelo correto já configurado: {current_value}")
+                new_lines.append(line)
             else:
-                # Modelo customizado, mantém
-                print(f"ℹ️  Modelo customizado encontrado: {current_value}")
+                # Modelo customizado ou inválido, alerta mas mantém se não for óbvio
+                print(f"ℹ️  Modelo customizado/desconhecido encontrado: {current_value}")
                 new_lines.append(line)
         else:
             new_lines.append(line)
@@ -56,7 +55,7 @@ def fix_env():
     # Se LLM_MODEL não foi encontrado, adiciona
     if not llm_model_found:
         print("⚠️  LLM_MODEL não encontrado no .env")
-        print("✅ Adicionando LLM_MODEL=gemini-1.5-flash-002")
+        print("✅ Adicionando LLM_MODEL=gemini-2.5-flash")
         # Adiciona após API_KEY se existir
         inserted = False
         final_lines = []
@@ -66,11 +65,11 @@ def fix_env():
                 # Adiciona LLM_MODEL após API_KEY
                 final_lines.append("\n")
                 final_lines.append("# Modelo do LLM\n")
-                final_lines.append("LLM_MODEL=gemini-1.5-flash-002\n")
+                final_lines.append("LLM_MODEL=gemini-2.5-flash\n")
                 inserted = True
         if not inserted:
             final_lines.append("\n# Modelo do LLM\n")
-            final_lines.append("LLM_MODEL=gemini-1.5-flash-002\n")
+            final_lines.append("LLM_MODEL=gemini-2.5-flash\n")
         new_lines = final_lines
         fixed = True
     

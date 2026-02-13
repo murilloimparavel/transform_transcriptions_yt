@@ -126,8 +126,18 @@ def get_transcript_from_youtube(video_id, preferred_languages=None, proxies=None
         data = transcript.fetch()
         lang = transcript.language_code
 
-        # Formata o texto
-        text = "\n".join([entry['text'] for entry in data])
+        # Formata o texto - compatível com nova API (objetos) e antiga (dicts)
+        lines = []
+        for entry in data:
+            # Nova API retorna objetos FetchedTranscriptSnippet com atributo .text
+            if hasattr(entry, 'text'):
+                lines.append(entry.text)
+            # API antiga retornava dicts com chave 'text'
+            elif isinstance(entry, dict) and 'text' in entry:
+                lines.append(entry['text'])
+            else:
+                lines.append(str(entry))
+        text = "\n".join(lines)
 
         # Restaura requests se foi modificado
         if proxies:

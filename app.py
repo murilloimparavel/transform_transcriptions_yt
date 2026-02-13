@@ -10,6 +10,8 @@ from core import (
     save_playlist_to_json,
     download_transcription,
     process_transcription,
+    process_n8n_framework,
+    process_prd_framework,
     ProgressManager
 )
 
@@ -260,6 +262,15 @@ def process_multiple_videos(video_urls, preferred_languages=None, prompt_type="c
         if confirm != 's':
             cprint("Processamento cancelado.", "red")
             return
+    elif prompt_type == "prd":
+        estimated_time = total_videos * 8  # ~8 minutos por vídeo
+        cprint("\n⚠️  MODO PRD BMAD ATIVADO", "yellow", attrs=["bold"])
+        cprint(f"Este modo gera um documento técnico completo para cada vídeo", "yellow")
+        cprint(f"Tempo estimado: ~{estimated_time} minutos para {total_videos} vídeo(s)", "yellow")
+        confirm = input(colored(f"\nDeseja processar {total_videos} vídeo(s) no modo PRD? (s/n): ", "magenta", attrs=["bold"])).strip().lower()
+        if confirm != 's':
+            cprint("Processamento cancelado.", "red")
+            return
     
     # Processa cada vídeo
     for idx, video_url in enumerate(video_urls, 1):
@@ -426,6 +437,15 @@ def process_single_video(video_url, preferred_languages=None, prompt_type="copyw
             cprint("Processamento cancelado.", "red")
             return False
 
+    elif prompt_type == "prd" and not video_number:
+        cprint("\n⚠️  MODO PRD BMAD ATIVADO", "yellow", attrs=["bold"])
+        cprint("Este modo gera uma especificação técnica completa (BMAD)", "yellow")
+        cprint("Tempo estimado: ~5-10 minutos", "yellow")
+        confirm = input(colored("\nDeseja continuar? (s/n): ", "magenta", attrs=["bold"])).strip().lower()
+        if confirm != 's':
+            cprint("Processamento cancelado.", "red")
+            return False
+
     try:
         if prompt_type == "framework":
             # Usa processador especial de framework
@@ -440,6 +460,12 @@ def process_single_video(video_url, preferred_languages=None, prompt_type="copyw
             cprint(f"\n✅ Base de conhecimento para agente gerada!", "green", attrs=["bold"])
             cprint(f"   Arquivo TXT: {output_path}", "white")
             cprint(f"   Arquivo JSON: {output_path.replace('.txt', '.json')}", "white")
+        elif prompt_type == "prd":
+            # Usa processador de PRD
+            from core.prd_processor import process_prd_framework
+            output_path = process_prd_framework(transcription_path, output_language)
+            cprint(f"\n✅ PRD BMAD completo gerado!", "green", attrs=["bold"])
+            cprint(f"   Arquivo: {output_path}", "white")
         else:
             # Usa processador normal (chunks)
             process_transcription(transcription_path, prompt_type, output_language)
@@ -706,6 +732,12 @@ def process_single_document(source, prompt_type, output_language, doc_number=Non
             cprint(f"   Arquivo TXT: {output_path}", "white")
             cprint(f"   Arquivo JSON: {output_path.replace('.txt', '.json')}", "white")
 
+        elif prompt_type == "prd":
+            # Processa com PRD Processor
+            output_path = os.path.join(output_dir, f"PRD_{base_name}_{output_language}.txt")
+            process_prd_framework(temp_file, output_language)
+
+            cprint(f"\n✅ PRD BMAD completo gerado!", "green", attrs=["bold"])
         else:  # FAQ
             # Processa com FAQ
             process_transcription(temp_file, prompt_type, output_language)
@@ -791,6 +823,14 @@ def process_all_transcriptions(prompt_type="copywriting", output_language="pt"):
         if confirm != 's':
             cprint("Processamento cancelado.", "red")
             return
+    elif prompt_type == "prd":
+        cprint("\n⚠️  MODO PRD BMAD ATIVADO", "yellow", attrs=["bold"])
+        cprint("Este modo gera especificações técnicas completas", "yellow")
+        cprint("Tempo estimado: ~5-10 minutos por transcrição", "yellow")
+        confirm = input(colored("\nDeseja continuar? (s/n): ", "magenta", attrs=["bold"])).strip().lower()
+        if confirm != 's':
+            cprint("Processamento cancelado.", "red")
+            return
 
     for idx, transcription_file in enumerate(transcription_files, 1):
         # Pega o caminho completo do arquivo
@@ -808,6 +848,11 @@ def process_all_transcriptions(prompt_type="copywriting", output_language="pt"):
                 from core.agent_builder_processor import process_transcription_agent_builder
                 output_path = process_transcription_agent_builder(file_path, output_language)
                 cprint(f"✅ Base de conhecimento gerada: {output_path}", "green", attrs=["bold"])
+            elif prompt_type == "prd":
+                # Usa processador de PRD
+                from core.prd_processor import process_prd_framework
+                output_path = process_prd_framework(file_path, output_language)
+                cprint(f"✅ PRD BMAD completo gerado: {output_path}", "green", attrs=["bold"])
             else:
                 # Usa processador normal (chunks)
                 process_transcription(file_path, prompt_type, output_language)
@@ -827,6 +872,69 @@ def process_all_transcriptions(prompt_type="copywriting", output_language="pt"):
                 import traceback
                 traceback.print_exc()
 
+
+def process_n8n_workflows(output_language="pt"):
+    """
+    Processa arquivos JSON de workflows do n8n.
+    """
+    cprint("\n" + "="*60, "cyan")
+    cprint("🤖 PROCESSAMENTO DE WORKFLOWS N8N", "cyan", attrs=["bold"])
+    cprint("="*60, "cyan")
+    
+    file_path = input(colored("\nDigite o caminho do arquivo JSON do workflow: ", "magenta", attrs=["bold"])).strip()
+    
+    if not file_path:
+        cprint("❌ Nenhum caminho fornecido.", "red")
+        return
+
+    # Remove aspas se houver
+    file_path = file_path.replace('"', '').replace("'", "")
+    
+    if not os.path.exists(file_path):
+        cprint(f"❌ Arquivo não encontrado: {file_path}", "red")
+        return
+        
+    try:
+        cprint(f"\n🚀 Iniciando análise do workflow...", "yellow")
+        output_path = process_n8n_framework(file_path, output_language)
+        
+        cprint(f"\n✅ Análise concluída com sucesso!", "green", attrs=["bold"])
+        cprint(f"   Arquivo gerado: {output_path}", "white")
+        
+    except Exception as e:
+        cprint(f"\n❌ Erro ao processar workflow: {e}", "red", attrs=["bold"])
+        import traceback
+        traceback.print_exc()
+
+
+def update_env_model(model_name):
+    """Atualiza o arquivo .env com o modelo selecionado."""
+    try:
+        env_path = ".env"
+        if not os.path.exists(env_path):
+            return
+
+        with open(env_path, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+
+        new_lines = []
+        model_updated = False
+        
+        for line in lines:
+            if line.strip().startswith("LLM_MODEL="):
+                new_lines.append(f"LLM_MODEL={model_name}\n")
+                model_updated = True
+            else:
+                new_lines.append(line)
+        
+        if not model_updated:
+            new_lines.append(f"\nLLM_MODEL={model_name}\n")
+            
+        with open(env_path, 'w', encoding='utf-8') as f:
+            f.writelines(new_lines)
+            
+    except Exception as e:
+        cprint(f"⚠️  Erro ao atualizar .env: {e}", "yellow")
 
 def main():
     cprint("Bem-vindo ao Processador de Transcrições do YouTube!", "green", attrs=["bold"])
@@ -870,13 +978,43 @@ def main():
     # Nova tarefa - Seleção de configurações
     cprint("\n=== CONFIGURAÇÃO DO PROCESSAMENTO ===", "cyan", attrs=["bold"])
 
+    # 0. Escolha do Modelo Gemini
+    cprint("\n🤖 Escolha o Modelo Gemini:", "blue")
+    print("[1] Gemini 2.5 Flash (Rápido e Eficiente)")
+    print("[2] Gemini 2.5 Flash-Lite (Otimizado para Custo)")
+    print("[3] Gemini 2.5 Pro (Raciocínio Complexo)")
+    print("[4] Gemini 3 Pro (Mais Inteligente - Preview)")
+    model_choice = input(colored("Digite sua escolha (1, 2, 3 ou 4): ", "magenta", attrs=["bold"])).strip()
+
+    if model_choice == '1':
+        os.environ["LLM_MODEL"] = "gemini-2.5-flash"
+        update_env_model("gemini-2.5-flash")
+        cprint("✅ Modelo selecionado: Gemini 2.5 Flash", "green")
+    elif model_choice == '2':
+        os.environ["LLM_MODEL"] = "gemini-2.5-flash-lite"
+        update_env_model("gemini-2.5-flash-lite")
+        cprint("✅ Modelo selecionado: Gemini 2.5 Flash-Lite", "green")
+    elif model_choice == '3':
+        os.environ["LLM_MODEL"] = "gemini-2.5-pro"
+        update_env_model("gemini-2.5-pro")
+        cprint("✅ Modelo selecionado: Gemini 2.5 Pro", "green")
+    elif model_choice == '4':
+        os.environ["LLM_MODEL"] = "gemini-3-pro"
+        update_env_model("gemini-3-pro")
+        cprint("✅ Modelo selecionado: Gemini 3 Pro", "green")
+    else:
+        cprint("Escolha inválida. Usando 'gemini-2.5-flash' como padrão.", "yellow")
+        os.environ["LLM_MODEL"] = "gemini-2.5-flash"
+        update_env_model("gemini-2.5-flash")
+
     # 1. Tipo de prompt
     cprint("\n📝 Escolha o tipo de análise:", "blue")
     print("[1] FAQ - Extração de conhecimento estruturado")
     print("[2] Copywriting - Frameworks de vendas high ticket")
     print("[3] Framework Completo - Extração profunda em 7 dimensões")
     print("[4] Agent Builder - Base de conhecimento para treinar agentes IA (RECOMENDADO)")
-    prompt_choice = input(colored("Digite sua escolha (1, 2, 3 ou 4): ", "magenta", attrs=["bold"])).strip()
+    print("[5] PRD Completo (BMAD) - Especificação Técnica para Desenvolvimento")
+    prompt_choice = input(colored("Digite sua escolha (1, 2, 3, 4 ou 5): ", "magenta", attrs=["bold"])).strip()
 
     if prompt_choice == '1':
         prompt_type = "faq"
@@ -886,6 +1024,8 @@ def main():
         prompt_type = "framework"
     elif prompt_choice == '4':
         prompt_type = "agent_builder"
+    elif prompt_choice == '5':
+        prompt_type = "prd"
     else:
         cprint("Escolha inválida. Usando 'agent_builder' como padrão.", "yellow")
         prompt_type = "agent_builder"
@@ -926,8 +1066,9 @@ def main():
     print("[3] Vídeo(s) do YouTube")
     print("[4] Documentos (Site, PDF, Word)")
     print("[5] Consolidar Agent Builder (arquivos já processados)")
+    print("[6] N8N Workflow (JSON)")
 
-    choice = input(colored("Digite sua escolha (1, 2, 3, 4 ou 5): ", "magenta", attrs=["bold"])).strip()
+    choice = input(colored("Digite sua escolha (1, 2, 3, 4, 5 ou 6): ", "magenta", attrs=["bold"])).strip()
 
     if choice == '1':
         playlist_url = input(colored("Digite a URL da playlist do YouTube: ", "magenta", attrs=["bold"])).strip()
@@ -982,6 +1123,8 @@ def main():
         process_documents(prompt_type, output_language)
     elif choice == '5':
         consolidate_existing_agent_builder(output_language)
+    elif choice == '6':
+        process_n8n_workflows(output_language)
     else:
         cprint("Escolha inválida. Por favor, tente novamente.", "red", attrs=["bold"])
         main()

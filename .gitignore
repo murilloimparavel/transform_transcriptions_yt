@@ -42,6 +42,8 @@ data/progress/*.json
 data/proxies/*.json
 data/DKW/
 data/*.zip
+data/app.db
+data/app.db-journal
 logs/*.log
 
 # Manter estrutura de diretórios
@@ -60,3 +62,13 @@ temp/
 # Sistema operacional
 Thumbs.db
 .DS_Store
+
+# Docker
+.dockerignore
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Redis
+dump.rdb
